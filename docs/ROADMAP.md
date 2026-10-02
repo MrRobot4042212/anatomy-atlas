@@ -6,9 +6,9 @@
 - [x] Asset pipeline: dump, build_mapping (TA2), Blender export, gltf-transform optimize, manifest
 - [x] Skeletal bundle exported and optimized (690 meshes, 4.0 MB meshopt)
 - [x] API: `PrismaModule`, seed from manifest (3,269 nodes, la/en/es names)
-- [ ] API: `structures` and `assets` modules
-- [ ] Viewer: load skeletal bundle, layer toggle, hover, select, info panel
-- [ ] Credits/attribution component
+- [x] API: `structures` (list/search, detail with ancestors, tree) and `assets` modules
+- [x] Viewer: load skeletal bundle, layer toggle, hover, select, focus, hide, info panel
+- [x] Credits/attribution component
 
 ## Phase 2: cardiovascular + performance
 
