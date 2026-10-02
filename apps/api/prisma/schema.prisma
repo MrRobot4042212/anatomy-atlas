@@ -1,0 +1,83 @@
+// Anatomy catalog. The 3D meshes live in object storage; this schema only
+// describes structures and which asset bundle holds each mesh.
+// Keep enums in sync with packages/shared/src/anatomy.ts.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BodySystem {
+  skeletal
+  muscular
+  cardiovascular
+  nervous
+  lymphatic
+  digestive
+  respiratory
+  urinary
+  reproductive
+  endocrine
+  integumentary
+}
+
+enum BodyRegion {
+  head
+  neck
+  thorax
+  abdomen
+  pelvis
+  upper_limb
+  lower_limb
+  back
+}
+
+enum Laterality {
+  left
+  right
+  midline
+  bilateral
+}
+
+model Structure {
+  id          String      @id @default(uuid())
+  fmaId       String      @unique // mesh name inside the GLB
+  taCode      String?
+  nameLa      String
+  nameEn      String
+  nameEs      String
+  system      BodySystem
+  subsystem   String?
+  region      BodyRegion
+  laterality  Laterality  @default(midline)
+  description String?
+  parentId    String?
+  parent      Structure?  @relation("Hierarchy", fields: [parentId], references: [id])
+  children    Structure[] @relation("Hierarchy")
+  assetId     String
+  asset       AssetBundle @relation(fields: [assetId], references: [id])
+  boundsMin   Float[]
+  boundsMax   Float[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([system])
+  @@index([region])
+  @@index([parentId])
+}
+
+model AssetBundle {
+  id         String      @id // e.g. "skeletal-v1"
+  system     BodySystem
+  url        String
+  sizeBytes  Int
+  meshCount  Int
+  hash       String
+  createdAt  DateTime    @default(now())
+  structures Structure[]
+}

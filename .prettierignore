@@ -1,0 +1,10 @@
+node_modules
+dist
+.next
+.turbo
+coverage
+pnpm-lock.yaml
+*.glb
+*.gltf
+*.ktx2
+apps/api/src/generated
