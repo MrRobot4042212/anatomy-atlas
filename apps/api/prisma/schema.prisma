@@ -1,5 +1,5 @@
-// Anatomy catalog. The 3D meshes live in object storage; this schema only
-// describes structures and which asset bundle holds each mesh.
+// Anatomy catalog. The 3D meshes live in object storage; this schema only describes the
+// hierarchy of anatomical terms and which asset bundle holds each mesh (ADR 0003, ADR 0004).
 // Keep enums in sync with packages/shared/src/anatomy.ts.
 
 generator client {
@@ -32,40 +32,43 @@ enum BodyRegion {
   thorax
   abdomen
   pelvis
+  back
   upper_limb
   lower_limb
-  back
 }
 
 enum Laterality {
   left
   right
   midline
-  bilateral
 }
 
 model Structure {
-  id          String      @id @default(uuid())
-  fmaId       String      @unique // mesh name inside the GLB
-  taCode      String?
+  id          String       @id @default(uuid())
+  /// `ta2:<id>` or `za:<slug>`; shared by left/right siblings.
+  termKey     String
+  ta2Id       Int?
+  /// Mesh name inside the GLB. Null for group nodes without geometry.
+  meshId      String?      @unique
   nameLa      String
   nameEn      String
   nameEs      String
   system      BodySystem
   subsystem   String?
-  region      BodyRegion
-  laterality  Laterality  @default(midline)
+  region      BodyRegion?
+  laterality  Laterality   @default(midline)
   description String?
   parentId    String?
-  parent      Structure?  @relation("Hierarchy", fields: [parentId], references: [id])
-  children    Structure[] @relation("Hierarchy")
-  assetId     String
-  asset       AssetBundle @relation(fields: [assetId], references: [id])
+  parent      Structure?   @relation("Hierarchy", fields: [parentId], references: [id])
+  children    Structure[]  @relation("Hierarchy")
+  assetId     String?
+  asset       AssetBundle? @relation(fields: [assetId], references: [id])
   boundsMin   Float[]
   boundsMax   Float[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
+  @@unique([termKey, laterality])
   @@index([system])
   @@index([region])
   @@index([parentId])

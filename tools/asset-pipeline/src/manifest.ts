@@ -1,10 +1,11 @@
 /**
- * Build out/manifest.json from the optimized GLB bundles and data/label-to-fma.csv.
+ * Build out/manifest.json from out/mapping.json and the optimized GLB bundles in out/.
  *
- *   pnpm --filter asset-pipeline manifest [--out out] [--names data/label-to-fma.csv]
+ *   pnpm --filter asset-pipeline manifest [--out out] [--mapping out/mapping.json]
  *
- * The manifest is the only input the API seed accepts. Every mesh found in a bundle must have a
- * row in the names CSV, otherwise the script fails and lists the missing FMA ids.
+ * The manifest is the only input the API seed accepts. Every mesh found in a bundle must be a
+ * structure in the mapping (by meshId); otherwise the script fails and lists the strays. Group
+ * nodes without geometry are passed through so the seed can build the full tree.
  */
 import { createHash } from 'node:crypto';
 import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
@@ -13,65 +14,81 @@ import { parseArgs } from 'node:util';
 import { NodeIO, type Node } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { MeshoptDecoder } from 'meshoptimizer';
-import { BODY_SYSTEMS, type BodySystem, type Structure } from '@atlas/shared';
+import {
+  BODY_SYSTEMS,
+  type AssetBundle,
+  type BodyRegion,
+  type BodySystem,
+  type Laterality,
+  type StructureNames,
+} from '@atlas/shared';
 
 const { values } = parseArgs({
   options: {
     out: { type: 'string', default: 'out' },
-    names: { type: 'string', default: 'data/label-to-fma.csv' },
+    mapping: { type: 'string', default: 'out/mapping.json' },
   },
 });
 
-interface NameRow {
-  fmaId: string;
-  label: string; // Z-Anatomy label
-  la: string;
-  en: string;
-  es: string;
+interface MappingStructure {
+  key: string;
+  termKey: string;
+  ta2Id: number | null;
+  meshId: string | null;
+  blenderName: string;
+  objectType: 'MESH' | 'CURVE' | 'COLLECTION';
+  names: StructureNames;
   system: BodySystem;
-  subsystem: string;
-  region: Structure['region'];
-  laterality: Structure['laterality'];
-  parentFmaId: string;
+  subsystem: string | null;
+  region: BodyRegion | null;
+  laterality: Laterality;
+  parentKey: string | null;
+  hasGeometry: boolean;
+  official: boolean;
 }
 
-interface ManifestStructure extends Omit<Structure, 'id' | 'parentId'> {
-  parentFmaId: string | null;
+export interface ManifestStructure {
+  key: string;
+  termKey: string;
+  ta2Id: number | null;
+  meshId: string | null;
+  names: StructureNames;
+  system: BodySystem;
+  subsystem: string | null;
+  region: BodyRegion | null;
+  laterality: Laterality;
+  parentKey: string | null;
+  assetId: string | null;
+  bounds: { min: [number, number, number]; max: [number, number, number] } | null;
 }
 
-interface Manifest {
+export interface Manifest {
   generatedAt: string;
-  bundles: {
-    id: string;
-    system: BodySystem;
-    url: string;
-    sizeBytes: number;
-    meshCount: number;
-    meshes: string[];
-    hash: string;
-  }[];
+  bundles: AssetBundle[];
   structures: ManifestStructure[];
 }
 
-function parseCsv(text: string): NameRow[] {
-  const [header, ...lines] = text.trim().split(/\r?\n/);
-  const cols = header.split(',');
-  return lines.map((line) => {
-    const cells = line.split(',');
-    return Object.fromEntries(cols.map((c, i) => [c, cells[i] ?? ''])) as unknown as NameRow;
-  });
-}
-
-const names = new Map(parseCsv(await readFile(values.names, 'utf8')).map((r) => [r.fmaId, r]));
+const mapping = JSON.parse(await readFile(values.mapping, 'utf8')) as {
+  structures: MappingStructure[];
+};
+const byMeshId = new Map(
+  mapping.structures.filter((s) => s.meshId).map((s) => [s.meshId as string, s]),
+);
 
 await MeshoptDecoder.ready;
 const io = new NodeIO()
   .registerExtensions(ALL_EXTENSIONS)
   .registerDependencies({ 'meshopt.decoder': MeshoptDecoder });
 
-const files = (await readdir(values.out)).filter((f) => f.endsWith('.glb'));
-const manifest: Manifest = { generatedAt: new Date().toISOString(), bundles: [], structures: [] };
-const missing: string[] = [];
+const files = (await readdir(values.out)).filter((f) => f.endsWith('.glb')).sort();
+if (files.length === 0) {
+  console.error(`No .glb bundles found in ${values.out}`);
+  process.exit(1);
+}
+
+const bundles: AssetBundle[] = [];
+const placed = new Map<string, { assetId: string; bounds: ManifestStructure['bounds'] }>();
+const strays: string[] = [];
 
 for (const file of files) {
   const path = join(values.out, file);
@@ -88,28 +105,16 @@ for (const file of files) {
   for (const node of document.getRoot().listNodes()) {
     const mesh = node.getMesh();
     if (!mesh) continue;
-    const fmaId = mesh.getName();
-    meshes.push(fmaId);
-    const row = names.get(fmaId);
-    if (!row) {
-      missing.push(fmaId);
+    const meshId = node.getName() || mesh.getName();
+    if (!byMeshId.has(meshId)) {
+      strays.push(`${file}:${meshId}`);
       continue;
     }
-    const [min, max] = nodeBounds(node);
-    manifest.structures.push({
-      fmaId,
-      names: { la: row.la, en: row.en, es: row.es },
-      system: row.system,
-      subsystem: row.subsystem || undefined,
-      region: row.region,
-      laterality: row.laterality,
-      parentFmaId: row.parentFmaId || null,
-      assetId: id,
-      bounds: { min, max },
-    });
+    meshes.push(meshId);
+    placed.set(meshId, { assetId: id, bounds: nodeBounds(node) });
   }
 
-  manifest.bundles.push({
+  bundles.push({
     id,
     system,
     url: `/models/${file}`,
@@ -120,20 +125,46 @@ for (const file of files) {
   });
 }
 
-if (missing.length > 0) {
-  console.error(`FMA ids missing from ${values.names} (${missing.length}):`, missing.slice(0, 50));
+if (strays.length > 0) {
+  console.error(
+    `Meshes in bundles that are not in the mapping (${strays.length}):`,
+    strays.slice(0, 30),
+  );
   process.exit(1);
 }
 
-await writeFile(join(values.out, 'manifest.json'), JSON.stringify(manifest, null, 2));
+const structures: ManifestStructure[] = mapping.structures.map((s) => {
+  const hit = s.meshId ? placed.get(s.meshId) : undefined;
+  return {
+    key: s.key,
+    termKey: s.termKey,
+    ta2Id: s.ta2Id,
+    meshId: s.meshId,
+    names: s.names,
+    system: s.system,
+    subsystem: s.subsystem,
+    region: s.region,
+    laterality: s.laterality,
+    parentKey: s.parentKey,
+    assetId: hit?.assetId ?? null,
+    bounds: hit?.bounds ?? null,
+  };
+});
+
+const manifest: Manifest = { generatedAt: new Date().toISOString(), bundles, structures };
+await writeFile(join(values.out, 'manifest.json'), JSON.stringify(manifest, null, 1));
+
+const withGeometry = structures.filter((s) => s.assetId).length;
 console.log(
-  `manifest.json: ${manifest.bundles.length} bundles, ${manifest.structures.length} structures`,
+  `manifest.json: ${bundles.length} bundles, ${structures.length} structures (${withGeometry} with geometry in a bundle)`,
 );
 
-function nodeBounds(node: Node): [[number, number, number], [number, number, number]] {
-  const mesh = node.getMesh()!;
+function nodeBounds(node: Node): ManifestStructure['bounds'] {
+  const mesh = node.getMesh();
+  if (!mesh) return null;
   const min: [number, number, number] = [Infinity, Infinity, Infinity];
   const max: [number, number, number] = [-Infinity, -Infinity, -Infinity];
+  const [tx, ty, tz] = node.getTranslation();
   for (const prim of mesh.listPrimitives()) {
     const pos = prim.getAttribute('POSITION');
     if (!pos) continue;
@@ -144,5 +175,11 @@ function nodeBounds(node: Node): [[number, number, number], [number, number, num
       max[i] = Math.max(max[i], pmax[i]);
     }
   }
-  return [min, max];
+  if (!Number.isFinite(min[0])) return null;
+  // Node translation only: Z-Anatomy objects carry identity rotation/scale, and export_apply
+  // bakes modifiers. Revisit if a bundle ever has rotated nodes.
+  return {
+    min: [min[0] + tx, min[1] + ty, min[2] + tz],
+    max: [max[0] + tx, max[1] + ty, max[2] + tz],
+  };
 }

@@ -1,44 +1,122 @@
-// Seed the catalog from the asset pipeline manifest.
-// Usage: pnpm --filter api db:seed
-// The manifest is produced by tools/asset-pipeline and lists every mesh (fmaId)
-// with its names, system, region and bounds. Until the pipeline runs, this
-// seeds a tiny fixture so the API has something to serve.
-import { PrismaClient } from '../src/generated/prisma/index.js';
+// Seed the catalog from the asset pipeline manifest (tools/asset-pipeline/out/manifest.json).
+//
+//   pnpm --filter api db:seed [-- --manifest <path>]
+//
+// Idempotent: bundles are upserted by id, structures by (termKey, laterality). Parents are
+// written first so parentId can be resolved in a single pass. Fails loudly if the manifest is
+// missing, so a database never gets silently seeded with fixtures.
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { parseArgs } from 'node:util';
+import { PrismaClient, type BodyRegion, type Laterality } from '../src/generated/prisma/index.js';
+
+const { values } = parseArgs({
+  options: {
+    manifest: {
+      type: 'string',
+      default: resolve(import.meta.dirname, '../../../tools/asset-pipeline/out/manifest.json'),
+    },
+  },
+});
+
+interface ManifestStructure {
+  key: string;
+  termKey: string;
+  ta2Id: number | null;
+  meshId: string | null;
+  names: { la: string; en: string; es: string };
+  system: string;
+  subsystem: string | null;
+  region: string | null;
+  laterality: Laterality;
+  parentKey: string | null;
+  assetId: string | null;
+  bounds: { min: number[]; max: number[] } | null;
+}
+
+interface Manifest {
+  bundles: {
+    id: string;
+    system: string;
+    url: string;
+    sizeBytes: number;
+    meshCount: number;
+    hash: string;
+  }[];
+  structures: ManifestStructure[];
+}
 
 const prisma = new PrismaClient();
 
-async function main() {
-  const bundle = await prisma.assetBundle.upsert({
-    where: { id: 'skeletal-v0' },
-    update: {},
-    create: {
-      id: 'skeletal-v0',
-      system: 'skeletal',
-      url: '/models/skeletal-v0.glb',
-      sizeBytes: 0,
-      meshCount: 1,
-      hash: 'fixture',
-    },
-  });
+function toRegion(region: string | null): BodyRegion | null {
+  return region ? (region.replace('-', '_') as BodyRegion) : null;
+}
 
-  await prisma.structure.upsert({
-    where: { fmaId: 'FMA9915' },
-    update: {},
-    create: {
-      fmaId: 'FMA9915',
-      nameLa: 'Femur',
-      nameEn: 'Femur',
-      nameEs: 'Fémur',
-      system: 'skeletal',
-      subsystem: 'bones',
-      region: 'lower_limb',
-      laterality: 'bilateral',
-      description: 'Longest and strongest bone of the body; articulates with the hip and the knee.',
-      assetId: bundle.id,
-      boundsMin: [],
-      boundsMax: [],
-    },
-  });
+async function main() {
+  const manifest = JSON.parse(await readFile(values.manifest, 'utf8')) as Manifest;
+
+  for (const b of manifest.bundles) {
+    await prisma.assetBundle.upsert({
+      where: { id: b.id },
+      update: { url: b.url, sizeBytes: b.sizeBytes, meshCount: b.meshCount, hash: b.hash },
+      create: {
+        id: b.id,
+        system: b.system as never,
+        url: b.url,
+        sizeBytes: b.sizeBytes,
+        meshCount: b.meshCount,
+        hash: b.hash,
+      },
+    });
+  }
+
+  // Topological order: a node is written only after its parent.
+  const byKey = new Map(manifest.structures.map((s) => [s.key, s]));
+  const ordered: ManifestStructure[] = [];
+  const seen = new Set<string>();
+  const visit = (s: ManifestStructure, trail: Set<string>) => {
+    if (seen.has(s.key)) return;
+    if (trail.has(s.key)) throw new Error(`cycle in hierarchy at ${s.key}`);
+    trail.add(s.key);
+    const parent = s.parentKey ? byKey.get(s.parentKey) : undefined;
+    if (parent) visit(parent, trail);
+    seen.add(s.key);
+    ordered.push(s);
+  };
+  for (const s of manifest.structures) visit(s, new Set());
+
+  const idByKey = new Map<string, string>();
+  let written = 0;
+  for (const s of ordered) {
+    const parentId = s.parentKey ? (idByKey.get(s.parentKey) ?? null) : null;
+    const data = {
+      ta2Id: s.ta2Id,
+      meshId: s.meshId,
+      nameLa: s.names.la,
+      nameEn: s.names.en,
+      nameEs: s.names.es,
+      system: s.system as never,
+      subsystem: s.subsystem,
+      region: toRegion(s.region),
+      parentId,
+      assetId: s.assetId,
+      boundsMin: s.bounds?.min ?? [],
+      boundsMax: s.bounds?.max ?? [],
+    };
+    const row = await prisma.structure.upsert({
+      where: { termKey_laterality: { termKey: s.termKey, laterality: s.laterality } },
+      update: data,
+      create: { termKey: s.termKey, laterality: s.laterality, ...data },
+      select: { id: true },
+    });
+    idByKey.set(s.key, row.id);
+    written++;
+  }
+
+  const withMesh = ordered.filter((s) => s.assetId).length;
+  console.log(
+    `Seeded ${manifest.bundles.length} bundles, ${written} structures (${withMesh} with geometry).`,
+  );
 }
 
 main()
