@@ -1,0 +1,24 @@
+{
+  "name": "asset-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "optimize": "tsx src/optimize.ts",
+    "manifest": "tsx src/manifest.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo 'no linter configured for asset-pipeline'"
+  },
+  "dependencies": {
+    "@atlas/shared": "workspace:*",
+    "@gltf-transform/core": "^4.2.0",
+    "@gltf-transform/extensions": "^4.2.0",
+    "@gltf-transform/functions": "^4.2.0",
+    "meshoptimizer": "^0.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}
