@@ -11,7 +11,7 @@ import { createHash } from 'node:crypto';
 import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
-import { NodeIO, type Node } from '@gltf-transform/core';
+import { NodeIO, getBounds, type Node } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { MeshoptDecoder } from 'meshoptimizer';
 import {
@@ -101,17 +101,33 @@ for (const file of files) {
     process.exit(1);
   }
 
+  // A structure is a NAMED node. After optimization (dedup + meshopt quantization) a mesh
+  // shared by several structures may sit in an unnamed child node under each named node, so
+  // we never identify structures by mesh name: only by node name, bounds from the subtree.
   const meshes: string[] = [];
   for (const node of document.getRoot().listNodes()) {
-    const mesh = node.getMesh();
-    if (!mesh) continue;
-    const meshId = node.getName() || mesh.getName();
+    const meshId = node.getName();
+    if (!meshId) {
+      if (node.getMesh() && !nearestNamedAncestor(node)) {
+        strays.push(`${file}:<unnamed mesh node>`);
+      }
+      continue;
+    }
+    if (!subtreeHasMesh(node)) continue;
     if (!byMeshId.has(meshId)) {
       strays.push(`${file}:${meshId}`);
       continue;
     }
+    if (placed.has(meshId)) {
+      strays.push(`${file}:${meshId} (duplicate node)`);
+      continue;
+    }
     meshes.push(meshId);
-    placed.set(meshId, { assetId: id, bounds: nodeBounds(node) });
+    const { min, max } = getBounds(node);
+    placed.set(meshId, {
+      assetId: id,
+      bounds: { min: [min[0], min[1], min[2]], max: [max[0], max[1], max[2]] },
+    });
   }
 
   bundles.push({
@@ -159,27 +175,16 @@ console.log(
   `manifest.json: ${bundles.length} bundles, ${structures.length} structures (${withGeometry} with geometry in a bundle)`,
 );
 
-function nodeBounds(node: Node): ManifestStructure['bounds'] {
-  const mesh = node.getMesh();
-  if (!mesh) return null;
-  const min: [number, number, number] = [Infinity, Infinity, Infinity];
-  const max: [number, number, number] = [-Infinity, -Infinity, -Infinity];
-  const [tx, ty, tz] = node.getTranslation();
-  for (const prim of mesh.listPrimitives()) {
-    const pos = prim.getAttribute('POSITION');
-    if (!pos) continue;
-    const pmin = pos.getMin([0, 0, 0]);
-    const pmax = pos.getMax([0, 0, 0]);
-    for (let i = 0; i < 3; i++) {
-      min[i] = Math.min(min[i], pmin[i]);
-      max[i] = Math.max(max[i], pmax[i]);
-    }
+function subtreeHasMesh(node: Node): boolean {
+  if (node.getMesh()) return true;
+  return node.listChildren().some(subtreeHasMesh);
+}
+
+function nearestNamedAncestor(node: Node): Node | null {
+  let parent = node.getParentNode();
+  while (parent) {
+    if (parent.getName()) return parent;
+    parent = parent.getParentNode();
   }
-  if (!Number.isFinite(min[0])) return null;
-  // Node translation only: Z-Anatomy objects carry identity rotation/scale, and export_apply
-  // bakes modifiers. Revisit if a bundle ever has rotated nodes.
-  return {
-    min: [min[0] + tx, min[1] + ty, min[2] + tz],
-    max: [max[0] + tx, max[1] + ty, max[2] + tz],
-  };
+  return null;
 }
