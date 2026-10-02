@@ -3,9 +3,10 @@
 ## Phase 1: skeletal system end to end (current)
 
 - [x] Monorepo scaffold, tooling, Prisma schema, shared types
-- [ ] Asset pipeline: Blender export script, gltf-transform optimize, manifest
-- [ ] Skeletal bundle exported and optimized (< 25 MB)
-- [ ] API: `PrismaModule`, `structures` and `assets` modules, seed from manifest
+- [x] Asset pipeline: dump, build_mapping (TA2), Blender export, gltf-transform optimize, manifest
+- [x] Skeletal bundle exported and optimized (690 meshes, 4.0 MB meshopt)
+- [x] API: `PrismaModule`, seed from manifest (3,269 nodes, la/en/es names)
+- [ ] API: `structures` and `assets` modules
 - [ ] Viewer: load skeletal bundle, layer toggle, hover, select, info panel
 - [ ] Credits/attribution component
 

@@ -1,21 +1,15 @@
 # Asset pipeline
 
-Turns raw anatomy sources (Z-Anatomy `.blend`) into optimized GLB bundles and the manifest that
-seeds the catalog. See `.claude/skills/asset-pipeline/SKILL.md` for the full contract.
+Turns the Z-Anatomy `Startup.blend` into optimized GLB bundles and the manifest that seeds the
+catalog. Full contract and commands: `.claude/skills/asset-pipeline/SKILL.md`, decisions: `docs/adr/0004-ta2-ontology-key.md`.
 
 ```
-raw/        git-ignored. Drop the Z-Anatomy .blend here.
-out/raw/    git-ignored. Unoptimized glTF per system, straight from Blender.
-out/        git-ignored. Optimized GLBs + manifest.json.
-blender/    export_system.py (headless Blender export, renames meshes to FMA ids)
-data/       label-to-fma.csv (Z-Anatomy label -> FMA id -> names la/en/es)
-src/        Node scripts: optimize.ts, manifest.ts
+raw/        git-ignored. TA2.csv and the extracted Z-Anatomy template (Startup.blend, 307 MB).
+out/        git-ignored. objects.json, mapping.json, raw/<system>.glb, <system>-vN.glb, manifest.json
+blender/    Blender-side scripts: inspect_blend.py, dump_objects.py, export_system.py
+scripts/    Offline Python: analyze_dump.py, build_mapping.py
+src/        Node: optimize.ts (gltf-transform + meshopt), manifest.ts
 ```
 
-Requirements: Blender 4.x on PATH, Node 24, pnpm.
-
-```bash
-blender -b raw/z-anatomy.blend -P blender/export_system.py -- --system skeletal
-pnpm optimize -- --in out/raw/skeletal.glb --out out/skeletal-v1.glb
-pnpm manifest
-```
+Source: https://github.com/Z-Anatomy/Models-of-human-anatomy (CC BY-SA 4.0).
+Download `Z-Anatomy.zip` and `TA2.csv` into `raw/` and extract the zip to `raw/z-anatomy/`.

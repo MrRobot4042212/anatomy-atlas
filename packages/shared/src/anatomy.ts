@@ -1,9 +1,11 @@
 /**
  * Domain vocabulary shared by the viewer (web) and the catalog (api).
  *
- * IDs are ontology-backed: every structure carries a stable `fmaId`
- * (Foundational Model of Anatomy) that is also the mesh name inside the GLB.
- * That single key is the contract between 3D assets and database rows.
+ * Keys are ontology-backed (ADR 0004): every structure has a `termKey` that is a
+ * Terminologia Anatomica 2 id (`ta2:4231`) or, for unofficial names Z-Anatomy adds, a stable
+ * local key (`za:adductor-minimus`). Sided structures get one row and one GLB mesh per side;
+ * the `meshId` (`ta2-4231-r`) is the mesh name inside the GLB and the single join key between
+ * 3D assets and database rows.
  */
 
 export const BODY_SYSTEMS = [
@@ -21,26 +23,19 @@ export const BODY_SYSTEMS = [
 ] as const;
 export type BodySystem = (typeof BODY_SYSTEMS)[number];
 
-/** Finer grouping inside a system, e.g. cardiovascular -> arteries | veins. */
-export const SUBSYSTEMS = {
-  cardiovascular: ['heart', 'arteries', 'veins'],
-  nervous: ['central', 'peripheral', 'cranial-nerves'],
-  skeletal: ['bones', 'cartilage', 'ligaments', 'joints'],
-} as const satisfies Partial<Record<BodySystem, readonly string[]>>;
-
 export const BODY_REGIONS = [
   'head',
   'neck',
   'thorax',
   'abdomen',
   'pelvis',
+  'back',
   'upper-limb',
   'lower-limb',
-  'back',
 ] as const;
 export type BodyRegion = (typeof BODY_REGIONS)[number];
 
-export const LATERALITY = ['left', 'right', 'midline', 'bilateral'] as const;
+export const LATERALITY = ['left', 'right', 'midline'] as const;
 export type Laterality = (typeof LATERALITY)[number];
 
 export interface StructureNames {
@@ -49,32 +44,35 @@ export interface StructureNames {
   es: string;
 }
 
-/** A single anatomical structure as served by the API. */
+/** A node of the anatomical hierarchy. Leaves usually have geometry; groups usually do not. */
 export interface Structure {
   id: string; // internal uuid
-  fmaId: string; // e.g. "FMA7163" (liver)
-  taCode?: string; // Terminologia Anatomica code, optional
+  /** `ta2:<id>` or `za:<slug>`; shared by left/right siblings. */
+  termKey: string;
+  ta2Id: number | null;
+  /** Mesh name inside the GLB; null for group nodes without geometry. */
+  meshId: string | null;
   names: StructureNames;
   system: BodySystem;
-  subsystem?: string;
-  region: BodyRegion;
+  subsystem: string | null;
+  region: BodyRegion | null;
   laterality: Laterality;
   parentId: string | null;
-  description?: string;
-  /** Which asset bundle holds this structure's mesh. */
-  assetId: string;
-  /** Axis-aligned bounds in model space, used for camera focus. */
-  bounds?: { min: [number, number, number]; max: [number, number, number] };
+  description: string | null;
+  /** Bundle that holds this structure's mesh; null when `meshId` is null. */
+  assetId: string | null;
+  /** Axis-aligned bounds in model space (metres, Y up), for camera focus. */
+  bounds: { min: [number, number, number]; max: [number, number, number] } | null;
 }
 
-/** One optimized GLB bundle (one per system or region) and the meshes it contains. */
+/** One optimized GLB bundle (one per system, or per system+region) and the meshes it holds. */
 export interface AssetBundle {
   id: string;
   system: BodySystem;
   url: string;
   sizeBytes: number;
   meshCount: number;
-  /** Mesh names (= fmaIds) inside the GLB, for lookup without parsing the file. */
+  /** Mesh names (= meshIds) inside the GLB, for lookup without parsing the file. */
   meshes: string[];
   /** Content hash to bust CDN cache on re-export. */
   hash: string;

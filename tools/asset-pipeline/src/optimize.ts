@@ -1,10 +1,10 @@
 /**
  * Optimize a raw glTF/GLB exported from Blender into a web-ready bundle.
  *
- *   pnpm --filter asset-pipeline optimize -- --in out/raw/skeletal.glb --out out/skeletal-v1.glb [--ratio 0.5]
+ *   pnpm --filter asset-pipeline optimize --in out/raw/skeletal.glb --out out/skeletal-v1.glb [--ratio 0.5]
  *
  * Pipeline: dedup -> prune -> weld -> simplify -> meshopt compression.
- * Mesh names (FMA ids) are preserved; the script fails if any mesh lacks one.
+ * Mesh names (meshIds, ADR 0004) are preserved; the script fails if any mesh lacks a valid one.
  */
 import { parseArgs } from 'node:util';
 import { NodeIO } from '@gltf-transform/core';
@@ -12,7 +12,8 @@ import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { dedup, prune, weld, simplify, meshopt } from '@gltf-transform/functions';
 import { MeshoptEncoder, MeshoptSimplifier } from 'meshoptimizer';
 
-const FMA_ID = /^FMA\d+$/;
+/** meshId contract (ADR 0004): ta2-<id> or za-<slug>, optional -l/-r side. */
+const MESH_ID = /^(ta2-\d+(-\d+)*|za-[a-z0-9-]+)(-[lr])?$/;
 
 const { values } = parseArgs({
   options: {
@@ -41,9 +42,9 @@ const badNames = document
   .getRoot()
   .listMeshes()
   .map((m) => m.getName())
-  .filter((n) => !FMA_ID.test(n));
+  .filter((n) => !MESH_ID.test(n));
 if (badNames.length > 0) {
-  console.error(`Meshes without a valid FMA id (${badNames.length}):`, badNames.slice(0, 20));
+  console.error(`Meshes without a valid meshId (${badNames.length}):`, badNames.slice(0, 20));
   process.exit(1);
 }
 
