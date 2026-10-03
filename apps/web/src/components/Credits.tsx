@@ -1,19 +1,25 @@
 /** Mandatory attribution: the 3D models are CC BY-SA derivatives (ADR 0001). Keep visible. */
 export function Credits() {
   return (
-    <footer className="flex items-center justify-between border-t border-neutral-800 bg-neutral-950 px-4 py-2 text-[11px] text-neutral-500">
-      <span>
+    <footer className="flex h-7 items-center justify-between gap-4 border-t border-hairline bg-panel px-4 text-[11px] text-ink-faint">
+      <p className="truncate">
         Modelos 3D derivados de{' '}
-        <a href="https://www.z-anatomy.com/" className="underline hover:text-neutral-300">
+        <a
+          href="https://www.z-anatomy.com/"
+          className="underline decoration-hairline-strong underline-offset-2 hover:text-ink"
+        >
           Z-Anatomy
         </a>{' '}
         (CC BY-SA 4.0) y{' '}
-        <a href="https://lifesciencedb.jp/bp3d/" className="underline hover:text-neutral-300">
+        <a
+          href="https://lifesciencedb.jp/bp3d/"
+          className="underline decoration-hairline-strong underline-offset-2 hover:text-ink"
+        >
           BodyParts3D
         </a>{' '}
-        de DBCLS (CC BY-SA 2.1 JP). Terminología: Terminologia Anatomica 2.
-      </span>
-      <span>Anatomy Atlas</span>
+        de DBCLS (CC BY-SA 2.1 JP). Nomenclatura: Terminologia Anatomica 2.
+      </p>
+      <p className="shrink-0">Wazo Anatomy</p>
     </footer>
   );
 }

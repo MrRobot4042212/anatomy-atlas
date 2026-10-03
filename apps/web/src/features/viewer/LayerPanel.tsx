@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { BODY_SYSTEMS, type AssetBundle, type BodySystem } from '@atlas/shared';
 import { subsystemKey, useViewerStore } from './store';
 
-const LABELS: Record<BodySystem, string> = {
+export const SYSTEM_LABELS: Record<BodySystem, string> = {
   skeletal: 'Esquelético',
   muscular: 'Muscular',
   cardiovascular: 'Cardiovascular',
@@ -33,7 +34,7 @@ const SUBSYSTEM_LABELS: Record<string, string> = {
 /** Subsystem lists longer than this start collapsed (the skeletal system has 12). */
 const AUTO_EXPAND_MAX = 4;
 
-function subsystemLabel(key: string): string {
+export function subsystemLabel(key: string): string {
   return SUBSYSTEM_LABELS[key] ?? key.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
 }
 
@@ -46,8 +47,6 @@ export function LayerPanel({ bundles }: { bundles: AssetBundle[] }) {
   const hiddenSubsystems = useViewerStore((s) => s.hiddenSubsystems);
   const toggle = useViewerStore((s) => s.toggleSystem);
   const toggleSubsystem = useViewerStore((s) => s.toggleSubsystem);
-  const hiddenCount = useViewerStore((s) => s.hidden.size);
-  const unhideAll = useViewerStore((s) => s.unhideAll);
   const available = new Map(bundles.map((b) => [b.system, b]));
   const [expanded, setExpanded] = useState<Set<BodySystem>>(
     () =>
@@ -66,66 +65,80 @@ export function LayerPanel({ bundles }: { bundles: AssetBundle[] }) {
     });
 
   return (
-    <aside className="flex h-full flex-col gap-4 overflow-y-auto border-r border-neutral-800 bg-neutral-950 p-4 text-sm text-neutral-200">
-      <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Sistemas</h2>
-      <ul className="flex flex-col gap-1">
+    <section aria-labelledby="layers-heading" className="flex flex-col">
+      <h2
+        id="layers-heading"
+        className="px-4 pt-4 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-faint"
+      >
+        Capas
+      </h2>
+      <ul className="flex flex-col px-2">
         {BODY_SYSTEMS.map((system) => {
           const bundle = available.get(system);
           const checked = visible.has(system);
           const subsystems = bundle ? Object.entries(bundle.subsystems) : [];
+          const isExpanded = expanded.has(system);
           return (
             <li key={system}>
-              <label
-                className={`flex items-center gap-3 rounded-md px-2 py-1.5 ${bundle ? 'cursor-pointer hover:bg-neutral-900' : 'cursor-not-allowed text-neutral-600'}`}
+              <div
+                className={`flex items-center gap-2.5 rounded-xs px-2 py-1.5 ${bundle ? 'hover:bg-raised' : ''}`}
               >
                 <input
+                  id={`layer-${system}`}
                   type="checkbox"
-                  className="accent-orange-500"
+                  className="size-3.5 accent-accent"
                   checked={checked}
                   disabled={!bundle}
                   onChange={() => toggle(system)}
                 />
-                <span className="flex min-w-0 flex-1 flex-col leading-tight">
-                  <span className="truncate">{LABELS[system]}</span>
-                  <span className="text-[11px] text-neutral-500">
+                <label
+                  htmlFor={`layer-${system}`}
+                  className={`flex min-w-0 flex-1 flex-col leading-tight ${bundle ? 'cursor-pointer' : 'text-ink-faint'}`}
+                >
+                  <span className="truncate text-[13px]">{SYSTEM_LABELS[system]}</span>
+                  <span className="tabular text-[11px] text-ink-faint">
                     {bundle
                       ? `${bundle.meshCount} estructuras · ${formatBytes(bundle.sizeBytes)}`
-                      : 'pendiente'}
+                      : 'modelo pendiente'}
                   </span>
-                </span>
+                </label>
                 {checked && subsystems.length > 1 ? (
                   <button
                     type="button"
-                    aria-label={
-                      expanded.has(system) ? 'Contraer subsistemas' : 'Expandir subsistemas'
-                    }
-                    aria-expanded={expanded.has(system)}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      toggleExpanded(system);
-                    }}
-                    className="w-4 shrink-0 text-center text-[10px] text-neutral-500 hover:text-neutral-200"
+                    aria-label={isExpanded ? 'Contraer subsistemas' : 'Expandir subsistemas'}
+                    aria-expanded={isExpanded}
+                    onClick={() => toggleExpanded(system)}
+                    className="rounded-xs p-0.5 text-ink-faint hover:text-ink"
                   >
-                    {expanded.has(system) ? '▾' : '▸'}
+                    {isExpanded ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
                   </button>
                 ) : null}
-              </label>
-              {checked && subsystems.length > 1 && expanded.has(system) ? (
-                <ul className="mb-1 ml-7 flex flex-col">
+              </div>
+              {checked && subsystems.length > 1 && isExpanded ? (
+                <ul className="mb-1 ml-5 flex flex-col border-l border-hairline pl-1">
                   {subsystems.map(([subsystem, meshIds]) => {
                     const key = subsystemKey(system, subsystem);
+                    const id = `sub-${system}-${subsystem}`;
                     return (
                       <li key={key}>
-                        <label className="flex cursor-pointer items-center gap-2 rounded px-2 py-1 text-xs hover:bg-neutral-900">
+                        <div className="flex items-center gap-2 rounded-xs px-2 py-1 hover:bg-raised">
                           <input
+                            id={id}
                             type="checkbox"
-                            className="accent-orange-400"
+                            className="size-3 accent-accent"
                             checked={!hiddenSubsystems.has(key)}
                             onChange={() => toggleSubsystem(key)}
                           />
-                          <span className="flex-1 truncate">{subsystemLabel(subsystem)}</span>
-                          <span className="text-[10px] text-neutral-600">{meshIds.length}</span>
-                        </label>
+                          <label
+                            htmlFor={id}
+                            className="flex min-w-0 flex-1 cursor-pointer items-baseline gap-2 text-xs"
+                          >
+                            <span className="truncate">{subsystemLabel(subsystem)}</span>
+                            <span className="tabular ml-auto text-[10px] text-ink-faint">
+                              {meshIds.length}
+                            </span>
+                          </label>
+                        </div>
                       </li>
                     );
                   })}
@@ -135,16 +148,6 @@ export function LayerPanel({ bundles }: { bundles: AssetBundle[] }) {
           );
         })}
       </ul>
-      {hiddenCount > 0 ? (
-        <button
-          type="button"
-          onClick={unhideAll}
-          className="rounded-md border border-neutral-700 px-3 py-1.5 text-left text-xs hover:bg-neutral-900"
-        >
-          Mostrar {hiddenCount} estructura{hiddenCount === 1 ? '' : 's'} oculta
-          {hiddenCount === 1 ? '' : 's'}
-        </button>
-      ) : null}
-    </aside>
+    </section>
   );
 }

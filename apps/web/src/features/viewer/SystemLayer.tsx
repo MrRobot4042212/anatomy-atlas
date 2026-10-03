@@ -6,7 +6,7 @@ import { useGLTF } from '@react-three/drei';
 import { Box3, Mesh, type BufferGeometry, type Material, type Object3D } from 'three';
 import { acceleratedRaycast, MeshBVH } from 'three-mesh-bvh';
 import type { AssetBundle } from '@atlas/shared';
-import { materialSetFor } from './materials';
+import { materialSetFor, type Variant } from './materials';
 import { registry, resolveMeshId, type StructureEntry } from './registry';
 import { subsystemKey, useViewerStore, type ViewerState } from './store';
 
@@ -65,13 +65,20 @@ function registerScene(scene: Object3D): string[] {
   return ids;
 }
 
-type Variant = 'base' | 'hover' | 'selected' | 'ghost';
+type PaintState = Pick<
+  ViewerState,
+  'hovered' | 'selected' | 'hidden' | 'hiddenSubsystems' | 'isolated' | 'transparent'
+>;
 
-function paint(
-  meshIds: string[],
-  subsystemOf: Map<string, string>,
-  state: Pick<ViewerState, 'hovered' | 'selected' | 'hidden' | 'hiddenSubsystems'>,
-) {
+function variantFor(meshId: string, state: PaintState): Variant {
+  if (meshId === state.selected) return 'selected';
+  if (meshId === state.hovered) return 'hover';
+  if (state.isolated && meshId !== state.isolated) return 'ghost';
+  if (state.transparent.has(meshId)) return 'translucent';
+  return 'base';
+}
+
+function paint(meshIds: string[], subsystemOf: Map<string, string>, state: PaintState) {
   for (const meshId of meshIds) {
     const entry = registry.get(meshId);
     if (!entry) continue;
@@ -79,12 +86,22 @@ function paint(
     const visible = !state.hidden.has(meshId) && !(sub && state.hiddenSubsystems.has(sub));
     entry.node.visible = visible;
     if (!visible) continue;
-    const variant: Variant =
-      meshId === state.selected ? 'selected' : meshId === state.hovered ? 'hover' : 'base';
+    const variant = variantFor(meshId, state);
     entry.meshes.forEach((mesh, i) => {
       mesh.material = entry.materials[i][variant];
     });
   }
+}
+
+function paintStateChanged(a: ViewerState, b: ViewerState): boolean {
+  return (
+    a.hovered !== b.hovered ||
+    a.selected !== b.selected ||
+    a.hidden !== b.hidden ||
+    a.hiddenSubsystems !== b.hiddenSubsystems ||
+    a.isolated !== b.isolated ||
+    a.transparent !== b.transparent
+  );
 }
 
 export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
@@ -105,14 +122,7 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
     }
     paint(meshIds, subsystemOf, useViewerStore.getState());
     const unsubscribe = useViewerStore.subscribe((state, prev) => {
-      if (
-        state.hovered !== prev.hovered ||
-        state.selected !== prev.selected ||
-        state.hidden !== prev.hidden ||
-        state.hiddenSubsystems !== prev.hiddenSubsystems
-      ) {
-        paint(meshIds, subsystemOf, state);
-      }
+      if (paintStateChanged(state, prev)) paint(meshIds, subsystemOf, state);
     });
     return () => {
       unsubscribe();
@@ -120,9 +130,16 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
     };
   }, [scene, bundle]);
 
+  /** While isolating, ghosted structures are not interactive. */
+  const interactive = (meshId: string | null) => {
+    const isolated = useViewerStore.getState().isolated;
+    return meshId !== null && (!isolated || isolated === meshId);
+  };
+
   const onPointerOver = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
-    hover(resolveMeshId(e.object));
+    const meshId = resolveMeshId(e.object);
+    hover(interactive(meshId) ? meshId : null);
   };
   const onPointerOut = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
@@ -131,6 +148,7 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
   const onClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     const meshId = resolveMeshId(e.object);
+    if (!interactive(meshId)) return;
     select(meshId);
     const entry = meshId ? registry.get(meshId) : undefined;
     if (entry) {

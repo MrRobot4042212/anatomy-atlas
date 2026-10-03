@@ -20,11 +20,18 @@
 
 ## Phase 3: exploration tools
 
-- [ ] Search with camera focus
-- [ ] Hierarchy tree navigation
-- [ ] Isolate / hide / transparency
-- [ ] Clipping planes
-- [ ] Camera presets (anterior, posterior, lateral)
+- [x] Search with camera focus (accent-insensitive, keyboard driven, turns the layer on)
+- [x] Hierarchy tree navigation (per visible system, loose structures under "Sin agrupar")
+- [x] Isolate / hide / translucent, with "Mostrar todo"
+- [x] Cutting plane: sagittal / axial / coronal, position, invert
+- [x] Camera presets (anterior, posterior, lateral izq./der., superior)
+
+## Phase 3b: identity (done 2026-10-03)
+
+- [x] Wazo Anatomy visual world: reading-room dark palette, Atkinson Hyperlegible / EB Garamond
+      italic / Geist Mono, specimen label with caliper, header search. See `apps/web/DESIGN.md`.
+- [ ] Descriptions per structure (source to be decided: Wikipedia extracts as Z-Anatomy does)
+- [ ] Language switch for the UI (es/en)
 
 ## Phase 4: remaining systems
 
