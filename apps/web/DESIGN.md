@@ -1,68 +1,98 @@
 # Design
 
-Wazo Anatomy, viewer surface. Written from the built world on 2026-10-03. Product truth lives in `PRODUCT.md`.
+Wazo Anatomy, viewer surface. Written from the built world on 2026-10-03 and revised the same
+day when the WAZO brand assets arrived. Product
+truth lives in `PRODUCT.md`.
 
 ## World
 
 The reading room, not the dashboard. A student at night, the screen the only light: the body is
-the light source and the interface is the dark instrument around it. Mode: Operate. Color
-strategy: Restrained (neutrals plus one accent).
+the light source and the interface is the dark instrument around it, built from WAZO's night
+navy and lit by WAZO's electric blue. Mode: Operate. Color strategy: Restrained (brand neutrals
+plus the brand primary).
+
+## Brand constants (from the WAZO brand sheet and the isotype SVG)
+
+| Name             | Value                         | Use here                                                    |
+| ---------------- | ----------------------------- | ----------------------------------------------------------- |
+| Electric         | `#0000FF`                     | fills: primary button end stop, text selection              |
+| Royal            | `#0442D7`                     | reserved (gradients)                                        |
+| Azure            | `#007BFF`                     | pressed wash at 16%                                         |
+| Sky              | `#33B2FB`                     | interactive text, focus ring, slider thumb, scene hover     |
+| Ice              | `#89D4ED`                     | reserved (gradient start)                                   |
+| Mint             | `#D8FFE6`                     | reserved (isotype)                                          |
+| Night            | `#212639`                     | raised surfaces                                             |
+| Magenta          | `#FF3CA6`                     | scene selection only (from the brand warm gradient palette) |
+| Primary gradient | `#8DD8EF → #0E69ED → #0000FF` | the primary action (Enfocar)                                |
+
+Other brand gradients (secondary 4, 5, 6; warm, navy and sky-to-red palettes) are recorded in
+`PRODUCT.md` and not used on this surface: an Operate surface earns one gradient, on its one
+primary action.
 
 ## Tokens (`src/app/globals.css`)
 
-| Role                                  | Token                                   | Value                             |
-| ------------------------------------- | --------------------------------------- | --------------------------------- |
-| Ground (page, canvas)                 | `--ground`                              | `#0C0F14`                         |
-| Panel (rails, header, footer)         | `--panel`                               | `#12161D`                         |
-| Raised (hover rows, pressed segments) | `--raised`                              | `#1A2029`                         |
-| Hairline / strong                     | `--hairline` / `--hairline-strong`      | `#283040` / `#36404F`             |
-| Ink / muted / faint                   | `--ink` / `--ink-muted` / `--ink-faint` | `#E7E4DC` / `#9AA3B2` / `#6B7483` |
-| Accent (selection, primary action)    | `--accent`                              | `#D9A441` dissection-pin ochre    |
-| Accent on accent                      | `--accent-ink`                          | `#1A1304`                         |
-| Accent wash (pressed, active row)     | `--accent-soft`                         | `rgba(217,164,65,0.14)`           |
-| Scene hover (3D only)                 | `--scene-hover`                         | `#6BC6E0`                         |
-| Danger                                | `--danger`                              | `#E06B6B`                         |
+| Role                                  | Token                                   | Value                                     |
+| ------------------------------------- | --------------------------------------- | ----------------------------------------- |
+| Ground (page, canvas)                 | `--ground`                              | `#0B0E1A`                                 |
+| Panel (rails, header, footer)         | `--panel`                               | `#12162A`                                 |
+| Raised (hover rows, pressed segments) | `--raised`                              | `#212639` (brand night)                   |
+| Hairline / strong                     | `--hairline` / `--hairline-strong`      | `#2A3049` / `#3A4160`                     |
+| Ink / muted / faint                   | `--ink` / `--ink-muted` / `--ink-faint` | `#F1EFEF` (brand) / `#A3AAC4` / `#6F7694` |
+| Accent fill / on accent               | `--accent` / `--accent-ink`             | `#0000FF` / `#FFFFFF`                     |
+| Accent text                           | `--accent-text`                         | `#33B2FB`                                 |
+| Accent wash                           | `--accent-soft`                         | `rgba(0,123,255,0.16)`                    |
+| Scene hover / selected                | `--scene-hover` / `--scene-selected`    | `#33B2FB` / `#FF3CA6`                     |
+| Danger                                | `--danger`                              | `#FF6E93` (from the sky-to-red palette)   |
 
-Cyan is never used in the DOM; it exists because hover must read on bone and on red/blue
-vessels inside the scene. Ochre marks what the student chose: the selected mesh, the active
-tree row, the pressed toggle, the primary button. Nothing else is coloured.
+Electric blue never carries text on the dark ground (2.4:1); it is a fill under white. Sky
+carries interactive text (7.9:1 on ground). Magenta exists only inside the 3D scene and as the
+small dot before the selected structure's Latin name, so the label and the model agree.
+
+## Logo
+
+Isotype `public/brand/wazo-mark.svg` at 22px and wordmark `public/brand/wazo-logo.svg` (white,
+68x18) in the header, followed by "Anatomy" in the Latin italic. The isotype is also the app
+icon (`src/app/icon.svg`) and appears at 72px in the empty label state. Never recolour the
+isotype; never set the wordmark in a typeface.
 
 ## Type
 
-- UI: Atkinson Hyperlegible 400/700 (`--font-ui`), 13px rows, 11px captions, uppercase section
-  labels at 11px bold with 0.14em tracking.
+- UI: BR Sonoma (brand) through `src/fonts/ui.ts`; Atkinson Hyperlegible 400/700 stands in
+  until the licensed files are added. 13px rows, 11px captions, uppercase section labels at
+  11px bold with 0.14em tracking.
 - Latin nomenclature: EB Garamond italic (`--font-latin`, `.font-latin`), 30px in the label,
-  19px in the wordmark, 24px in the empty state. Scientific names are italic by convention;
-  this is the only serif on the surface.
+  19px for "Anatomy" in the header, 24px in the empty state. Scientific names are italic by
+  convention; this is the only serif on the surface.
 - Data: Geist Mono (`--font-data`, `.font-mono`) for TA2 codes, millimetres, counts in badges,
   the hovered meshId. Tabular figures via `.tabular`.
 
 ## Layout
 
-Header 48px (wordmark, search, live layer summary). Left rail 280px: Capas then Jerarquía.
-Centre: viewer edge to edge, toolbar overlaid at the bottom (camera presets, cutting plane,
-"Mostrar todo"). Right rail 340px: the specimen label. Footer 28px credits. Below `lg` the grid
-stacks: viewer 60vh first, then rails. Radii 2px/4px; hairline borders; no cards inside cards;
-no shadows except the search dropdown (offset, soft blur).
+Header 48px (isotype + wordmark + Anatomy, search, live layer summary). Left rail 280px: Capas
+then Jerarquía. Centre: viewer edge to edge, toolbar overlaid at the bottom (camera presets,
+cutting plane, "Mostrar todo"). Right rail 340px: the specimen label. Footer 28px credits.
+Below `lg` the grid stacks: viewer 60vh first, then rails. Radii 2px/4px; hairline borders; no
+cards inside cards; no shadows except the search dropdown (offset, soft blur).
 
 ## Components
 
-- Specimen label (`InfoPanel`): breadcrumb, Latin italic, Spanish bold, English small, data
-  grid, caliper (three proportional bars with end ticks, numbers in mono), four actions in a
-  2x2 grid (Enfocar primary; Aislar and Translúcido are toggles with `aria-pressed`; Ocultar).
+- Specimen label (`InfoPanel`): breadcrumb, Latin italic with the selection dot, Spanish bold,
+  English small, data grid, caliper (three proportional bars with end ticks, numbers in mono),
+  four actions in a 2x2 grid (Enfocar on the brand gradient; Aislar and Translúcido are toggles
+  with `aria-pressed` in the azure wash; Ocultar).
 - Toolbar segments: 28px tall, text labels, `aria-pressed` for toggles, one icon per action
   from lucide at 14px.
-- Checkboxes use `accent-color` ochre; tree rows highlight with the accent wash; structures
-  with geometry show a 6px dot.
+- Checkboxes use `accent-color` electric; tree rows highlight with the azure wash; structures
+  with geometry show a 6px dot, magenta when selected.
 - Search: combobox with listbox, keyboard navigation, `/` shortcut, Latin shown in italic
   after the Spanish name.
 
 ## States
 
-Hover rows `--raised`; focus-visible ring 2px ground + 2px accent; disabled layers in
+Hover rows `--raised`; focus-visible ring 2px ground + 2px sky; disabled layers in
 `--ink-faint` with "modelo pendiente"; loading shown as skeleton bars in the label and a text
-line in the tree; errors in `--danger` naming the problem and the recovery; empty label states
-teach the interface.
+line in the tree; errors in `--danger` naming the problem and the recovery; empty label state
+shows the isotype and teaches the interface.
 
 ## Motion
 
@@ -72,5 +102,5 @@ One authored moment: the label settles in (180 ms, 4px rise) and the caliper bar
 
 ## Browser surfaces
 
-Selection ochre on accent-ink, caret ochre, thin scrollbars in `--hairline-strong`, range
-input restyled for the cutting plane, `color-scheme: dark`.
+Selection electric on white, caret sky, thin scrollbars in `--hairline-strong`, range input
+restyled for the cutting plane, `color-scheme: dark`.

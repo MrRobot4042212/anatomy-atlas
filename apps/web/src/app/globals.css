@@ -1,25 +1,47 @@
 @import 'tailwindcss';
 
 /*
- * Wazo Anatomy design tokens. The scene is a reading room at night: the body is the only light
- * source, the interface is the dark instrument around it. One accent (dissection-pin ochre) for
- * selection and primary actions; cyan is reserved for hover inside the 3D scene.
+ * Wazo Anatomy tokens, derived from the WAZO brand system (apps/web/DESIGN.md).
+ * The scene: a reading room at night. The body is the light source; the interface is the dark
+ * instrument around it, built from WAZO's navy neutral and lit by WAZO's electric blue.
  */
 :root {
-  --ground: #0c0f14;
-  --panel: #12161d;
-  --raised: #1a2029;
-  --hairline: #283040;
-  --hairline-strong: #36404f;
-  --ink: #e7e4dc;
-  --ink-muted: #9aa3b2;
-  --ink-faint: #6b7483;
-  --accent: #d9a441;
-  --accent-ink: #1a1304;
-  --accent-soft: rgba(217, 164, 65, 0.14);
-  --scene-hover: #6bc6e0;
-  --danger: #e06b6b;
-  --focus-ring: 0 0 0 2px var(--ground), 0 0 0 4px var(--accent);
+  /* Brand constants */
+  --wazo-electric: #0000ff;
+  --wazo-royal: #0442d7;
+  --wazo-azure: #007bff;
+  --wazo-sky: #33b2fb;
+  --wazo-ice: #89d4ed;
+  --wazo-mint: #d8ffe6;
+  --wazo-night: #212639;
+  --wazo-magenta: #ff3ca6;
+  --wazo-gradient-primary: linear-gradient(180deg, #8dd8ef 0%, #0e69ed 45%, #0000ff 100%);
+  --wazo-gradient-secondary-5: radial-gradient(120% 90% at 50% 100%, #0118d6 0%, #0088ff 100%);
+
+  /* Surfaces: a dark scale around the brand night navy */
+  --ground: #0b0e1a;
+  --panel: #12162a;
+  --raised: #212639;
+  --hairline: #2a3049;
+  --hairline-strong: #3a4160;
+
+  /* Ink: brand white and greys, tinted by the navy where secondary */
+  --ink: #f1efef;
+  --ink-muted: #a3aac4;
+  --ink-faint: #6f7694;
+
+  /* Accent: electric blue for fills, sky for text and rings, azure wash for pressed states */
+  --accent: var(--wazo-electric);
+  --accent-ink: #ffffff;
+  --accent-text: var(--wazo-sky);
+  --accent-soft: rgba(0, 123, 255, 0.16);
+
+  /* Inside the 3D scene only */
+  --scene-hover: var(--wazo-sky);
+  --scene-selected: var(--wazo-magenta);
+
+  --danger: #ff6e93;
+  --focus-ring: 0 0 0 2px var(--ground), 0 0 0 4px var(--wazo-sky);
 }
 
 @theme inline {
@@ -33,8 +55,10 @@
   --color-ink-faint: var(--ink-faint);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
   --color-accent-soft: var(--accent-soft);
   --color-scene-hover: var(--scene-hover);
+  --color-scene-selected: var(--scene-selected);
   --color-danger: var(--danger);
   --font-sans: var(--font-ui), system-ui, sans-serif;
   --font-serif: var(--font-latin), Georgia, serif;
@@ -60,12 +84,12 @@ body {
 
 /* Browser surfaces carry the design too. */
 ::selection {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--wazo-electric);
+  color: #ffffff;
 }
 input,
 textarea {
-  caret-color: var(--accent);
+  caret-color: var(--wazo-sky);
 }
 :focus-visible {
   outline: none;
@@ -97,6 +121,11 @@ textarea {
   font-variant-numeric: tabular-nums;
 }
 
+/* The brand gradient, used only on the primary action. */
+.bg-brand-gradient {
+  background: var(--wazo-gradient-primary);
+}
+
 /* Range input: the cutting plane slider. */
 input[type='range'].plane {
   appearance: none;
@@ -113,7 +142,7 @@ input[type='range'].plane::-webkit-slider-thumb {
   height: 12px;
   margin-top: -5px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--wazo-sky);
   border: 2px solid var(--ground);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
@@ -125,7 +154,7 @@ input[type='range'].plane::-moz-range-thumb {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--wazo-sky);
   border: 2px solid var(--ground);
 }
 

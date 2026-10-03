@@ -134,7 +134,7 @@ export function AnatomyViewer({ bundles }: { bundles: AssetBundle[] }) {
       onPointerMissed={() => select(null)}
       className="h-full w-full"
     >
-      <color attach="background" args={['#0c0f14']} />
+      <color attach="background" args={['#0b0e1a']} />
       <hemisphereLight args={['#e8eef7', '#30271f', 1.1]} />
       <directionalLight position={[2.5, 4, 3]} intensity={1.6} />
       <directionalLight position={[-3, 1.5, -2]} intensity={0.5} />

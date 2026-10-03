@@ -16,8 +16,10 @@ export type Variant = 'base' | 'hover' | 'selected' | 'ghost' | 'translucent';
 export type MaterialSet = Record<Variant, MeshStandardMaterial>;
 
 const cache = new Map<string, MaterialSet>();
-const HOVER = new Color('#6bc6e0');
-const SELECTED = new Color('#d9a441');
+// Brand colours (DESIGN.md): hover sky blue, selection magenta from the brand gradient
+// palette, the one hue that reads on bone, arteries and veins alike.
+const HOVER = new Color('#33b2fb');
+const SELECTED = new Color('#ff3ca6');
 let currentPlanes: Plane[] = [];
 
 function readColor(source: Material): Color {
@@ -57,7 +59,7 @@ export function materialSetFor(source: Material): MaterialSet {
     }),
     selected: variant(base, 'selected', (m) => {
       m.emissive = SELECTED;
-      m.emissiveIntensity = 0.6;
+      m.emissiveIntensity = 0.7;
     }),
     // Transparent + DoubleSide renders in two passes by default (back faces, then front),
     // doubling draw calls while isolating. One pass is enough for these see-through states.

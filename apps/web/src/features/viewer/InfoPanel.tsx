@@ -1,6 +1,7 @@
 'use client';
 
 import { Component, Suspense, use, type ReactNode } from 'react';
+import Image from 'next/image';
 import { Crosshair, EyeOff, Focus, Layers2 } from 'lucide-react';
 import type { StructureDetail } from '@atlas/shared';
 import { api } from '@/lib/api';
@@ -58,9 +59,10 @@ export function InfoPanel() {
           </Suspense>
         </DetailBoundary>
       ) : (
-        <div className="flex flex-1 flex-col justify-center gap-2 px-6 text-center">
+        <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
+          <Image src="/brand/wazo-mark.svg" alt="" width={72} height={72} className="opacity-80" />
           <p className="font-latin text-2xl text-ink-muted">Nomina anatomica</p>
-          <p className="text-xs text-ink-faint">
+          <p className="max-w-[28ch] text-xs text-ink-faint">
             Haz clic en una estructura, o búscala arriba, para ver su nombre en latín, español e
             inglés, su posición en la jerarquía y sus medidas.
           </p>
@@ -134,7 +136,12 @@ function Detail({ meshId }: { meshId: string }) {
       </nav>
 
       <header className="flex flex-col gap-1">
-        <h2 className="font-latin text-[30px] leading-[1.05] text-ink">
+        <h2 className="font-latin flex items-baseline gap-2 text-[30px] leading-[1.05] text-ink">
+          <span
+            aria-hidden="true"
+            className="mb-1 inline-block size-2 shrink-0 rounded-full bg-scene-selected"
+            title="Color de la estructura seleccionada en el modelo"
+          />
           {structure.names.la || structure.names.en}
         </h2>
         <p className="text-base font-bold text-ink">{structure.names.es || structure.names.en}</p>
@@ -218,7 +225,7 @@ function Detail({ meshId }: { meshId: string }) {
                       select(c.meshId);
                       focus(c.bounds);
                     }}
-                    className="truncate text-left hover:text-accent"
+                    className="truncate text-left hover:text-accent-text"
                   >
                     {c.names.es || c.names.en}
                   </button>
@@ -253,9 +260,9 @@ function Action({
   pressed?: boolean;
 }) {
   const tone = primary
-    ? 'bg-accent text-accent-ink hover:brightness-110'
+    ? 'bg-brand-gradient text-accent-ink hover:brightness-110'
     : pressed
-      ? 'border border-accent/60 bg-accent-soft text-ink'
+      ? 'border border-accent-text/60 bg-accent-soft text-ink'
       : 'border border-hairline text-ink hover:bg-raised';
   return (
     <button
