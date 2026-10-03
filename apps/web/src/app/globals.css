@@ -61,8 +61,6 @@
   --color-scene-selected: var(--scene-selected);
   --color-danger: var(--danger);
   --font-sans: var(--font-ui), system-ui, sans-serif;
-  --font-serif: var(--font-latin), Georgia, serif;
-  --font-mono: var(--font-data), ui-monospace, monospace;
   --radius-xs: 2px;
   --radius-sm: 4px;
 }
@@ -113,9 +111,9 @@ textarea {
 }
 
 .font-latin {
-  font-family: var(--font-serif);
   font-style: italic;
-  font-feature-settings: 'liga', 'kern';
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 .tabular {
   font-variant-numeric: tabular-nums;
