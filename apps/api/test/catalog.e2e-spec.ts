@@ -48,7 +48,7 @@ const prisma = {
         sizeBytes: 3979028,
         meshCount: 690,
         hash: 'abc',
-        structures: [{ meshId: 'ta2-1360-r' }],
+        structures: [{ meshId: 'ta2-1360-r', subsystem: 'bones-of-lower-limb' }],
       },
     ]),
   },
@@ -75,7 +75,11 @@ describe('Catalog (e2e)', () => {
   it('GET /api/assets lists bundles with their meshIds', async () => {
     const res = await request(app.getHttpServer()).get('/api/assets').expect(200);
     expect(res.body).toHaveLength(1);
-    expect(res.body[0]).toMatchObject({ id: 'skeletal-v1', meshes: ['ta2-1360-r'] });
+    expect(res.body[0]).toMatchObject({
+      id: 'skeletal-v1',
+      meshes: ['ta2-1360-r'],
+      subsystems: { 'bones-of-lower-limb': ['ta2-1360-r'] },
+    });
   });
 
   it('GET /api/structures paginates and maps regions', async () => {

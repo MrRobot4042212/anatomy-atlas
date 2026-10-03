@@ -3,8 +3,13 @@ import type { BodySystem } from '@atlas/shared';
 
 export type Bounds = { min: [number, number, number]; max: [number, number, number] };
 
+/** Key of a subsystem toggle: `<system>/<subsystem>`. */
+export const subsystemKey = (system: BodySystem, subsystem: string) => `${system}/${subsystem}`;
+
 export interface ViewerState {
   visibleSystems: Set<BodySystem>;
+  /** Subsystems switched off (keys from `subsystemKey`); everything else in a visible system shows. */
+  hiddenSubsystems: Set<string>;
   hidden: Set<string>;
   isolated: string | null;
   transparent: Set<string>;
@@ -15,6 +20,7 @@ export interface ViewerState {
   cameraTarget: Bounds | null;
 
   toggleSystem: (system: BodySystem) => void;
+  toggleSubsystem: (key: string) => void;
   hover: (meshId: string | null) => void;
   select: (meshId: string | null) => void;
   hide: (meshId: string) => void;
@@ -26,8 +32,16 @@ export interface ViewerState {
 
 const DEFAULT_SYSTEMS: BodySystem[] = ['skeletal'];
 
+function toggled<T>(set: Set<T>, value: T): Set<T> {
+  const next = new Set(set);
+  if (next.has(value)) next.delete(value);
+  else next.add(value);
+  return next;
+}
+
 export const useViewerStore = create<ViewerState>()((set) => ({
   visibleSystems: new Set(DEFAULT_SYSTEMS),
+  hiddenSubsystems: new Set(),
   hidden: new Set(),
   isolated: null,
   transparent: new Set(),
@@ -36,13 +50,8 @@ export const useViewerStore = create<ViewerState>()((set) => ({
   clipping: { axis: 'x', offset: 0, enabled: false },
   cameraTarget: null,
 
-  toggleSystem: (system) =>
-    set((s) => {
-      const next = new Set(s.visibleSystems);
-      if (next.has(system)) next.delete(system);
-      else next.add(system);
-      return { visibleSystems: next };
-    }),
+  toggleSystem: (system) => set((s) => ({ visibleSystems: toggled(s.visibleSystems, system) })),
+  toggleSubsystem: (key) => set((s) => ({ hiddenSubsystems: toggled(s.hiddenSubsystems, key) })),
   hover: (meshId) => set((s) => (s.hovered === meshId ? s : { hovered: meshId })),
   select: (meshId) => set((s) => (s.selected === meshId ? s : { selected: meshId })),
   hide: (meshId) =>

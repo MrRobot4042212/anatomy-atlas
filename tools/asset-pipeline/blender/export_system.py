@@ -22,6 +22,11 @@ def parse_args():
     p.add_argument("--system", required=True)
     p.add_argument("--mapping", default="out/mapping.json")
     p.add_argument("--out", default="out/raw")
+    # Curve tessellation (vessels, nerves). Z-Anatomy ships resolution_u=12, bevel_resolution=4,
+    # which is far more than a 0.5 mm tube needs on screen. Lower values cut triangles at the
+    # source instead of relying on mesh simplification afterwards.
+    p.add_argument("--curve-resolution", type=int, default=None, help="resolution_u per spline segment")
+    p.add_argument("--bevel-resolution", type=int, default=None, help="bevel_resolution of round profiles")
     return p.parse_args(argv)
 
 
@@ -36,12 +41,18 @@ def main():
     export_col = bpy.data.collections.new("EXPORT")
     bpy.context.scene.collection.children.link(export_col)
 
-    missing, exported = [], 0
+    missing, exported, curves = [], 0, 0
     for s in wanted:
         obj = bpy.data.objects.get(s["blenderName"])
         if obj is None:
             missing.append(s["blenderName"])
             continue
+        if obj.type == "CURVE":
+            curves += 1
+            if args.curve_resolution is not None:
+                obj.data.resolution_u = args.curve_resolution
+            if args.bevel_resolution is not None:
+                obj.data.bevel_resolution = args.bevel_resolution
         obj.name = s["meshId"]
         if obj.data is not None:
             obj.data.name = s["meshId"]
@@ -76,7 +87,10 @@ def main():
         export_skins=False,
         export_morph=False,
     )
-    print(f"Exported {exported} structures of system {args.system!r} to {out_file}")
+    print(
+        f"Exported {exported} structures ({curves} curves, resolution_u={args.curve_resolution or 'source'}, "
+        f"bevel_resolution={args.bevel_resolution or 'source'}) of system {args.system!r} to {out_file}"
+    )
 
 
 if __name__ == "__main__":

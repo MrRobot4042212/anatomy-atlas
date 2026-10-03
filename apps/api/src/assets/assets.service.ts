@@ -11,18 +11,30 @@ export class AssetsService {
     const bundles = await this.prisma.assetBundle.findMany({
       orderBy: { id: 'asc' },
       include: {
-        structures: { where: { meshId: { not: null } }, select: { meshId: true } },
+        structures: {
+          where: { meshId: { not: null } },
+          select: { meshId: true, subsystem: true },
+          orderBy: { meshId: 'asc' },
+        },
       },
     });
-    return bundles.map((b) => ({
-      id: b.id,
-      system: b.system,
-      url: b.url,
-      sizeBytes: b.sizeBytes,
-      meshCount: b.meshCount,
-      hash: b.hash,
-      meshes: b.structures.map((s) => s.meshId as string),
-    }));
+    return bundles.map((b) => {
+      const subsystems: Record<string, string[]> = {};
+      for (const s of b.structures) {
+        const key = s.subsystem ?? 'other';
+        (subsystems[key] ??= []).push(s.meshId as string);
+      }
+      return {
+        id: b.id,
+        system: b.system,
+        url: b.url,
+        sizeBytes: b.sizeBytes,
+        meshCount: b.meshCount,
+        hash: b.hash,
+        meshes: b.structures.map((s) => s.meshId as string),
+        subsystems,
+      };
+    });
   }
 
   async byId(id: string): Promise<AssetBundle> {
