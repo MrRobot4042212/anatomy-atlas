@@ -34,10 +34,14 @@
 - [ ] Descriptions per structure (source to be decided: Wikipedia extracts as Z-Anatomy does)
 - [ ] Language switch for the UI (es/en)
 
-## Phase 4: remaining systems
+## Phase 4: remaining systems (done 2026-10-03)
 
-- [ ] muscular, nervous, lymphatic, digestive, respiratory, urinary, reproductive, endocrine,
-      integumentary
+- [x] muscular (6.5 MB), nervous (4.5 MB), lymphatic (0.5), digestive (1.3), respiratory (0.9),
+      urinary, reproductive, endocrine, integumentary (0.1 to 0.2 each). 11 bundles, 22.1 MB,
+      2,903 structures with geometry. All layers on: 3,584 draw calls, 4.4M triangles.
+- [ ] Draw-call reduction (merge static geometry per subsystem) once frame time is measured
+      on the target laptop; with every layer on this is the first thing that will hurt.
+- [ ] Spanish names for the subsystem groups that TA2 does not translate (e.g. "Arthrology")
 
 ## Phase 5: learning features
 

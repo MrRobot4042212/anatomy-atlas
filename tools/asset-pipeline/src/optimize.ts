@@ -38,13 +38,16 @@ const io = new NodeIO()
 
 const document = await io.read(values.in);
 
+// The contract is on NODE names (a structure is a named node; mesh data may be shared and
+// carries whatever name Blender left on it).
 const badNames = document
   .getRoot()
-  .listMeshes()
-  .map((m) => m.getName())
+  .listNodes()
+  .filter((n) => n.getMesh())
+  .map((n) => n.getName())
   .filter((n) => !MESH_ID.test(n));
 if (badNames.length > 0) {
-  console.error(`Meshes without a valid meshId (${badNames.length}):`, badNames.slice(0, 20));
+  console.error(`Nodes without a valid meshId (${badNames.length}):`, badNames.slice(0, 20));
   process.exit(1);
 }
 

@@ -23,6 +23,8 @@ import unicodedata
 from collections import Counter, defaultdict
 
 LABEL_SUFFIXES = (".r.t", ".l.t", ".st", ".t", ".j", ".g", ".i")
+# Modelling helpers that are not anatomical structures: bevel profiles, paths, reference axes.
+HELPER_RE = re.compile(r"(-curve|-path|-profile)(\.[lr])?$|^BezierCircle|^(Equator|Meridians|External axis) of eyeball")
 INSERTION_RE = re.compile(r"^(.*)\.(o|e)(\d*)([lr])?$")
 SIDE_RE = re.compile(r"^(.*)\.([lr])$")
 FLAT_RE = re.compile(r"^\d+: (.*)$")
@@ -132,6 +134,8 @@ def load_ta2(path):
 
 def classify(name):
     """Return (base, side, kind) where kind in structure | label | insertion."""
+    if HELPER_RE.search(name.rstrip("'")):
+        return name, None, "helper"
     for suf in LABEL_SUFFIXES:
         if name.endswith(suf):
             return name[: -len(suf)], None, "label"

@@ -30,7 +30,16 @@ const PRESETS: Partial<Record<BodySystem, Preset>> = {
     bevelResolution: 2,
     note: '676 nodes; source curves 3.8M drawn tris -> u6/b2 1.41M -> ratio 0.5 744k, 4.0 MB',
   },
-  nervous: { ratio: 0.5, curveResolution: 6, bevelResolution: 2, note: 'same recipe as vessels' },
+  nervous: {
+    ratio: 0.5,
+    curveResolution: 6,
+    bevelResolution: 2,
+    note: '589 nodes (251 curves); 21.7 MB raw -> 4.5 MB',
+  },
+  muscular: { ratio: 0.5, note: '683 nodes; 25.4 MB raw -> 6.5 MB, 1.53M drawn triangles' },
+  lymphatic: { ratio: 0.5, note: '159 nodes; 1.5 MB raw -> 0.5 MB' },
+  digestive: { ratio: 0.5, note: '46 nodes; 7.0 MB raw -> 1.3 MB' },
+  respiratory: { ratio: 0.5, note: '35 nodes; 4.4 MB raw -> 0.9 MB' },
 };
 const DEFAULT_PRESET: Preset = { ratio: 0.5, note: 'default' };
 
@@ -54,10 +63,12 @@ const preset = PRESETS[system] ?? DEFAULT_PRESET;
 const raw = `out/raw/${system}.glb`;
 const out = `out/${system}-v${values.version}.glb`;
 
-function run(cmd: string, args: string[]) {
+function run(cmd: string, args: string[], { tolerate = false } = {}): number {
   console.log(`$ ${cmd} ${args.join(' ')}`);
   const res = spawnSync(cmd, args, { stdio: 'inherit', shell: process.platform === 'win32' });
-  if (res.status !== 0) process.exit(res.status ?? 1);
+  const status = res.status ?? 1;
+  if (status !== 0 && !tolerate) process.exit(status);
+  return status;
 }
 
 if (!values['skip-export']) {
@@ -78,7 +89,16 @@ if (!values['skip-export']) {
   ];
   if (preset.curveResolution) args.push('--curve-resolution', String(preset.curveResolution));
   if (preset.bevelResolution) args.push('--bevel-resolution', String(preset.bevelResolution));
-  run(`"${BLENDER}"`, args);
+  // Blender 5.2 sometimes crashes on exit (EXCEPTION_ACCESS_VIOLATION) after the export has
+  // been written. The export is complete if the raw file was (re)written during this run.
+  const before = existsSync(raw) ? statSync(raw).mtimeMs : 0;
+  const status = run(`"${BLENDER}"`, args, { tolerate: true });
+  const after = existsSync(raw) ? statSync(raw).mtimeMs : 0;
+  if (after <= before) {
+    console.error(`Blender exited with ${status} and ${raw} was not written.`);
+    process.exit(status || 1);
+  }
+  if (status !== 0) console.warn(`Blender exited with ${status} after writing ${raw}; continuing.`);
 }
 
 run('pnpm', [

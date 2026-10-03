@@ -22,7 +22,33 @@ const HOVER = new Color('#33b2fb');
 const SELECTED = new Color('#ff3ca6');
 let currentPlanes: Plane[] = [];
 
+/**
+ * Scene palette (DESIGN.md). Z-Anatomy colours several materials through its own shader and
+ * exports them as pure white; we give those the colours anatomy atlases use so a student reads
+ * tissue type at a glance: muscle red, nerve yellow, lymph green, cortex pink, bone ivory.
+ * Materials not listed keep the colour that came in the GLB (arteries red, veins blue...).
+ */
+const SCENE_PALETTE: Record<string, { color?: string; opacity?: number }> = {
+  Flexion: { color: '#a9463f' }, // muscles
+  Trapezius: { color: '#a9463f' },
+  'Orbicularis/Constrictor': { color: '#a9463f' },
+  Nerve: { color: '#e3c75a' },
+  'Frontal lobe': { color: '#e0a48e' }, // cerebral cortex
+  'Bronchi-1': { color: '#d9cfc0' },
+  'Lymph-5': { color: '#79b77f' },
+  Organ: { color: '#c97b6b' },
+  'Organ-2': { color: '#c97b6b' },
+  'Bone-1': { color: '#ece5d6' },
+  'Bone-4': { color: '#ece5d6' },
+  Dentine: { color: '#efe6d8' },
+  // Fascia and sheaths wrap muscles; as a veil they show what they cover.
+  Fascia: { opacity: 0.35 },
+  Bursa: { opacity: 0.6 },
+};
+
 function readColor(source: Material): Color {
+  const override = SCENE_PALETTE[source.name]?.color;
+  if (override) return new Color(override);
   const c = (source as { color?: Color }).color;
   return c instanceof Color ? c.clone() : new Color('#d8d2c4');
 }
@@ -43,6 +69,7 @@ export function materialSetFor(source: Material): MaterialSet {
   let set = cache.get(key);
   if (set) return set;
 
+  const opacity = SCENE_PALETTE[key]?.opacity ?? 1;
   const base = new MeshStandardMaterial({
     name: `${key}/base`,
     color: readColor(source),
@@ -50,6 +77,10 @@ export function materialSetFor(source: Material): MaterialSet {
     roughness: 0.65,
     side: DoubleSide,
     clippingPlanes: currentPlanes,
+    transparent: opacity < 1,
+    opacity,
+    depthWrite: opacity >= 1,
+    forceSinglePass: opacity < 1,
   });
   set = {
     base,

@@ -48,6 +48,16 @@ Electric blue never carries text on the dark ground (2.4:1); it is a fill under 
 carries interactive text (7.9:1 on ground). Magenta exists only inside the 3D scene and as the
 small dot before the selected structure's Latin name, so the label and the model agree.
 
+## Scene palette
+
+Tissue colours inside the 3D scene follow atlas convention, not the brand: muscle `#A9463F`,
+nerve `#E3C75A`, lymph `#79B77F`, cerebral cortex `#E0A48E`, bronchi `#D9CFC0`, generic organ
+`#C97B6B`, bone `#ECE5D6`. These override the pure-white materials Z-Anatomy exports
+(`SCENE_PALETTE` in `materials.ts`); every other material keeps its source colour (arteries
+`#E46E6E`, veins `#7873E4`, cartilage, ligaments, mucosa, glands). Fascia renders at 35 %
+opacity and bursae at 60 %, as veils over what they wrap; the muscular layer starts with its
+`fascia` subsystem switched off.
+
 ## Logo
 
 Isotype `public/brand/wazo-mark.svg` at 22px and wordmark `public/brand/wazo-logo.svg` (white,
