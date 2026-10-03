@@ -1,6 +1,6 @@
 'use client';
 
-import { Component, Suspense, use, useState, type ReactNode } from 'react';
+import { Component, Suspense, use, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import type { BodySystem, StructureTreeNode } from '@atlas/shared';
 import { api } from '@/lib/api';
@@ -22,10 +22,21 @@ function treeFor(system: BodySystem): Promise<StructureTreeNode[]> {
 
 const SIDE: Record<string, string> = { left: 'izq.', right: 'der.' };
 
+// The tree depends on viewer state and on a client-side promise cache, so it is rendered on the
+// client only; server rendering it produced hydration mismatches with no benefit.
+const subscribeNoop = () => () => {};
+const useIsClient = () =>
+  useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false,
+  );
+
 /** Hierarchy of every visible system: browse groups, select structures with geometry. */
 export function HierarchyTree() {
   const visible = useViewerStore((s) => s.visibleSystems);
-  const systems = [...visible];
+  const isClient = useIsClient();
+  const systems = isClient ? [...visible] : [];
 
   return (
     <section aria-labelledby="tree-heading" className="flex min-h-0 flex-col">
@@ -35,7 +46,11 @@ export function HierarchyTree() {
       >
         Jerarquía
       </h2>
-      {systems.length === 0 ? (
+      {!isClient ? (
+        <p className="px-4 pb-4 text-xs text-ink-faint" aria-busy="true">
+          Cargando jerarquía…
+        </p>
+      ) : systems.length === 0 ? (
         <p className="px-4 pb-4 text-xs text-ink-muted">
           Activa una capa para recorrer su jerarquía.
         </p>
