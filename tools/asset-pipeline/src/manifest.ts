@@ -130,6 +130,12 @@ for (const file of files) {
     });
   }
 
+  const subsystems: Record<string, string[]> = {};
+  for (const meshId of meshes) {
+    const key = byMeshId.get(meshId)?.subsystem ?? 'other';
+    (subsystems[key] ??= []).push(meshId);
+  }
+
   bundles.push({
     id,
     system,
@@ -137,6 +143,7 @@ for (const file of files) {
     sizeBytes: (await stat(path)).size,
     meshCount: meshes.length,
     meshes,
+    subsystems,
     hash: createHash('sha256').update(bytes).digest('hex').slice(0, 16),
   });
 }

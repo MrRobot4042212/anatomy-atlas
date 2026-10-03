@@ -74,6 +74,8 @@ export interface AssetBundle {
   meshCount: number;
   /** Mesh names (= meshIds) inside the GLB, for lookup without parsing the file. */
   meshes: string[];
+  /** meshIds grouped by subsystem (e.g. arteries / veins / heart), for layer sub-toggles. */
+  subsystems: Record<string, string[]>;
   /** Content hash to bust CDN cache on re-export. */
   hash: string;
 }

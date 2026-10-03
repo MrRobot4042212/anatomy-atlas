@@ -12,9 +12,11 @@
 
 ## Phase 2: cardiovascular + performance
 
-- [ ] Cardiovascular bundle (heart, arteries, veins as subsystems)
-- [ ] Performance pass with numbers: draw calls, frame time, bytes over the wire
-- [ ] Lazy loading per system, bundle splitting by region when needed
+- [x] Cardiovascular bundle (676 structures, 4.0 MB; heart, arteries, veins, pulmonary as subsystem toggles)
+- [x] Baseline numbers: draw calls, triangles, bytes (see docs/viewer-conventions.md). Frame time pending on real hardware
+- [ ] Draw-call reduction (merge static geometry per subsystem) if measured frame time exceeds budget
+- [x] Lazy loading per system (nothing downloads until its layer is on)
+- [ ] Bundle splitting by region when a bundle exceeds 25 MB
 
 ## Phase 3: exploration tools
 

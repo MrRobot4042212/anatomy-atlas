@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <div className="grid h-screen grid-rows-[1fr_auto] bg-neutral-950">
-      <div className="grid min-h-0 grid-cols-[240px_1fr_320px]">
+      <div className="grid min-h-0 grid-cols-[260px_1fr_320px]">
         <LayerPanel bundles={bundles} />
         <main className="relative min-h-0">
           <AnatomyViewer bundles={bundles} />

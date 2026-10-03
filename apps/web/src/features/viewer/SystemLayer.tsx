@@ -8,7 +8,7 @@ import { acceleratedRaycast, MeshBVH } from 'three-mesh-bvh';
 import type { AssetBundle } from '@atlas/shared';
 import { materialSetFor } from './materials';
 import { registry, resolveMeshId, type StructureEntry } from './registry';
-import { useViewerStore, type ViewerState } from './store';
+import { subsystemKey, useViewerStore, type ViewerState } from './store';
 
 // BVH-accelerated raycast for every mesh in the app (module scope, set once).
 Mesh.prototype.raycast = acceleratedRaycast;
@@ -67,11 +67,16 @@ function registerScene(scene: Object3D): string[] {
 
 type Variant = 'base' | 'hover' | 'selected' | 'ghost';
 
-function paint(meshIds: string[], state: Pick<ViewerState, 'hovered' | 'selected' | 'hidden'>) {
+function paint(
+  meshIds: string[],
+  subsystemOf: Map<string, string>,
+  state: Pick<ViewerState, 'hovered' | 'selected' | 'hidden' | 'hiddenSubsystems'>,
+) {
   for (const meshId of meshIds) {
     const entry = registry.get(meshId);
     if (!entry) continue;
-    const visible = !state.hidden.has(meshId);
+    const sub = subsystemOf.get(meshId);
+    const visible = !state.hidden.has(meshId) && !(sub && state.hiddenSubsystems.has(sub));
     entry.node.visible = visible;
     if (!visible) continue;
     const variant: Variant =
@@ -93,21 +98,27 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
   // always pairs with a registration, StrictMode remounts included.
   useEffect(() => {
     const meshIds = registerScene(scene);
-    paint(meshIds, useViewerStore.getState());
+    const subsystemOf = new Map<string, string>();
+    for (const [subsystem, ids] of Object.entries(bundle.subsystems)) {
+      const key = subsystemKey(bundle.system, subsystem);
+      for (const id of ids) subsystemOf.set(id, key);
+    }
+    paint(meshIds, subsystemOf, useViewerStore.getState());
     const unsubscribe = useViewerStore.subscribe((state, prev) => {
       if (
         state.hovered !== prev.hovered ||
         state.selected !== prev.selected ||
-        state.hidden !== prev.hidden
+        state.hidden !== prev.hidden ||
+        state.hiddenSubsystems !== prev.hiddenSubsystems
       ) {
-        paint(meshIds, state);
+        paint(meshIds, subsystemOf, state);
       }
     });
     return () => {
       unsubscribe();
       for (const meshId of meshIds) registry.delete(meshId);
     };
-  }, [scene]);
+  }, [scene, bundle]);
 
   const onPointerOver = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
