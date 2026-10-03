@@ -64,8 +64,11 @@ function variant(
   return m;
 }
 
-export function materialSetFor(source: Material): MaterialSet {
-  const key = source.name || 'default';
+/**
+ * `key` is the GLB material name (stable across re-registrations); `source` is only read the
+ * first time a key is seen, to pick up the colour the file shipped.
+ */
+export function materialSetFor(key: string, source: Material): MaterialSet {
   let set = cache.get(key);
   if (set) return set;
 

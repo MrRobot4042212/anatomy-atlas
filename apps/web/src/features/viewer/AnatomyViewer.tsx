@@ -97,11 +97,18 @@ function DevProbe() {
     if (now - a.published < 500) return;
     let meshes = 0;
     let withBvh = 0;
+    let translucent = 0;
+    const materialNames = new Map<string, boolean>();
     scene.traverse((o) => {
-      const geometry = (o as { geometry?: { boundsTree?: unknown } }).geometry;
-      if (!geometry) return;
+      const mesh = o as {
+        geometry?: { boundsTree?: unknown };
+        material?: { name?: string; transparent?: boolean };
+      };
+      if (!mesh.geometry) return;
       meshes += 1;
-      if (geometry.boundsTree) withBvh += 1;
+      if (mesh.geometry.boundsTree) withBvh += 1;
+      if (mesh.material?.transparent) translucent += 1;
+      if (mesh.material?.name) materialNames.set(mesh.material.name, !!mesh.material.transparent);
     });
     document.body.dataset.atlasStats = JSON.stringify({
       calls: gl.info.render.calls,
@@ -110,6 +117,8 @@ function DevProbe() {
       frameMs: +(a.ms / a.frames).toFixed(2),
       meshes,
       withBvh,
+      translucent,
+      materials: [...materialNames].map(([n, t]) => (t ? `${n}*` : n)),
       dpr: gl.getPixelRatio(),
       camera: camera.position.toArray().map((v) => +v.toFixed(2)),
     });
