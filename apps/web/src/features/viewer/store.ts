@@ -48,6 +48,9 @@ export interface ViewerState {
 }
 
 const DEFAULT_SYSTEMS: BodySystem[] = ['skeletal'];
+// Fascia wraps every muscle; students study the muscles underneath, so it starts switched
+// off and is one click away in the muscular layer's subsystems.
+const DEFAULT_HIDDEN_SUBSYSTEMS = [subsystemKey('muscular', 'fascia')];
 
 function toggled<T>(set: Set<T>, value: T): Set<T> {
   const next = new Set(set);
@@ -58,7 +61,7 @@ function toggled<T>(set: Set<T>, value: T): Set<T> {
 
 export const useViewerStore = create<ViewerState>()((set) => ({
   visibleSystems: new Set(DEFAULT_SYSTEMS),
-  hiddenSubsystems: new Set(),
+  hiddenSubsystems: new Set(DEFAULT_HIDDEN_SUBSYSTEMS),
   hidden: new Set(),
   isolated: null,
   transparent: new Set(),

@@ -113,9 +113,31 @@ async function main() {
     written++;
   }
 
+  // Rows that left the manifest (renamed terms, excluded helpers) are removed so the catalog
+  // never serves structures the bundles no longer contain.
+  const keep = new Set(ordered.map((s) => `${s.termKey}|${s.laterality}`));
+  const stale = (
+    await prisma.structure.findMany({ select: { id: true, termKey: true, laterality: true } })
+  ).filter((r) => !keep.has(`${r.termKey}|${r.laterality}`));
+  if (stale.length > 0) {
+    const ids = stale.map((r) => r.id);
+    await prisma.structure.updateMany({
+      where: { parentId: { in: ids } },
+      data: { parentId: null },
+    });
+    await prisma.structure.deleteMany({ where: { id: { in: ids } } });
+  }
+  const bundleIds = new Set(manifest.bundles.map((b) => b.id));
+  const staleBundles = (await prisma.assetBundle.findMany({ select: { id: true } })).filter(
+    (b) => !bundleIds.has(b.id),
+  );
+  if (staleBundles.length > 0) {
+    await prisma.assetBundle.deleteMany({ where: { id: { in: staleBundles.map((b) => b.id) } } });
+  }
+
   const withMesh = ordered.filter((s) => s.assetId).length;
   console.log(
-    `Seeded ${manifest.bundles.length} bundles, ${written} structures (${withMesh} with geometry).`,
+    `Seeded ${manifest.bundles.length} bundles, ${written} structures (${withMesh} with geometry); removed ${stale.length} stale structures, ${staleBundles.length} stale bundles.`,
   );
 }
 
