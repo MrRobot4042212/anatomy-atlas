@@ -127,7 +127,7 @@ export function SearchBox() {
           onKeyDown={onKeyDown}
           className="min-w-0 flex-1 bg-transparent text-[13px] text-ink placeholder:text-ink-faint focus:outline-none"
         />
-        <kbd className="hidden rounded-xs border border-hairline px-1 tabular text-[10px] text-ink-faint sm:inline">
+        <kbd className="hidden rounded-xs border border-hairline px-1 font-sans text-[10px] text-ink-faint sm:inline">
           /
         </kbd>
       </div>
