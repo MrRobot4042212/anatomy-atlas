@@ -49,7 +49,12 @@ function registerScene(scene: Object3D): string[] {
         geometry.boundsTree = new MeshBVH(geometry);
         built += 1;
       }
-      const set = materialSetFor(mesh.material as Material);
+      // The GLB material name is the palette key. After a StrictMode remount the mesh already
+      // carries one of our materials, so the original key is kept on the mesh the first time.
+      const source = mesh.material as Material;
+      const key = (mesh.userData.materialKey as string | undefined) ?? (source.name || 'default');
+      mesh.userData.materialKey = key;
+      const set = materialSetFor(key, source);
       mesh.material = set.base;
       return set;
     });
