@@ -106,6 +106,10 @@ describe('Catalog (e2e)', () => {
     const res = await request(app.getHttpServer())
       .get('/api/structures/tree?system=skeletal')
       .expect(200);
-    expect(res.body[0]).toMatchObject({ meshId: 'ta2-1360-r', children: [] });
+    // A loose structure (no parent row) is grouped under the synthetic "Sin agrupar" root.
+    expect(res.body[0]).toMatchObject({
+      nameEs: 'Sin agrupar',
+      children: [{ meshId: 'ta2-1360-r', children: [] }],
+    });
   });
 });

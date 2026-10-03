@@ -69,6 +69,20 @@ SUBSYSTEM_OVERRIDES = {
     ("nervous", "Peripheral nervous system"): "peripheral",
     ("nervous", "Sense organs"): "sense-organs",
 }
+# Bonus collection top group that acts as the catalog root of each system
+SYSTEM_ROOT = {
+    "skeletal": "Skeletal system",
+    "muscular": "Muscular system",
+    "cardiovascular": "Cardiovascular system",
+    "nervous": "Nervous system",
+    "lymphatic": "Lymphoid system",
+    "digestive": "Digestive system",
+    "respiratory": "Respiratory system",
+    "urinary": "Urinary system",
+    "reproductive": "Genital systems'",
+    "endocrine": "Endocrine glands",
+    "integumentary": "Integument",
+}
 REGION_MAP = {
     "Head": "head",
     "Neck": "neck",
@@ -207,17 +221,19 @@ def main():
     def node_key(term_key, side):
         return f"{term_key.replace(':', '-')}-{side}" if side else term_key.replace(":", "-")
 
-    def ensure_group(col_name, system, subsystem):
+    def ensure_group(col_name, system, subsystem, parent_override=None):
         """Emit a group node for a sub-collection and return its node key."""
         term = resolve_term(col_name, terms)
         key = node_key(term["termKey"], None)
         if key not in structures:
-            chain = paths[col_name]
-            parent_key = None
-            # parent group = nearest ancestor below the top group
-            for anc in reversed(chain[1:]):
-                parent_key = ensure_group(anc, system, subsystem)
-                break
+            chain = paths.get(col_name, [])
+            parent_key = parent_override
+            # parent group = nearest ancestor, the system's top group included, so every
+            # system has exactly one root node in the catalog tree
+            if parent_key is None:
+                for anc in reversed(chain):
+                    parent_key = ensure_group(anc, system, subsystem)
+                    break
             structures[key] = {
                 "key": key, "termKey": term["termKey"], "ta2Id": term["ta2Id"], "meshId": None,
                 "blenderName": col_name, "objectType": "COLLECTION", "names": term["names"],
@@ -262,9 +278,18 @@ def main():
         deepest = max(same_system, key=lambda c: len(c[2]), default=None)
         if deepest:
             subsystem = deepest[1]
-            parent_key = ensure_group(deepest[2][-1], system, subsystem) if len(deepest[2]) > 1 else None
+            parent_key = ensure_group(deepest[2][-1], system, subsystem)
         else:
-            parent_key = None
+            # Only linked to a region (e.g. "Left hand") and the flat system collection:
+            # group it by that region under the system's root so the tree stays navigable.
+            root_name = SYSTEM_ROOT.get(system, system)
+            root_key = ensure_group(root_name, system, None)
+            region_leaf = next(
+                (p[-1] for p in full_paths if len(p) >= 3 and p[0] == "Regions of human body" and p[1] == "Main divisions"),
+                None,
+            )
+            parent_key = ensure_group(region_leaf, system, None, parent_override=root_key) if region_leaf else root_key
+            stats["parent:region-fallback"] += 1
 
         term = resolve_term(base, terms)
         laterality = {"l": "left", "r": "right"}.get(side, "midline")

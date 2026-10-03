@@ -98,6 +98,10 @@ export class StructuresService {
   }
 }
 
+/**
+ * Group nodes come first; structures with geometry but no parent in this system are collected
+ * under a synthetic "unclassified" root at the end, so the tree opens on the real hierarchy.
+ */
 export function buildTree(rows: StructureRow[]): StructureTreeNode[] {
   const nodes = new Map<string, StructureTreeNode>();
   for (const r of rows) {
@@ -106,16 +110,32 @@ export function buildTree(rows: StructureRow[]): StructureTreeNode[] {
       termKey: r.termKey,
       meshId: r.meshId,
       name: r.nameEn,
+      nameEs: r.nameEs || r.nameEn,
       laterality: r.laterality,
       children: [],
     });
   }
-  const roots: StructureTreeNode[] = [];
+  const groups: StructureTreeNode[] = [];
+  const loose: StructureTreeNode[] = [];
   for (const r of rows) {
     const node = nodes.get(r.id) as StructureTreeNode;
     const parent = r.parentId ? nodes.get(r.parentId) : undefined;
     if (parent) parent.children.push(node);
-    else roots.push(node);
+    else if (node.meshId) loose.push(node);
+    else groups.push(node);
   }
-  return roots;
+  if (loose.length === 0) return groups;
+  const system = rows[0]?.system ?? 'unknown';
+  return [
+    ...groups,
+    {
+      id: `${system}:unclassified`,
+      termKey: 'za:unclassified',
+      meshId: null,
+      name: 'Unclassified',
+      nameEs: 'Sin agrupar',
+      laterality: 'midline',
+      children: loose,
+    },
+  ];
 }

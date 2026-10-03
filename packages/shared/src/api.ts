@@ -28,7 +28,9 @@ export interface StructureTreeNode {
   id: string;
   termKey: string;
   meshId: string | null;
+  /** English name (TA2); `nameEs` falls back to it when the Spanish term is missing. */
   name: string;
+  nameEs: string;
   laterality: Laterality;
   children: StructureTreeNode[];
 }

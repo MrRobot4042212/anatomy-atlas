@@ -44,7 +44,17 @@ describe('toStructure', () => {
 });
 
 describe('buildTree', () => {
-  it('nests children under parents and keeps orphans as roots', () => {
+  it('collects loose structures with geometry under a synthetic root', () => {
+    const rows = [
+      row({ id: 'root', nameEn: 'Skeletal system' }),
+      row({ id: 'loose', nameEn: 'Patella', meshId: 'ta2-1', parentId: 'outside' }),
+    ];
+    const tree = buildTree(rows);
+    expect(tree.map((n) => n.id)).toEqual(['root', 'skeletal:unclassified']);
+    expect(tree[1]).toMatchObject({ nameEs: 'Sin agrupar', children: [{ id: 'loose' }] });
+  });
+
+  it('nests children under parents and keeps orphan groups as roots', () => {
     const rows = [
       row({ id: 'root', nameEn: 'Skeletal system' }),
       row({ id: 'limb', nameEn: 'Bones of lower limb', parentId: 'root' }),
@@ -59,6 +69,7 @@ describe('buildTree', () => {
     ];
     const tree = buildTree(rows);
     expect(tree.map((n) => n.id)).toEqual(['root', 'orphan']);
+    expect(tree[1].meshId).toBeNull();
     expect(tree[0].children[0].children[0]).toMatchObject({
       meshId: 'ta2-1360-l',
       laterality: 'left',
