@@ -47,8 +47,8 @@ the screen is the main light source, so the interface must be comfortable in the
 
 - Name: **Wazo Anatomy**. WAZO is the owner's employer. Brand assets provided 2026-10-03:
   wordmark `public/brand/wazo-logo.svg` (WAZO®), isotype `public/brand/wazo-mark.svg` (blurred
-  blue gradient shield, also the app icon), typeface **BR Sonoma** (licensed; files pending, see
-  `src/fonts/README.md`), and the WAZO colour system: electric blue `#0000FF`, black, white;
+  blue gradient shield, also the app icon), typeface **BR Sonoma** (licensed, not available; the owner approved
+  shipping the closest open face, Albert Sans, see `src/fonts/README.md`), and the WAZO colour system: electric blue `#0000FF`, black, white;
   secondary blues `#0442D7` `#007BFF` `#33B2FB` `#89D4ED`; neutrals `#212639` `#D9D9D9`
   `#F1EFEF`; primary gradient `#8DD8EF → #0000FF` (radial and linear); secondary gradients
   4 (`#068BFF → #EEF7FF`), 5 (`#0088FF → #0118D6` radial), 6 (`#0209F0 → #86C5EA`); gradient

@@ -30,7 +30,7 @@
 
 - [x] Wazo Anatomy visual world on the WAZO brand system (logo, isotype, colours, gradients),
       EB Garamond italic for Latin, Geist Mono for data, specimen label with caliper. See `apps/web/DESIGN.md`.
-- [ ] BR Sonoma font files from the owner (`apps/web/src/fonts/README.md`)
+- [x] UI typeface: Albert Sans as the open stand-in for BR Sonoma (`apps/web/src/fonts/README.md`)
 - [ ] Descriptions per structure (source to be decided: Wikipedia extracts as Z-Anatomy does)
 - [ ] Language switch for the UI (es/en)
 

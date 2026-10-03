@@ -1,14 +1,7 @@
-# Brand fonts
+# UI typeface
 
-WAZO's typeface is **BR Sonoma** (licensed, not on Google Fonts). Drop the files here:
+WAZO's brand face is **BR Sonoma** (licensed). The owner chose to ship the closest open face
+instead: **Albert Sans** (Google Fonts, self-hosted by next/font), configured in `ui.ts`.
 
-```
-src/fonts/BRSonoma-Regular.woff2
-src/fonts/BRSonoma-Medium.woff2
-src/fonts/BRSonoma-SemiBold.woff2
-src/fonts/BRSonoma-Bold.woff2
-```
-
-then switch `src/fonts/ui.ts` to the `localFont` block (already written there, commented).
-Until then the UI falls back to Atkinson Hyperlegible, chosen for legibility; nothing else in
-the design depends on the swap.
+If the BR Sonoma files are ever added here (`BRSonoma-Regular/Medium/SemiBold/Bold.woff2`),
+swap to the commented `localFont` block in `ui.ts`; nothing else in the design depends on it.
