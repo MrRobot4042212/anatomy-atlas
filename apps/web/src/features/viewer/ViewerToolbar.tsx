@@ -60,7 +60,7 @@ export function ViewerToolbar() {
               value={clipping.offset}
               onChange={(e) => setClipping({ offset: Number(e.target.value) })}
             />
-            <span className="tabular w-10 shrink-0 text-right font-mono text-[11px] text-ink-muted">
+            <span className="tabular w-10 shrink-0 text-right tabular text-[11px] text-ink-muted">
               {Math.round(clipping.offset * 100)}%
             </span>
           </label>
@@ -110,7 +110,7 @@ export function ViewerToolbar() {
             >
               <Eye size={14} aria-hidden="true" />
               Mostrar todo
-              <span className="tabular rounded-xs bg-raised px-1 font-mono text-[10px] text-ink-faint">
+              <span className="tabular rounded-xs bg-raised px-1 tabular text-[10px] text-ink-faint">
                 {alterations}
               </span>
             </button>

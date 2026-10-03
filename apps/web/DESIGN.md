@@ -51,20 +51,19 @@ small dot before the selected structure's Latin name, so the label and the model
 ## Logo
 
 Isotype `public/brand/wazo-mark.svg` at 22px and wordmark `public/brand/wazo-logo.svg` (white,
-68x18) in the header, followed by "Anatomy" in the Latin italic. The isotype is also the app
+68x18) in the header, followed by "Anatomy" in italic. The isotype is also the app
 icon (`src/app/icon.svg`) and appears at 72px in the empty label state. Never recolour the
 isotype; never set the wordmark in a typeface.
 
 ## Type
 
-- UI: Albert Sans 400/500/600/700 through `src/fonts/ui.ts`, the closest open face to the brand's
-  BR Sonoma (owner decision 2026-10-03); the `localFont` block for BR Sonoma stays ready. 13px rows, 11px captions, uppercase section labels at
-  11px bold with 0.14em tracking.
-- Latin nomenclature: EB Garamond italic (`--font-latin`, `.font-latin`), 30px in the label,
-  19px for "Anatomy" in the header, 24px in the empty state. Scientific names are italic by
-  convention; this is the only serif on the surface.
-- Data: Geist Mono (`--font-data`, `.font-mono`) for TA2 codes, millimetres, counts in badges,
-  the hovered meshId. Tabular figures via `.tabular`.
+One family only: Albert Sans 400/500/600/700 with italics (`src/fonts/ui.ts`), the closest
+open face to the brand's BR Sonoma (owner decision 2026-10-03; the `localFont` block stays
+ready). 13px rows, 11px captions, uppercase section labels at 11px bold with 0.14em tracking.
+
+- Latin nomenclature: Albert Sans italic 500 (`.font-latin`), 30px in the label, 19px for
+  "Anatomy" in the header, 24px in the empty state. Scientific names are italic by convention.
+- Data: TA2 codes, millimetres and counts use the same face with tabular figures (`.tabular`).
 
 ## Layout
 

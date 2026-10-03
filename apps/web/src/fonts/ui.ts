@@ -7,10 +7,12 @@
 import { Albert_Sans } from 'next/font/google';
 // import localFont from 'next/font/local';
 
+// The only typeface on the surface: UI, Latin nomenclature (italic) and data (tabular figures).
 export const ui = Albert_Sans({
   variable: '--font-ui',
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
   display: 'swap',
 });
 

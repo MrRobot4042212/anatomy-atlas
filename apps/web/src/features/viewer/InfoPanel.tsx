@@ -47,7 +47,7 @@ export function InfoPanel() {
     <section aria-label="Ficha de la estructura" className="flex h-full flex-col">
       <div className="flex h-8 items-center border-b border-hairline px-4 text-[11px] text-ink-faint">
         {hovered ? (
-          <span className="font-mono">{hovered}</span>
+          <span className="tabular">{hovered}</span>
         ) : (
           <span>Pasa el cursor sobre el modelo para identificar</span>
         )}
@@ -150,7 +150,7 @@ function Detail({ meshId }: { meshId: string }) {
 
       <dl className="grid grid-cols-[88px_1fr] gap-x-3 gap-y-1.5 border-t border-hairline pt-3 text-xs">
         <dt className="text-ink-faint">Código TA2</dt>
-        <dd className="font-mono text-ink">{structure.ta2Id ?? 'sin código oficial'}</dd>
+        <dd className="tabular text-ink">{structure.ta2Id ?? 'sin código oficial'}</dd>
         <dt className="text-ink-faint">Sistema</dt>
         <dd>
           {SYSTEM_LABELS[structure.system]}
@@ -340,7 +340,7 @@ function Caliper({
               </g>
             </svg>
           </dd>
-          <dd className="tabular text-right font-mono text-ink">
+          <dd className="tabular text-right tabular text-ink">
             {r.value} <span className="text-ink-faint">mm</span>
           </dd>
         </div>
