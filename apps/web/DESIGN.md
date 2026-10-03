@@ -57,8 +57,8 @@ isotype; never set the wordmark in a typeface.
 
 ## Type
 
-- UI: BR Sonoma (brand) through `src/fonts/ui.ts`; Atkinson Hyperlegible 400/700 stands in
-  until the licensed files are added. 13px rows, 11px captions, uppercase section labels at
+- UI: Albert Sans 400/500/600/700 through `src/fonts/ui.ts`, the closest open face to the brand's
+  BR Sonoma (owner decision 2026-10-03); the `localFont` block for BR Sonoma stays ready. 13px rows, 11px captions, uppercase section labels at
   11px bold with 0.14em tracking.
 - Latin nomenclature: EB Garamond italic (`--font-latin`, `.font-latin`), 30px in the label,
   19px for "Anatomy" in the header, 24px in the empty state. Scientific names are italic by
