@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { AssetBundle } from '@atlas/shared';
 import { SearchBox } from '@/features/viewer/SearchBox';
@@ -8,11 +9,12 @@ export function Header({ bundles }: { bundles: AssetBundle[] }) {
     <header className="grid h-12 grid-cols-[280px_1fr_340px] items-center border-b border-hairline bg-panel px-4 max-lg:grid-cols-[auto_1fr]">
       <Link
         href="/"
-        className="flex items-baseline gap-1.5 rounded-xs"
+        className="flex items-center gap-2.5 rounded-xs"
         aria-label="Wazo Anatomy, inicio"
       >
-        <span className="text-[13px] font-bold tracking-[0.2em] text-ink">WAZO</span>
-        <span className="font-latin text-[19px] leading-none text-ink">Anatomy</span>
+        <Image src="/brand/wazo-mark.svg" alt="" width={22} height={22} priority />
+        <Image src="/brand/wazo-logo.svg" alt="WAZO" width={68} height={18} priority />
+        <span className="font-latin mt-px text-[19px] leading-none text-ink">Anatomy</span>
       </Link>
       <div className="flex justify-center px-4">
         <SearchBox />

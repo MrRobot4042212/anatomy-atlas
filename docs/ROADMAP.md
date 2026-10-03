@@ -28,8 +28,9 @@
 
 ## Phase 3b: identity (done 2026-10-03)
 
-- [x] Wazo Anatomy visual world: reading-room dark palette, Atkinson Hyperlegible / EB Garamond
-      italic / Geist Mono, specimen label with caliper, header search. See `apps/web/DESIGN.md`.
+- [x] Wazo Anatomy visual world on the WAZO brand system (logo, isotype, colours, gradients),
+      EB Garamond italic for Latin, Geist Mono for data, specimen label with caliper. See `apps/web/DESIGN.md`.
+- [ ] BR Sonoma font files from the owner (`apps/web/src/fonts/README.md`)
 - [ ] Descriptions per structure (source to be decided: Wikipedia extracts as Z-Anatomy does)
 - [ ] Language switch for the UI (es/en)
 

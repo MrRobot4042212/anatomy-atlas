@@ -175,7 +175,7 @@ function TreeRow({
           {node.meshId ? (
             <span
               aria-label="con geometría"
-              className={`ml-auto size-1.5 shrink-0 rounded-full ${isSelected ? 'bg-accent' : 'bg-hairline-strong'}`}
+              className={`ml-auto size-1.5 shrink-0 rounded-full ${isSelected ? 'bg-scene-selected' : 'bg-hairline-strong'}`}
             />
           ) : null}
         </button>

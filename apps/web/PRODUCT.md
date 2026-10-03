@@ -47,8 +47,16 @@ the screen is the main light source, so the interface must be comfortable in the
 
 ## Brand Commitments
 
-- Name: **Wazo Anatomy**. WAZO is the owner's employer; no logo asset exists yet, so the
-  wordmark is typographic until one is provided.
+- Name: **Wazo Anatomy**. WAZO is the owner's employer. Brand assets provided 2026-10-03:
+  wordmark `public/brand/wazo-logo.svg` (WAZO®), isotype `public/brand/wazo-mark.svg` (blurred
+  blue gradient shield, also the app icon), typeface **BR Sonoma** (licensed; files pending, see
+  `src/fonts/README.md`), and the WAZO colour system: electric blue `#0000FF`, black, white;
+  secondary blues `#0442D7` `#007BFF` `#33B2FB` `#89D4ED`; neutrals `#212639` `#D9D9D9`
+  `#F1EFEF`; primary gradient `#8DD8EF → #0000FF` (radial and linear); secondary gradients
+  4 (`#068BFF → #EEF7FF`), 5 (`#0088FF → #0118D6` radial), 6 (`#0209F0 → #86C5EA`); gradient
+  palettes warm (`#FF6709 #FF4C5A #FF3CA6 #4D5CD9 #000000`), navy (`#0000FF #043CDF #032CBC
+#000066`) and sky-to-red (`#0088FF #C694FF #FF6E93 #FF0000`). Values sampled from the brand
+  sheet; the isotype SVG carries the exact blues.
 - Dark theme is mandatory (owner decision, 2026-10-03).
 - Interface language: Spanish; terminology stays trilingual.
 - Identity must read as scientific rigor and precision, closer to an academic atlas than to a

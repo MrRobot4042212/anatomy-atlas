@@ -19,12 +19,15 @@ THESIS: The reading room, not the dashboard. The body is the only light source; 
 is the dark instrument around it. Refuses the category default of a near-black app with one neon
 accent and glowing edges, and the hero-metric dashboard.
 
-OWN-WORLD: Cool graphite surfaces (#0C0F14 ground, #12161D panels, #1A2029 raised, hairlines
-#283040), text #E7E4DC, muted #9AA3B2. One accent, dissection-pin ochre #D9A441, used only for
-the current selection and primary actions; hover inside the scene is a cool cyan #6BC6E0 because
-it must read on bone and on red/blue vessels. Latin names set in EB Garamond italic (the
-typeface era of the Fabrica); UI in Atkinson Hyperlegible; TA2 codes and millimetres in Geist
-Mono with tabular figures. Hairline rules, 2px radii, no cards inside cards.
+OWN-WORLD: WAZO's brand system on a dark ground. Surfaces are a dark scale around the brand
+night navy #212639 (ground #0B0E1A, panel #12162A, raised #212639, hairlines #2A3049); ink is
+brand white #F1EFEF. One accent: WAZO electric blue #0000FF for fills, sky #33B2FB for
+interactive text and focus, azure wash for pressed states; the brand primary gradient
+(#8DD8EF→#0000FF) only on the primary action. Inside the scene hover is sky and the selection
+is brand-gradient magenta #FF3CA6, the one hue that reads on bone, arteries and veins. Wordmark
+and isotype are the real SVGs; UI in BR Sonoma (fallback Atkinson Hyperlegible until the files
+arrive), Latin names in EB Garamond italic, data in Geist Mono. Hairlines, 2px radii, no cards
+in cards.
 
 STORY: "This is an instrument of reference. Every structure has a name in three languages and a
 measurable size; I can take the body apart and put it back without losing my place."
@@ -49,3 +52,8 @@ header/search/summary, rails, viewer with bottom toolbar, specimen label with La
 caliper and four actions all present and working against the live API. Mechanical detector:
 no findings. Verdict: ships. Known gaps recorded in docs/ROADMAP.md: frame time on real
 hardware, structure descriptions, UI language switch. DESIGN.md written from the built world.
+
+## Revision (2026-10-03, brand assets received)
+
+Owner supplied the WAZO wordmark, isotype, typeface (BR Sonoma) and colour/gradient system.
+OWN-WORLD rewritten above; ochre accent retired; tokens, materials and header updated.

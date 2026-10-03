@@ -95,7 +95,7 @@ export function ViewerToolbar() {
           type="button"
           aria-pressed={clipping.enabled}
           onClick={() => setClipping({ enabled: !clipping.enabled })}
-          className={`${segment} flex items-center gap-1.5 ${clipping.enabled ? 'bg-accent-soft text-accent' : 'text-ink-muted'}`}
+          className={`${segment} flex items-center gap-1.5 ${clipping.enabled ? 'bg-accent-soft text-accent-text' : 'text-ink-muted'}`}
         >
           <Scissors size={14} aria-hidden="true" />
           Corte
