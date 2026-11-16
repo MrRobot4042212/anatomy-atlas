@@ -4,6 +4,7 @@ import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import type { AssetBundle } from '@atlas/shared';
 import { HierarchyTree } from './HierarchyTree';
 import { LayerPanel } from './LayerPanel';
+import { RegionFilter } from './RegionFilter';
 
 const TABS = [
   { id: 'layers', label: 'Capas' },
@@ -96,11 +97,7 @@ export function LeftRail({ bundles }: { bundles: AssetBundle[] }) {
         className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
       >
         <LayerPanel bundles={bundles} />
-        {/*
-          Region and side filter slot. The owner mounts RegionFilter here (another agent's
-          component, "Región" and "Lado" below the systems, docs/design/interaction-model.md).
-          Intentionally empty until then: nothing is rendered in its place.
-        */}
+        <RegionFilter bundles={bundles} />
       </div>
 
       <div

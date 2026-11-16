@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { BODY_ZONES, type AssetBundle, type BodyZone } from '@atlas/shared';
-import { entryBounds, registry } from './registry';
+import { ownBounds, registry } from './registry';
 import {
   BACK_CONTEXT,
   BACK_VIEWBOX,
@@ -17,7 +17,7 @@ import {
   structuresLabel,
   unionBounds,
   zoneIndex,
-} from './regionFilter';
+} from './regionZones';
 import { useViewerStore, type Bounds, type SideFilter } from './store';
 
 /** Chips in the order the toolbar's arrow keys walk them (the groups, flattened). */
@@ -68,8 +68,13 @@ export function RegionFilter({ bundles }: { bundles: AssetBundle[] }) {
     const boxes: Bounds[] = [];
     for (const id of ids) {
       const entry = registry.get(id);
-      const b = entry ? entryBounds(entry) : null;
-      if (b) boxes.push(b);
+      const box = entry ? ownBounds(entry) : null;
+      if (box && !box.isEmpty()) {
+        boxes.push({
+          min: [box.min.x, box.min.y, box.min.z],
+          max: [box.max.x, box.max.y, box.max.z],
+        });
+      }
     }
     const bounds = unionBounds(boxes);
     if (bounds) focus(bounds);
