@@ -1,0 +1,23 @@
+{
+  "$comment": "Objects of the Z-Anatomy .blend that are excluded from every export because they probably derive from components under a non-commercial licence. Z-Anatomy credits those components but does not tag objects, so this list is conservative and must be re-checked when the blend is updated. Read by scripts/build_mapping.py; src/manifest.ts fails if a quarantined mesh reaches a bundle. See docs/adr/0005-model-licensing-policy.md.",
+  "sources": {
+    "dundee-inner-ear": {
+      "credit": "Anatomy of the Inner Ear, University of Dundee School of Medicine",
+      "license": "CC BY-NC-SA 4.0"
+    },
+    "cowley-kidney": {
+      "credit": "Kidney, Lissie Cowley",
+      "license": "CC BY-NC 4.0"
+    }
+  },
+  "objects": [
+    { "blenderName": "Kidney.l", "source": "cowley-kidney" },
+    { "blenderName": "Kidney.r", "source": "cowley-kidney" },
+    { "blenderName": "Renal pelvis.l", "source": "cowley-kidney" },
+    { "blenderName": "Renal pelvis.r", "source": "cowley-kidney" },
+    { "blenderName": "Cochlea.l", "source": "dundee-inner-ear" },
+    { "blenderName": "Cochlea.r", "source": "dundee-inner-ear" },
+    { "blenderName": "Vestibule.l", "source": "dundee-inner-ear" },
+    { "blenderName": "Vestibule.r", "source": "dundee-inner-ear" }
+  ]
+}

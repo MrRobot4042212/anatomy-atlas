@@ -45,6 +45,8 @@ interface MappingStructure {
   parentKey: string | null;
   hasGeometry: boolean;
   official: boolean;
+  /** Set (e.g. "license:cowley-kidney") when the object is withheld from every bundle. */
+  excluded?: string;
 }
 
 export interface ManifestStructure {
@@ -73,6 +75,11 @@ const mapping = JSON.parse(await readFile(values.mapping, 'utf8')) as {
 };
 const byMeshId = new Map(
   mapping.structures.filter((s) => s.meshId).map((s) => [s.meshId as string, s]),
+);
+// Quarantined structures keep their key but have no meshId; a bundle carrying a node with that
+// key was exported before the quarantine and must be rebuilt, never shipped.
+const quarantinedKeys = new Map(
+  mapping.structures.filter((s) => s.excluded).map((s) => [s.key, s.excluded as string]),
 );
 
 await MeshoptDecoder.ready;
@@ -115,7 +122,12 @@ for (const file of files) {
     }
     if (!subtreeHasMesh(node)) continue;
     if (!byMeshId.has(meshId)) {
-      strays.push(`${file}:${meshId}`);
+      const reason = quarantinedKeys.get(meshId);
+      strays.push(
+        reason
+          ? `${file}:${meshId} (quarantined, ${reason}: rebuild the bundle)`
+          : `${file}:${meshId}`,
+      );
       continue;
     }
     if (placed.has(meshId)) {
