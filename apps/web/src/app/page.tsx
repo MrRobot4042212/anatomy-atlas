@@ -33,16 +33,16 @@ export default async function Home({ searchParams }: PageProps<'/'>) {
         // still scroll on their own and the credits row stays on screen.
         embedded
           ? 'fixed inset-0 grid grid-rows-[auto_1fr_auto] overflow-hidden overscroll-none bg-ground'
-          : 'grid h-screen grid-rows-[auto_1fr_auto] bg-ground'
+          : 'grid h-dvh grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden bg-ground'
       }
     >
       <Header bundles={bundles} embedded={embedded} />
-      <div className="grid min-h-0 grid-cols-[280px_1fr_340px] max-lg:grid-cols-1 max-lg:grid-rows-[60vh_auto_auto] max-lg:overflow-y-auto">
+      <div className="grid min-h-0 min-w-0 grid-cols-[280px_minmax(0,1fr)_340px] max-lg:grid-cols-1 max-lg:grid-rows-[60vh_auto_auto] max-lg:overflow-y-auto">
         <aside className="flex min-h-0 flex-col overflow-y-auto border-r border-hairline bg-panel max-lg:order-2 max-lg:border-r-0 max-lg:border-t">
           <LayerPanel bundles={bundles} />
           <HierarchyTree />
         </aside>
-        <main className="relative min-h-0 max-lg:order-1">
+        <main className="relative min-h-0 min-w-0 overflow-hidden max-lg:order-1">
           <AnatomyViewer bundles={bundles} />
           <ViewerToolbar />
         </main>

@@ -2,7 +2,7 @@
 
 import { Component, Suspense, use, type ReactNode } from 'react';
 import Image from 'next/image';
-import { Crosshair, EyeOff, Focus, Layers2 } from 'lucide-react';
+import { ArrowRight, Crosshair, EyeOff, Layers2 } from 'lucide-react';
 import { SYSTEM_LABELS, subsystemLabel } from './LayerPanel';
 import { useViewerStore } from './store';
 import { detailFor } from './structureDetail';
@@ -169,11 +169,7 @@ function Detail({ meshId }: { meshId: string }) {
       ) : null}
 
       <div className="grid grid-cols-2 gap-1.5">
-        <Action
-          icon={<Focus size={14} aria-hidden="true" />}
-          primary
-          onClick={() => focus(structure.bounds)}
-        >
+        <Action icon={null} primary onClick={() => focus(structure.bounds)}>
           Enfocar
         </Action>
         <Action
@@ -249,8 +245,9 @@ function Action({
       onClick={onClick}
       className={`btn w-full ${primary ? 'btn-primary' : 'btn-outline'}`}
     >
-      {icon}
+      {primary ? null : icon}
       {children}
+      {primary ? <ArrowRight size={16} aria-hidden="true" /> : null}
     </button>
   );
 }
