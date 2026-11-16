@@ -13,6 +13,10 @@ src/        Node: optimize.ts (gltf-transform + meshopt), manifest.ts
 
 Source: https://github.com/Z-Anatomy/Models-of-human-anatomy (CC BY-SA 4.0).
 
+`editorial/corrections.json` fixes the Latin and English names and the hierarchy inherited from
+the Z-Anatomy source (typos, grammar, misplaced parents). `build_mapping.py` applies it strictly;
+never edit `TA2.csv` or the blend. Each entry carries its basis.
+
 `editorial/names.es.json` holds the Spanish names (our own, ADR 0005). `build_mapping.py` reads
 them and never the Spanish column of `TA2.csv`. Style guide: `editorial/STYLE.md`.
 

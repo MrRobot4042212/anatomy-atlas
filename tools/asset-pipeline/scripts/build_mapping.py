@@ -11,6 +11,7 @@ indicator lines, insertion areas and reference geometry) it derives:
   subsystem  second level of the Bonus collection path (e.g. "Systemic arteries")
   region     from "Regions of human body > Main divisions > ..." paths
   parentKey  the deepest group node of the same system that contains the object
+  names      la and en corrected by editorial/corrections.json (typos, grammar, hierarchy)
   names.es   from editorial/names.es.json (our own Spanish names), never from TA2.csv
   source     "bodyparts3d:<element>" or "authored:<generator>" when the geometry comes from
              sources/ instead of the blend
@@ -179,6 +180,7 @@ def main():
     ap.add_argument("--ta2", default="raw/TA2.csv")
     ap.add_argument("--out", default="out/mapping.json")
     ap.add_argument("--quarantine", default="licensing/quarantine.json")
+    ap.add_argument("--corrections", default="editorial/corrections.json")
     ap.add_argument("--replacements", default="sources/bodyparts3d/replacements.json")
     ap.add_argument("--authored", default="sources/authored/models.json")
     ap.add_argument("--editorial", default="editorial/names.es.json")
@@ -331,6 +333,45 @@ def main():
         stats["structures"] += 1
         stats["official" if term["official"] else "unofficial"] += 1
         stats[f"system:{system}"] += 1
+
+    # Corrections to inherited names and hierarchy (editorial/corrections.json). Strict: a missing
+    # term, key or text stops the build, so a corrected source never silently drops a fix.
+    corrections = json.load(open(args.corrections, encoding="utf-8"))
+    by_term = defaultdict(list)
+    for s in structures.values():
+        by_term[s["termKey"]].append(s)
+    for tk, change in corrections["names"].items():
+        group = by_term.get(tk)
+        if not group:
+            raise SystemExit(f"corrections: unknown term {tk}")
+        for field in ("la", "en"):
+            if field not in change:
+                continue
+            for s in group:
+                current = s["names"][field]
+                if isinstance(change[field], str):
+                    updated = change[field]
+                else:
+                    updated = current
+                    for old_text, new_text in change[field]:
+                        if old_text == "@strip-accents":
+                            updated = "".join(c for c in unicodedata.normalize("NFKD", updated) if not unicodedata.combining(c))
+                        elif old_text not in updated:
+                            raise SystemExit(f"corrections: {tk} {field} has no {old_text!r} in {current!r}")
+                        else:
+                            updated = updated.replace(old_text, new_text, 1)
+                s["names"] = {**s["names"], field: updated}
+                stats["corrected:" + field] += 1
+    for fix in corrections["parents"]:
+        if fix["parent"] not in structures:
+            raise SystemExit(f"corrections: unknown parent {fix['parent']}")
+        for key in fix["keys"]:
+            if key not in structures:
+                raise SystemExit(f"corrections: unknown structure {key}")
+            structures[key]["parentKey"] = fix["parent"]
+            if "subsystem" in fix:
+                structures[key]["subsystem"] = fix["subsystem"]
+            stats["corrected:parent"] += 1
 
     # Licence quarantine: keep the catalog row, drop the geometry.
     quarantine = json.load(open(args.quarantine, encoding="utf-8"))

@@ -100,7 +100,7 @@ def main():
     export_col = bpy.data.collections.new("EXPORT")
     bpy.context.scene.collection.children.link(export_col)
 
-    missing, exported, curves = [], 0, 0
+    missing, exported, curves, repaired = [], 0, 0, []
     for s in wanted:
         source = str(s.get("source", ""))
         if source.startswith("bodyparts3d:"):
@@ -122,6 +122,8 @@ def main():
                 obj.data.resolution_u = args.curve_resolution
             if args.bevel_resolution is not None:
                 obj.data.bevel_resolution = args.bevel_resolution
+        if obj.type == "MESH" and obj.data.validate():
+            repaired.append(s["meshId"])  # Blender fixed invalid topology (degenerate or duplicate faces)
         obj.name = s["meshId"]
         if obj.data is not None:
             obj.data.name = s["meshId"]
@@ -131,6 +133,8 @@ def main():
         export_col.objects.link(obj)
         exported += 1
 
+    if repaired:
+        print(f"Repaired invalid topology in {len(repaired)} meshes: {repaired[:20]}")
     if missing:
         print(f"WARNING {len(missing)} mapped objects not found in the blend:")
         for n in missing[:30]:
