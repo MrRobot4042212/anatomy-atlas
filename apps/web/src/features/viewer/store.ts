@@ -34,6 +34,8 @@ export interface ViewerState {
 
   toggleSystem: (system: BodySystem) => void;
   showSystem: (system: BodySystem) => void;
+  /** Replaces the visible systems with exactly these (embed bridge, `set-layers`). */
+  setVisibleSystems: (systems: Iterable<BodySystem>) => void;
   toggleSubsystem: (key: string) => void;
   hover: (meshId: string | null) => void;
   select: (meshId: string | null) => void;
@@ -76,6 +78,7 @@ export const useViewerStore = create<ViewerState>()((set) => ({
     set((s) =>
       s.visibleSystems.has(system) ? s : { visibleSystems: new Set([...s.visibleSystems, system]) },
     ),
+  setVisibleSystems: (systems) => set({ visibleSystems: new Set(systems) }),
   toggleSubsystem: (key) => set((s) => ({ hiddenSubsystems: toggled(s.hiddenSubsystems, key) })),
   hover: (meshId) => set((s) => (s.hovered === meshId ? s : { hovered: meshId })),
   select: (meshId) => set((s) => (s.selected === meshId ? s : { selected: meshId })),
