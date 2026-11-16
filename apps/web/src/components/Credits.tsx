@@ -8,8 +8,8 @@ import Link from 'next/link';
 export function Credits({ embedded = false }: { embedded?: boolean }) {
   const outside = embedded ? { target: '_blank', rel: 'noopener noreferrer' } : {};
   return (
-    <footer className="flex h-7 items-center justify-between gap-4 border-t border-hairline bg-panel px-4 text-xs text-ink-faint">
-      <p className="truncate">
+    <footer className="flex h-7 min-w-0 items-center justify-between gap-4 border-t border-hairline bg-panel px-4 text-xs text-ink-faint">
+      <p className="min-w-0 truncate">
         Modelos 3D derivados de{' '}
         <a
           href="https://www.z-anatomy.com/"
