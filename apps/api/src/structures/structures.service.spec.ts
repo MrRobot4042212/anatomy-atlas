@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing';
 import type { Structure as StructureRow } from '../generated/prisma/index.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { toStructure } from './structure.mapper.js';
-import { buildTree, StructuresService } from './structures.service.js';
+import { buildTree, searchPatterns, StructuresService } from './structures.service.js';
 
 function row(partial: Partial<StructureRow> & { id: string; nameEn: string }): StructureRow {
   return {
@@ -40,6 +40,25 @@ describe('toStructure', () => {
       row({ id: 'a', nameEn: 'Femur', boundsMin: [0, 1, 2], boundsMax: [3, 4, 5] }),
     );
     expect(s.bounds).toEqual({ min: [0, 1, 2], max: [3, 4, 5] });
+  });
+});
+
+describe('searchPatterns', () => {
+  it('returns one pattern per word so word order and plurals do not matter', () => {
+    expect(searchPatterns('  ganglio   linfático axilar ')).toEqual([
+      '%ganglio%',
+      '%linfático%',
+      '%axilar%',
+    ]);
+  });
+
+  it('returns no patterns for an empty or missing query', () => {
+    expect(searchPatterns(undefined)).toEqual([]);
+    expect(searchPatterns('   ')).toEqual([]);
+  });
+
+  it('escapes the user wildcards', () => {
+    expect(searchPatterns('100%_a\\b')).toEqual(['%100\\%\\_a\\\\b%']);
   });
 });
 

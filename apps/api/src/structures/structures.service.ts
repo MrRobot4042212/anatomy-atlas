@@ -11,6 +11,14 @@ import { PrismaService } from '../prisma/prisma.service.js';
 import type { ListStructuresDto } from './dto/list-structures.dto.js';
 import { toStructure } from './structure.mapper.js';
 
+/** ILIKE patterns, one per word of the query, with the user's own wildcards escaped. */
+export function searchPatterns(q: string | undefined): string[] {
+  return (q ?? '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => `%${word.replace(/[\\%_]/g, '\\$&')}%`);
+}
+
 @Injectable()
 export class StructuresService {
   constructor(private readonly prisma: PrismaService) {}
@@ -26,8 +34,10 @@ export class StructuresService {
     if (query.region) {
       conditions.push(Prisma.sql`"region" = ${query.region.replace('-', '_')}::"BodyRegion"`);
     }
-    if (query.q?.trim()) {
-      const pattern = `%${query.q.trim()}%`;
+    // Every word must appear in one of the three names, in any order, so "ganglio axilar"
+    // finds "Ganglios linfáticos axilares". A plural only adds a suffix, so substring matching
+    // covers it.
+    for (const pattern of searchPatterns(query.q)) {
       conditions.push(
         Prisma.sql`(unaccent("nameEs") ILIKE unaccent(${pattern})
           OR unaccent("nameEn") ILIKE unaccent(${pattern})
