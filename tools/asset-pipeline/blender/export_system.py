@@ -19,6 +19,29 @@ import bpy
 BP3D_ZIP = "raw/bodyparts3d/partof_BP3D_4.0_obj_99.zip"
 
 
+def mesh_object(name, verts, faces, material_name):
+    mesh = bpy.data.meshes.new(name)
+    mesh.from_pydata(verts, [], faces)
+    mesh.update()
+    for poly in mesh.polygons:
+        poly.use_smooth = True
+    material = bpy.data.materials.get(material_name)
+    if material is None:
+        sys.exit(f"material {material_name!r} not found in the blend")
+    mesh.materials.append(material)
+    return bpy.data.objects.new(name, mesh)
+
+
+def authored_object(root, structure, models):
+    """Mesh from a parametric generator in sources/authored (original work, no third-party data)."""
+    sys.path.insert(0, str(root / "sources" / "authored"))
+    import build  # noqa: E402  (sources/authored/build.py)
+
+    spec = next(m for m in models["models"] if m["blenderName"] == structure["blenderName"])
+    verts, faces = build.build(spec["generator"], spec["side"], spec["centre"])
+    return mesh_object(structure["meshId"], verts, faces, spec["material"])
+
+
 def bodyparts3d_object(root, structure, element, registration, replacements):
     """Build a mesh object from a BodyParts3D OBJ (millimetres) in the Z-Anatomy frame (metres).
 
@@ -39,17 +62,8 @@ def bodyparts3d_object(root, structure, element, registration, replacements):
             ))
         elif line.startswith("f "):
             faces.append([int(tok.split("/")[0]) - 1 for tok in line.split()[1:]])
-    mesh = bpy.data.meshes.new(structure["meshId"])
-    mesh.from_pydata(verts, [], faces)
-    mesh.update()
-    for poly in mesh.polygons:
-        poly.use_smooth = True
     spec = next(r for r in replacements["replacements"] if r["element"] == element)
-    material = bpy.data.materials.get(spec["material"])
-    if material is None:
-        sys.exit(f"material {spec['material']!r} not found in the blend")
-    mesh.materials.append(material)
-    return bpy.data.objects.new(structure["meshId"], mesh)
+    return mesh_object(structure["meshId"], verts, faces, spec["material"])
 
 
 def parse_args():
@@ -79,6 +93,10 @@ def main():
         registration = json.load(open(root / "sources/bodyparts3d/registration.json", encoding="utf-8"))
         replacements = json.load(open(root / "sources/bodyparts3d/replacements.json", encoding="utf-8"))
 
+    models = None
+    if any(str(s.get("source", "")).startswith("authored:") for s in wanted):
+        models = json.load(open(root / "sources/authored/models.json", encoding="utf-8"))
+
     export_col = bpy.data.collections.new("EXPORT")
     bpy.context.scene.collection.children.link(export_col)
 
@@ -88,6 +106,10 @@ def main():
         if source.startswith("bodyparts3d:"):
             obj = bodyparts3d_object(root, s, source.split(":", 1)[1], registration, replacements)
             export_col.objects.link(obj)
+            exported += 1
+            continue
+        if source.startswith("authored:"):
+            export_col.objects.link(authored_object(root, s, models))
             exported += 1
             continue
         obj = bpy.data.objects.get(s["blenderName"])

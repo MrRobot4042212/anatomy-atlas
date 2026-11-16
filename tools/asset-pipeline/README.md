@@ -20,6 +20,9 @@ them and never the Spanish column of `TA2.csv`. Style guide: `editorial/STYLE.md
 builds their mesh from the original OBJ. `scripts/register_bodyparts3d.py` computes the
 transform; the archive goes in `raw/bodyparts3d/` (git-ignored).
 
+`sources/authored/` holds parametric models (pure Python, no dependencies) for quarantined
+structures that no clean dataset covers; `python scripts/check_authored.py` verifies them.
+
 `licensing/quarantine.json` lists objects withheld from every export because they probably derive
 from non-commercial components credited by Z-Anatomy. Edit that file, never the exporter, and
 rerun `build_mapping.py`. Policy: `docs/adr/0005-model-licensing-policy.md`.
