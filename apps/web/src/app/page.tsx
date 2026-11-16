@@ -7,6 +7,11 @@ import { LayerPanel } from '@/features/viewer/LayerPanel';
 import { ViewerToolbar } from '@/features/viewer/ViewerToolbar';
 import { api } from '@/lib/api';
 
+// The bundle list comes from the catalog API and changes with every asset-pipeline run, so the
+// page renders at request time. Prerendering it would bake a stale list into the build and make
+// `next build` depend on a live API.
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const bundles = await api.bundles();
 
