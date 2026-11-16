@@ -319,5 +319,6 @@ input[type='range'].plane::-moz-range-thumb {
 /* The dev-only frame counter (drei StatsGl) is appended to the body; keep it out of the layout flow. */
 body > .stats {
   position: fixed !important;
+  inset: auto 8px 36px auto !important;
   pointer-events: none;
 }
