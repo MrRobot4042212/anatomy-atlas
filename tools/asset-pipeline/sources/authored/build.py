@@ -6,11 +6,15 @@ lateral/anterior/superior frame so the left structure is the exact mirror of the
 """
 
 import inner_ear
+import ossicles
 import renal_pelvis
 
 GENERATORS = {
     "inner_ear:cochlea": inner_ear.cochlea,
     "inner_ear:vestibule": inner_ear.vestibule_with_canals,
+    "ossicles:malleus": ossicles.malleus,
+    "ossicles:incus": ossicles.incus,
+    "ossicles:stapes": ossicles.stapes,
     "renal_pelvis:pelvis": renal_pelvis.renal_pelvis,
 }
 

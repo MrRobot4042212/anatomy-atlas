@@ -3,7 +3,8 @@
   "sources": {
     "dundee-inner-ear": {
       "credit": "Anatomy of the Inner Ear, University of Dundee School of Medicine",
-      "license": "CC BY-NC-SA 4.0"
+      "license": "CC BY-NC-SA 4.0",
+      "note": "The Dundee model also contains the ossicles (its own description: tympanic membrane, facial nerve, ossicles and vestibular system), and derives from the McGill 3D ear (CC BY-NC-SA 2.5 Canada). BodyParts3D has no ossicles, so the ossicles of the blend are probably from this source."
     },
     "cowley-kidney": {
       "credit": "Kidney, Lissie Cowley",
@@ -11,13 +12,61 @@
     }
   },
   "objects": [
-    { "blenderName": "Kidney.l", "source": "cowley-kidney" },
-    { "blenderName": "Kidney.r", "source": "cowley-kidney" },
-    { "blenderName": "Renal pelvis.l", "source": "cowley-kidney" },
-    { "blenderName": "Renal pelvis.r", "source": "cowley-kidney" },
-    { "blenderName": "Cochlea.l", "source": "dundee-inner-ear" },
-    { "blenderName": "Cochlea.r", "source": "dundee-inner-ear" },
-    { "blenderName": "Vestibule.l", "source": "dundee-inner-ear" },
-    { "blenderName": "Vestibule.r", "source": "dundee-inner-ear" }
+    {
+      "blenderName": "Kidney.l",
+      "source": "cowley-kidney"
+    },
+    {
+      "blenderName": "Kidney.r",
+      "source": "cowley-kidney"
+    },
+    {
+      "blenderName": "Renal pelvis.l",
+      "source": "cowley-kidney"
+    },
+    {
+      "blenderName": "Renal pelvis.r",
+      "source": "cowley-kidney"
+    },
+    {
+      "blenderName": "Cochlea.l",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Cochlea.r",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Vestibule.l",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Vestibule.r",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Malleus.l",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Malleus.r",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Incus.l",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Incus.r",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Stapes.l",
+      "source": "dundee-inner-ear"
+    },
+    {
+      "blenderName": "Stapes.r",
+      "source": "dundee-inner-ear"
+    }
   ]
 }
