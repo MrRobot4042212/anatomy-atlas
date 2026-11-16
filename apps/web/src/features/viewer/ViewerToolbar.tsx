@@ -18,7 +18,7 @@ const AXES: { axis: ClippingAxis; label: string; title: string }[] = [
 ];
 
 const segment =
-  'h-7 px-2.5 text-xs leading-7 whitespace-nowrap rounded-xs transition-colors duration-150 hover:bg-raised hover:text-ink focus-visible:relative';
+  'h-9 px-3 text-sm font-medium leading-9 whitespace-nowrap rounded-xs transition-colors hover:bg-raised hover:text-ink focus-visible:relative';
 
 /** Camera presets and the cutting plane, overlaid on the bottom edge of the viewer. */
 export function ViewerToolbar() {
@@ -34,7 +34,7 @@ export function ViewerToolbar() {
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 p-3">
       {clipping.enabled ? (
-        <div className="pointer-events-auto flex w-full max-w-xl items-center gap-3 rounded-sm border border-hairline bg-panel/95 px-3 py-2 backdrop-blur-sm">
+        <div className="pointer-events-auto flex w-full max-w-xl items-center gap-3 rounded-md border border-hairline bar-surface px-3 py-2">
           <div role="group" aria-label="Plano de corte" className="flex items-center gap-0.5">
             {AXES.map((a) => (
               <button
@@ -60,7 +60,7 @@ export function ViewerToolbar() {
               value={clipping.offset}
               onChange={(e) => setClipping({ offset: Number(e.target.value) })}
             />
-            <span className="tabular w-10 shrink-0 text-right tabular text-[11px] text-ink-muted">
+            <span className="tabular w-10 shrink-0 text-right tabular text-xs text-ink-muted">
               {Math.round(clipping.offset * 100)}%
             </span>
           </label>
@@ -77,7 +77,7 @@ export function ViewerToolbar() {
         </div>
       ) : null}
 
-      <div className="pointer-events-auto flex max-w-full items-center gap-1 overflow-x-auto rounded-sm border border-hairline bg-panel/95 p-1 backdrop-blur-sm">
+      <div className="pointer-events-auto flex max-w-full items-center gap-1 overflow-x-auto rounded-md border border-hairline bar-surface p-1">
         <div role="group" aria-label="Vistas de cámara" className="flex items-center gap-0.5">
           {PRESETS.map((p) => (
             <button
@@ -110,7 +110,7 @@ export function ViewerToolbar() {
             >
               <Eye size={14} aria-hidden="true" />
               Mostrar todo
-              <span className="tabular rounded-xs bg-raised px-1 tabular text-[10px] text-ink-faint">
+              <span className="tabular rounded-xs bg-raised px-1 tabular text-xs text-ink-faint">
                 {alterations}
               </span>
             </button>
