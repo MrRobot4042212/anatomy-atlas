@@ -1,14 +1,34 @@
 'use client';
 
-import { Eye, FlipHorizontal2, Scissors } from 'lucide-react';
+import {
+  useRef,
+  useState,
+  type ButtonHTMLAttributes,
+  type KeyboardEvent,
+  type ReactNode,
+} from 'react';
+import {
+  ArrowDownToDot,
+  Ear,
+  Eye,
+  FlipHorizontal2,
+  Rotate3d,
+  RotateCcw,
+  ScanFace,
+  Scissors,
+  SunDim,
+  type LucideIcon,
+} from 'lucide-react';
+import { nextToolbarIndex } from '@/features/interaction/roving';
+import { toggleCut, updateCut } from './cut';
 import { useViewerStore, type CameraPreset, type ClippingAxis } from './store';
 
-const PRESETS: { name: CameraPreset; label: string }[] = [
-  { name: 'anterior', label: 'Anterior' },
-  { name: 'posterior', label: 'Posterior' },
-  { name: 'left', label: 'Lateral izq.' },
-  { name: 'right', label: 'Lateral der.' },
-  { name: 'superior', label: 'Superior' },
+const PRESETS: { name: CameraPreset; label: string; icon: LucideIcon; mirror?: boolean }[] = [
+  { name: 'anterior', label: 'Anterior', icon: ScanFace },
+  { name: 'posterior', label: 'Posterior', icon: Rotate3d },
+  { name: 'left', label: 'Lateral izq.', icon: Ear, mirror: true },
+  { name: 'right', label: 'Lateral der.', icon: Ear },
+  { name: 'superior', label: 'Superior', icon: ArrowDownToDot },
 ];
 
 const AXES: { axis: ClippingAxis; label: string; title: string }[] = [
@@ -17,105 +37,222 @@ const AXES: { axis: ClippingAxis; label: string; title: string }[] = [
   { axis: 'z', label: 'Coronal', title: 'Plano coronal (anterior / posterior)' },
 ];
 
-const segment =
-  'h-9 px-3 text-sm font-medium leading-9 whitespace-nowrap rounded-xs transition-colors hover:bg-raised hover:text-ink focus-visible:relative';
+/** Toolbar buttons: the system's 40 px button, ghost variant. */
+const tool = 'btn btn-ghost shrink-0 whitespace-nowrap';
+/**
+ * One row of the toolbar: wraps from `sm` up and scrolls sideways below it (no scrollbar, the cut
+ * label shows there is more; focus scrolls the active button into view). Order never changes.
+ */
+const row =
+  'flex min-w-0 items-center gap-1 max-sm:overflow-x-auto max-sm:p-1 max-sm:[scrollbar-width:none]! sm:flex-wrap sm:justify-center';
 
-/** Camera presets and the cutting plane, overlaid on the bottom edge of the viewer. */
-export function ViewerToolbar() {
-  const preset = useViewerStore((s) => s.preset);
+/**
+ * A toolbar button that takes part in roving focus: only the active one is a Tab stop. Disabled
+ * states use `aria-disabled`, so a button that just emptied its own count keeps focus.
+ */
+function Tool({
+  index,
+  active,
+  icon: Icon,
+  mirror,
+  children,
+  ...props
+}: {
+  index: number;
+  active: number;
+  icon: LucideIcon;
+  mirror?: boolean;
+  children: ReactNode;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'className' | 'tabIndex'>) {
+  return (
+    <button
+      type="button"
+      data-tool={index}
+      tabIndex={index === active ? 0 : -1}
+      className={tool}
+      {...props}
+    >
+      <Icon size={16} aria-hidden="true" className={mirror ? '-scale-x-100' : undefined} />
+      {children}
+    </button>
+  );
+}
+
+function CutPanel() {
   const clipping = useViewerStore((s) => s.clipping);
   const setClipping = useViewerStore((s) => s.setClipping);
+
+  return (
+    <div
+      role="group"
+      aria-label="Plano de corte"
+      className="pointer-events-auto flex w-full max-w-xl flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-hairline bar-surface p-1"
+    >
+      <div className="flex items-center gap-1">
+        {AXES.map((a) => (
+          <button
+            key={a.axis}
+            type="button"
+            title={a.title}
+            aria-pressed={clipping.axis === a.axis}
+            onClick={() => updateCut({ axis: a.axis })}
+            className={tool}
+          >
+            {a.label}
+          </button>
+        ))}
+      </div>
+      <label className="flex h-10 min-w-40 flex-1 items-center gap-2 px-1">
+        <span className="sr-only">Posición del corte</span>
+        <input
+          type="range"
+          className="plane w-full"
+          min={0}
+          max={1}
+          step={0.005}
+          value={clipping.offset}
+          onChange={(e) => setClipping({ offset: Number(e.target.value) })}
+        />
+        <span className="tabular w-11 shrink-0 text-right text-sm text-ink-muted">
+          {Math.round(clipping.offset * 100)}%
+        </span>
+      </label>
+      <button
+        type="button"
+        title="Invertir el lado que se retira"
+        aria-pressed={clipping.flip}
+        onClick={() => updateCut({ flip: !clipping.flip })}
+        className={tool}
+      >
+        <FlipHorizontal2 size={16} aria-hidden="true" />
+        Invertir
+      </button>
+    </div>
+  );
+}
+
+/**
+ * The floating toolbar over the bottom of the canvas (`docs/design/interaction-model.md`).
+ * Fixed slots: every control is always rendered in the same place, and states change only
+ * colour, pressed state or the count inside "Mostrar todo", so nothing moves when a state
+ * appears. Two rows, camera views first and model tools second (Reiniciar always last).
+ * One Tab stop; the arrows move inside.
+ */
+export function ViewerToolbar() {
+  const preset = useViewerStore((s) => s.preset);
+  const cutEnabled = useViewerStore((s) => s.clipping.enabled);
+  const dimOthers = useViewerStore((s) => s.dimOthers);
+  const toggleDimOthers = useViewerStore((s) => s.toggleDimOthers);
+  const reset = useViewerStore((s) => s.reset);
   const hiddenCount = useViewerStore((s) => s.hidden.size);
   const isolated = useViewerStore((s) => s.isolated);
   const transparentCount = useViewerStore((s) => s.transparent.size);
   const unhideAll = useViewerStore((s) => s.unhideAll);
   const alterations = hiddenCount + (isolated ? 1 : 0) + transparentCount;
 
+  const [active, setActive] = useState(0);
+  const bar = useRef<HTMLDivElement>(null);
+
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const items = [...(bar.current?.querySelectorAll<HTMLButtonElement>('[data-tool]') ?? [])];
+    const next = nextToolbarIndex(
+      items.indexOf(e.target as HTMLButtonElement),
+      e.key,
+      items.length,
+    );
+    if (next === null) return;
+    e.preventDefault();
+    items[next]?.focus();
+  };
+
+  const views = PRESETS.length;
+
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 p-3">
-      {clipping.enabled ? (
-        <div className="pointer-events-auto flex w-full max-w-xl items-center gap-3 rounded-md border border-hairline bar-surface px-3 py-2">
-          <div role="group" aria-label="Plano de corte" className="flex items-center gap-0.5">
-            {AXES.map((a) => (
-              <button
-                key={a.axis}
-                type="button"
-                title={a.title}
-                aria-pressed={clipping.axis === a.axis}
-                onClick={() => setClipping({ axis: a.axis })}
-                className={`${segment} ${clipping.axis === a.axis ? 'bg-raised text-ink' : 'text-ink-muted'}`}
-              >
-                {a.label}
-              </button>
-            ))}
-          </div>
-          <label className="flex min-w-0 flex-1 items-center gap-2">
-            <span className="sr-only">Posición del corte</span>
-            <input
-              type="range"
-              className="plane w-full"
-              min={0}
-              max={1}
-              step={0.005}
-              value={clipping.offset}
-              onChange={(e) => setClipping({ offset: Number(e.target.value) })}
-            />
-            <span className="tabular w-10 shrink-0 text-right tabular text-xs text-ink-muted">
-              {Math.round(clipping.offset * 100)}%
-            </span>
-          </label>
-          <button
-            type="button"
-            title="Invertir el lado que se retira"
-            aria-pressed={clipping.flip}
-            onClick={() => setClipping({ flip: !clipping.flip })}
-            className={`${segment} flex items-center gap-1.5 ${clipping.flip ? 'bg-raised text-ink' : 'text-ink-muted'}`}
-          >
-            <FlipHorizontal2 size={14} aria-hidden="true" />
-            Invertir
-          </button>
-        </div>
-      ) : null}
+      {cutEnabled ? <CutPanel /> : null}
 
-      <div className="pointer-events-auto flex max-w-full items-center gap-1 overflow-x-auto rounded-md border border-hairline bar-surface p-1">
-        <div role="group" aria-label="Vistas de cámara" className="flex items-center gap-0.5">
-          {PRESETS.map((p) => (
-            <button
+      <div
+        ref={bar}
+        role="toolbar"
+        aria-label="Herramientas del visor"
+        aria-orientation="horizontal"
+        onKeyDown={onKeyDown}
+        onFocus={(e) => {
+          const index = Number((e.target as HTMLElement).dataset.tool);
+          if (Number.isInteger(index)) setActive(index);
+        }}
+        className="pointer-events-auto flex max-w-full flex-col gap-1 rounded-md border border-hairline bar-surface p-1"
+      >
+        <div role="group" aria-label="Vistas de cámara" className={row}>
+          {PRESETS.map((p, i) => (
+            <Tool
               key={p.name}
-              type="button"
+              index={i}
+              active={active}
+              icon={p.icon}
+              mirror={p.mirror}
+              aria-keyshortcuts={String(i + 1)}
+              title={`Vista ${p.label.toLowerCase()} (${i + 1})`}
               onClick={() => preset(p.name)}
-              className={`${segment} text-ink-muted`}
             >
               {p.label}
-            </button>
+            </Tool>
           ))}
         </div>
-        <span className="mx-1 h-5 w-px bg-hairline" aria-hidden="true" />
-        <button
-          type="button"
-          aria-pressed={clipping.enabled}
-          onClick={() => setClipping({ enabled: !clipping.enabled })}
-          className={`${segment} flex items-center gap-1.5 ${clipping.enabled ? 'bg-accent-soft text-accent-text' : 'text-ink-muted'}`}
-        >
-          <Scissors size={14} aria-hidden="true" />
-          Corte
-        </button>
-        {alterations > 0 ? (
-          <>
-            <span className="mx-1 h-5 w-px bg-hairline" aria-hidden="true" />
-            <button
-              type="button"
-              onClick={unhideAll}
-              className={`${segment} flex items-center gap-1.5 text-ink-muted`}
-            >
-              <Eye size={14} aria-hidden="true" />
-              Mostrar todo
-              <span className="tabular rounded-xs bg-raised px-1 tabular text-xs text-ink-faint">
-                {alterations}
-              </span>
-            </button>
-          </>
-        ) : null}
+
+        <div role="group" aria-label="Modelo" className={row}>
+          <Tool
+            index={views}
+            active={active}
+            icon={Scissors}
+            aria-pressed={cutEnabled}
+            aria-keyshortcuts="C"
+            title="Plano de corte (C)"
+            onClick={toggleCut}
+          >
+            Corte
+          </Tool>
+          <Tool
+            index={views + 1}
+            active={active}
+            icon={SunDim}
+            aria-pressed={dimOthers}
+            aria-keyshortcuts="A"
+            title="Atenuar el resto al seleccionar (A)"
+            onClick={toggleDimOthers}
+          >
+            Atenuar resto
+          </Tool>
+          <Tool
+            index={views + 2}
+            active={active}
+            icon={Eye}
+            aria-disabled={alterations === 0}
+            title={
+              alterations === 0
+                ? 'No hay estructuras ocultas, aisladas ni translúcidas'
+                : 'Mostrar las estructuras ocultas, aisladas o translúcidas'
+            }
+            onClick={() => {
+              if (alterations > 0) unhideAll();
+            }}
+          >
+            Mostrar todo
+            <span className="tabular min-w-8 rounded-xs bg-raised px-1 text-center text-sm text-ink-muted">
+              {alterations}
+            </span>
+          </Tool>
+          <Tool
+            index={views + 3}
+            active={active}
+            icon={RotateCcw}
+            aria-keyshortcuts="R"
+            title="Volver a la vista inicial (R)"
+            onClick={reset}
+          >
+            Reiniciar
+          </Tool>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { AssetBundle } from '@atlas/shared';
+import { HelpButton } from '@/features/interaction/HelpButton';
 import { SearchBox } from '@/features/viewer/SearchBox';
 import { LayerSummary } from '@/features/viewer/LayerSummary';
 
@@ -26,7 +27,7 @@ export function Header({
   embedded?: boolean;
 }) {
   return (
-    <header className="grid h-16 grid-cols-[280px_1fr_340px] items-center bar-surface border-b border-hairline px-4 max-lg:grid-cols-[auto_1fr]">
+    <header className="grid h-16 grid-cols-[280px_1fr_340px] items-center bar-surface border-b border-hairline px-4 max-lg:grid-cols-[auto_1fr_auto]">
       {embedded ? (
         <div className="flex items-center gap-2.5">
           <Brand />
@@ -40,11 +41,14 @@ export function Header({
           <Brand />
         </Link>
       )}
-      <div className="flex justify-center px-4">
+      <div className="flex min-w-0 justify-center px-4 max-sm:px-2">
         <SearchBox />
       </div>
-      <div className="flex justify-end max-lg:hidden">
-        <LayerSummary bundles={bundles} />
+      <div className="flex items-center justify-end gap-3">
+        <div className="max-lg:hidden">
+          <LayerSummary bundles={bundles} />
+        </div>
+        <HelpButton />
       </div>
     </header>
   );

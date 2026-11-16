@@ -5,6 +5,8 @@ import { DeepLinkSelection } from '@/features/embed/DeepLinkSelection';
 import { firstParam, isEmbedFlag, resolveDeepLink } from '@/features/embed/deepLink';
 import { EmbedBridge } from '@/features/embed/EmbedBridge';
 import { parseAllowedOrigins } from '@/features/embed/origins';
+import { FirstRunHint } from '@/features/interaction/FirstRunHint';
+import { InteractionLayer } from '@/features/interaction/InteractionLayer';
 import { AnatomyViewer } from '@/features/viewer/AnatomyViewer';
 import { HierarchyTree } from '@/features/viewer/HierarchyTree';
 import { InfoPanel } from '@/features/viewer/InfoPanel';
@@ -45,12 +47,14 @@ export default async function Home({ searchParams }: PageProps<'/'>) {
         <main className="relative min-h-0 min-w-0 overflow-hidden max-lg:order-1">
           <AnatomyViewer bundles={bundles} />
           <ViewerToolbar />
+          {embedded ? null : <FirstRunHint />}
         </main>
         <aside className="min-h-0 overflow-y-auto border-l border-hairline bg-panel max-lg:order-3 max-lg:border-l-0 max-lg:border-t">
           <InfoPanel />
         </aside>
       </div>
       <Credits embedded={embedded} />
+      <InteractionLayer bundles={bundles} />
       {/* The bridge mounts before the deep link so the host also hears about that selection. */}
       {embedded ? <EmbedBridge allowedOrigins={allowedOrigins} bundles={bundles} /> : null}
       {deepLink ? <DeepLinkSelection meshId={deepLink} bundles={bundles} /> : null}

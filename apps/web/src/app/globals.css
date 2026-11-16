@@ -188,10 +188,12 @@ select:focus-visible,
     border-color 0.18s var(--wazo-ease),
     box-shadow 0.18s var(--wazo-ease);
 }
-.btn:hover:not(:disabled) {
+.btn:hover:not(:disabled, [aria-disabled='true']) {
   transform: translateY(-1px);
 }
-.btn:disabled {
+/* `aria-disabled` keeps the button focusable (a toolbar slot that just emptied keeps focus). */
+.btn:disabled,
+.btn[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: 0.45;
 }
@@ -218,6 +220,29 @@ select:focus-visible,
 .btn-sm {
   height: 32px;
   padding: 0 12px;
+}
+/* Ghost: buttons inside a bar (toolbar, header, sheets). No border until pressed; same pressed
+   state as the outline toggle. */
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-muted);
+}
+.btn-ghost:hover:not(:disabled, [aria-disabled='true']) {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+}
+/* Square icon-only button (close, help): 40 x 40 target, label in `aria-label`. */
+.btn-icon {
+  width: 40px;
+  padding: 0;
+}
+.btn svg {
+  flex-shrink: 0;
+}
+.btn-ghost[aria-pressed='true'] {
+  background: var(--accent-soft);
+  border-color: var(--wazo-accent);
+  color: var(--ink);
 }
 
 /* Range input: the cutting plane slider. */
