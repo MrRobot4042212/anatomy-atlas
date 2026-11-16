@@ -166,7 +166,10 @@ export const useViewerStore = create<ViewerState>()((set) => ({
   clearIsolation: () => set({ isolated: null }),
   toggleTransparent: (meshId) => set((s) => ({ transparent: toggled(s.transparent, meshId) })),
   setClipping: (patch) => set((s) => ({ clipping: { ...s.clipping, ...patch } })),
-  focus: (bounds) => set({ cameraTarget: bounds }),
+  // A fresh object per call, so asking to frame the same bounds again (after orbiting away)
+  // still reaches the focus controller, which reacts to a new reference.
+  focus: (bounds) =>
+    set({ cameraTarget: bounds ? { min: [...bounds.min], max: [...bounds.max] } : null }),
   preset: (name) =>
     set((s) => ({ cameraPreset: { name, nonce: (s.cameraPreset?.nonce ?? 0) + 1 } })),
   reset: () =>
