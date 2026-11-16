@@ -1,7 +1,7 @@
 # Asset pipeline
 
 Turns the Z-Anatomy `Startup.blend` into optimized GLB bundles and the manifest that seeds the
-catalog. Full contract and commands: `.claude/skills/asset-pipeline/SKILL.md`, decisions: `docs/adr/0004-ta2-ontology-key.md`.
+catalog. Full contract and commands: `docs/pipeline.md`, decisions: `docs/adr/0004-ta2-ontology-key.md`.
 
 ```
 raw/        git-ignored. TA2.csv and the extracted Z-Anatomy template (Startup.blend, 307 MB).
