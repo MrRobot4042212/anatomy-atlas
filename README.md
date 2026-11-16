@@ -29,7 +29,9 @@ Web runs on http://localhost:3000, API on http://localhost:3001/api.
 
 3D anatomy models derived from [Z-Anatomy](https://www.z-anatomy.com/) (CC BY-SA 4.0), itself
 derived from [BodyParts3D](https://lifesciencedb.jp/bp3d/) by DBCLS (CC BY-SA 2.1 JP).
-Derived models in this project are distributed under CC BY-SA 4.0.
+Derived models in this project are distributed under CC BY-SA 4.0. Meshes that probably derive
+from non-commercial components credited by Z-Anatomy are excluded
+(`tools/asset-pipeline/licensing/quarantine.json`, ADR 0005). Full notice at `/licencias`.
 
 ## Docs
 

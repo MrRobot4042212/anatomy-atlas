@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 /** Mandatory attribution: the 3D models are CC BY-SA derivatives (ADR 0001). Keep visible. */
 export function Credits() {
   return (
@@ -17,7 +19,13 @@ export function Credits() {
         >
           BodyParts3D
         </a>{' '}
-        de DBCLS (CC BY-SA 2.1 JP). Nomenclatura: Terminologia Anatomica 2.
+        de DBCLS (CC BY-SA 2.1 JP). Nomenclatura: Terminologia Anatomica 2.{' '}
+        <Link
+          href="/licencias"
+          className="underline decoration-hairline-strong underline-offset-2 hover:text-ink"
+        >
+          Licencias
+        </Link>
       </p>
       <p className="shrink-0">Wazo Anatomy</p>
     </footer>
