@@ -50,6 +50,14 @@ export default function Licencias() {
               </a>
             </li>
           </ul>
+          <p className="mt-3 text-[13px] leading-relaxed">
+            Los riñones proceden directamente de BodyParts3D, The Database Center for Life Science,
+            con licencia{' '}
+            <a href="https://creativecommons.org/licenses/by/4.0/" className={link}>
+              CC BY 4.0
+            </a>
+            .
+          </p>
           <p className="mt-3 text-[13px] leading-relaxed text-ink-muted">
             Los modelos mostrados son una adaptación: se han seleccionado, renombrado según su
             código de Terminologia Anatomica, optimizado y comprimido para la web. La adaptación se
