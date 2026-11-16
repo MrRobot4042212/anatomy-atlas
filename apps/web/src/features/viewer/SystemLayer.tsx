@@ -3,11 +3,11 @@
 import { useEffect } from 'react';
 import type { ThreeEvent } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-import { Box3, Mesh, type BufferGeometry, type Material, type Object3D } from 'three';
+import { Mesh, type BufferGeometry, type Material, type Object3D } from 'three';
 import { acceleratedRaycast, MeshBVH } from 'three-mesh-bvh';
 import type { AssetBundle, BodySystem, BodyZone } from '@atlas/shared';
 import { materialSetFor } from './materials';
-import { registry, resolveMeshId, type StructureEntry } from './registry';
+import { entryBounds, registry, resolveMeshId, type StructureEntry } from './registry';
 import { subsystemKey, useViewerStore, type ViewerState } from './store';
 import { passesFilters, variantFor, type PaintState } from './visibility';
 
@@ -26,40 +26,50 @@ function bundleUrl(bundle: AssetBundle): string {
 // module augmentation of BufferGeometry) exists in the bundle.
 type BvhGeometry = BufferGeometry & { boundsTree?: MeshBVH };
 
+/** Layer that neither the camera nor the raycaster sees: how a structure is hidden. */
+const HIDDEN_LAYER = 31;
+
 /**
- * Register the named nodes of a loaded scene and return their meshIds. Idempotent: BVHs are
- * built once per geometry and materials are shared, so re-running after a StrictMode remount
- * costs a traversal, not a rebuild.
+ * Register every structure of a loaded scene and return their meshIds. A structure is a node
+ * named with one of the bundle's meshIds, at any depth: the GLB keeps the Blender parenting, so
+ * structures nest (the arterial tree hangs from the aorta). Each mesh belongs to its nearest
+ * structure ancestor. Unnamed shared-geometry children are named by three after the glTF mesh
+ * plus a `_n` suffix, so they never match a meshId. Idempotent: BVHs are built once per geometry
+ * and materials are shared, so re-running after a StrictMode remount costs a traversal.
  */
-function registerScene(scene: Object3D): string[] {
+function registerScene(scene: Object3D, meshIds: ReadonlySet<string>): string[] {
   const started = performance.now();
   let built = 0;
-  const ids: string[] = [];
-  for (const node of scene.children) {
-    const meshId = node.name;
-    if (!meshId) continue;
-    node.userData.meshId = meshId;
-    const meshes: Mesh[] = [];
-    node.traverse((child) => {
-      if (child instanceof Mesh) meshes.push(child);
-    });
-    if (meshes.length === 0) continue;
-    const materials = meshes.map((mesh) => {
-      const geometry = mesh.geometry as BvhGeometry;
+  const entries = new Map<string, StructureEntry>();
+  const visit = (object: Object3D, owner: StructureEntry | null) => {
+    let current = owner;
+    if (meshIds.has(object.name) && !entries.has(object.name)) {
+      current = { meshId: object.name, node: object, meshes: [], materials: [] };
+      object.userData.meshId = object.name;
+      entries.set(object.name, current);
+    }
+    if (current && object instanceof Mesh) {
+      const geometry = object.geometry as BvhGeometry;
       if (!geometry.boundsTree) {
         geometry.boundsTree = new MeshBVH(geometry);
         built += 1;
       }
       // The GLB material name is the palette key. After a StrictMode remount the mesh already
       // carries one of our materials, so the original key is kept on the mesh the first time.
-      const source = mesh.material as Material;
-      const key = (mesh.userData.materialKey as string | undefined) ?? (source.name || 'default');
-      mesh.userData.materialKey = key;
+      const source = object.material as Material;
+      const key = (object.userData.materialKey as string | undefined) ?? (source.name || 'default');
+      object.userData.materialKey = key;
       const set = materialSetFor(key, source);
-      mesh.material = set.base;
-      return set;
-    });
-    const entry: StructureEntry = { meshId, node, meshes, materials };
+      object.material = set.base;
+      current.meshes.push(object);
+      current.materials.push(set);
+    }
+    for (const child of object.children) visit(child, current);
+  };
+  visit(scene, null);
+  const ids: string[] = [];
+  for (const [meshId, entry] of entries) {
+    if (entry.meshes.length === 0) continue;
     registry.set(meshId, entry);
     ids.push(meshId);
   }
@@ -87,11 +97,12 @@ function paint(meshIds: string[], facts: MeshFacts, state: PaintState) {
       !state.hidden.has(meshId) &&
       !(sub && state.hiddenSubsystems.has(sub)) &&
       passesFilters(meshId, facts.zoneOf, state.zones, state.side);
-    entry.node.visible = visible;
-    if (!visible) continue;
-    const variant = variantFor(meshId, facts.system, state);
+    // Hide the structure's own meshes through a layer, never `node.visible`: that would also
+    // hide the structures nested below it, which have their own zone and state.
+    const variant = visible ? variantFor(meshId, facts.system, state) : null;
     entry.meshes.forEach((mesh, i) => {
-      mesh.material = entry.materials[i][variant];
+      mesh.layers.set(variant ? 0 : HIDDEN_LAYER);
+      if (variant) mesh.material = entry.materials[i][variant];
     });
   }
 }
@@ -121,7 +132,7 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
   // Register, paint and subscribe in one effect so the cleanup (unsubscribe + unregister)
   // always pairs with a registration, StrictMode remounts included.
   useEffect(() => {
-    const meshIds = registerScene(scene);
+    const meshIds = registerScene(scene, new Set(bundle.meshes));
     const subsystemOf = new Map<string, string>();
     for (const [subsystem, ids] of Object.entries(bundle.subsystems)) {
       const key = subsystemKey(bundle.system, subsystem);
@@ -163,11 +174,10 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
     if (!interactive(meshId)) return;
     select(meshId);
     const entry = meshId ? registry.get(meshId) : undefined;
-    if (entry) {
-      // World-space bounds of one node, computed on demand (the scene is attached by now).
-      const { min, max } = new Box3().setFromObject(entry.node);
-      focus({ min: [min.x, min.y, min.z], max: [max.x, max.y, max.z] });
-    }
+    // World-space bounds of the structure's own meshes, computed on demand (the scene is
+    // attached by now); nested structures are not part of it.
+    const bounds = entry ? entryBounds(entry) : null;
+    if (bounds) focus(bounds);
   };
 
   return (
