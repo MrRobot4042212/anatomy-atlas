@@ -15,7 +15,7 @@ import {
   unionBounds,
   zoneIndex,
   type ShownState,
-} from './regionFilter';
+} from './regionZones';
 
 const bundle = (system: BodySystem, patch: Partial<AssetBundle>): AssetBundle => ({
   id: `${system}-v1`,

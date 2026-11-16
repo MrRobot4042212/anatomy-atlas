@@ -1,7 +1,7 @@
 # ADR 0007: Interaction model for the 3D body
 
 Date: 2026-11-16
-Status: accepted
+Status: accepted; implemented 2026-11-17 (see Result)
 
 ## Context
 
@@ -37,3 +37,30 @@ Adopt the model in `docs/design/interaction-model.md`:
   hide it.
 - Cost: about two weeks of work in four independent pieces (data and region filter, toolbar and keyboard,
   layer panel, tree and search, selection and panel), each shippable alone.
+
+## Result (2026-11-17)
+
+Built as four independent pieces and merged: the zone index and the region filter, the toolbar with
+keyboard, reset and URL state, the layer panel with the tree and the search ranking, and the selection
+with the tabbed panel. 203 web tests and 34 API tests cover it.
+
+Measured against the acceptance table of `docs/design/interaction-model.md`:
+
+| Task                                   | Before                    | After                                                  |
+| -------------------------------------- | ------------------------- | ------------------------------------------------------ |
+| Right forearm muscles only             | blocker                   | 4 clicks (Muscular, hide skeleton, Antebrazo, Derecho) |
+| Back to the initial state              | no way                    | 1 action (button or R); the view is in the URL         |
+| Select the malleus                     | a 5 px dot                | fills 65 % of the canvas height after Enfocar          |
+| Tab stops from the page to the toolbar | 60                        | 5                                                      |
+| Layout shift in the toolbar            | yes                       | none (fixed slots, measured)                           |
+| Search "sciatic", "kidney", "femur"    | bursae and branches first | the structure first, on all six queries                |
+| Systems with a depth state             | on or off                 | visible, translucent, hidden                           |
+
+Found on the way and fixed: structures nested inside other structures in the GLB (616 of 676
+cardiovascular, 190 nervous) were never registered, so a coronary branch selected its root; and hidden
+structures could still take a click.
+
+Open: descriptions, innervation and blood supply (no data), guided views (the data format is specified in
+the interaction model but no views are authored yet), the occluded-structure cue is unit tested only, and
+the zone rules have accepted edge cases (mylohyoid and suboccipital muscles in the head, brachial plexus
+trunks and supraclavicular nodes in the thorax).
