@@ -237,14 +237,14 @@
       "basis": ["abbreviation"],
       "la": [
         ["dors.", "dorsales"],
-        ["lat.", "laterales"]
+        ["lat.", "lateralium"]
       ]
     },
     "ta2:2241": {
       "basis": ["abbreviation"],
       "la": [
         ["vent.", "ventrales"],
-        ["lat.", "laterales"]
+        ["lat.", "lateralium"]
       ]
     },
     "ta2:2450": {
@@ -257,7 +257,7 @@
     },
     "ta2:2577": {
       "basis": ["abbreviation"],
-      "la": "Vagina tendinum musculorum abductoris longi et extensoris brevis pollicis",
+      "la": "Vagina tendinum abductoris longi et extensoris brevis pollicis",
       "en": "Tendon sheath of abductor pollicis longus and extensor pollicis brevis"
     },
     "ta2:2581": {
@@ -270,7 +270,7 @@
     },
     "ta2:2682": {
       "basis": ["duplicated-word"],
-      "la": [["pedis pedis", "brevis pedis"]]
+      "la": [["pedis pedis", "pedis"]]
     },
     "ta2:2750": {
       "basis": ["truncation"],
@@ -278,7 +278,7 @@
     },
     "ta2:2760": {
       "basis": ["grammar"],
-      "la": "Vagina tendinis musculi flexoris digitorum longi"
+      "la": "Vagina tendinum flexoris longi digitorum"
     },
     "ta2:3076": {
       "basis": ["omission"],
@@ -342,11 +342,11 @@
     },
     "ta2:4143": {
       "basis": ["abbreviation"],
-      "la": [["ant.", "anterior"]]
+      "la": "Arteria interventricularis anterior"
     },
     "ta2:4147": {
       "basis": ["abbreviation"],
-      "la": "Rami interventriculares septales"
+      "la": "Rami interventriculares septales arteriae interventricularis anterioris"
     },
     "ta2:4165": {
       "basis": ["synonym-removed"],
@@ -372,17 +372,13 @@
       "basis": ["typo"],
       "la": [["internaecus", "internae"]]
     },
-    "ta2:4341": {
-      "basis": ["consistency"],
-      "la": [["pudendalis", "pudenda"]]
-    },
     "ta2:4420": {
       "basis": ["typo"],
       "la": [["fontale", "frontalis"]]
     },
     "ta2:4504": {
       "basis": ["grammar"],
-      "la": [["cerebri anterior", "cerebri anterioris"]]
+      "la": "Rami orbitofrontales arteriae anterioris cerebri"
     },
     "ta2:4506": {
       "basis": ["grammar"],
@@ -734,6 +730,14 @@
       "parent": "ta2-4108",
       "basis": "hierarchy",
       "why": "Tributaries of the right superior pulmonary vein were filed under the left superior pulmonary vein."
+    },
+    {
+      "keys": ["ta2-6827-l", "ta2-6827-r", "ta2-6829-l", "ta2-6829-r"],
+      "parent": "ta2-6815",
+      "system": "nervous",
+      "subsystem": "sense-organs",
+      "basis": "hierarchy",
+      "why": "The tarsal plates are connective tissue of the eyelids. TA2 classes them with the accessory visual structures of the eye, not with the muscles of the head. This also moves them from the muscular to the nervous (sense organs) bundle."
     }
   ],
   "declined": [
@@ -756,12 +760,22 @@
   ],
   "deferred": [
     {
-      "keys": ["ta2-6827-l", "ta2-6827-r", "ta2-6829-l", "ta2-6829-r"],
-      "reason": "The tarsal plates of the eyelids sit under Muscles of head, but they are connective tissue. Moving them changes their body system and so their bundle; needs a decision on where eyelid structures belong."
-    },
-    {
       "keys": ["za:unnamed", "za:x"],
       "reason": "Unnamed objects in the source model. They carry placeholder names and must be identified against the mesh by an anatomist."
+    }
+  ],
+  "keptDeviations": [
+    {
+      "termKey": "ta2:2198",
+      "reason": "TA2 prints cricoarytendoideus, a misprint (its own id 2196 spells cricoarytenoideus); the correct spelling is kept."
+    },
+    {
+      "termKey": "ta2:5258",
+      "reason": "TA2 prints prepericadiaci, a misprint; the correct spelling is kept."
+    },
+    {
+      "termKey": "ta2:5338",
+      "reason": "TA2 has no lateral sacral nodes; the structure comes from the 3D source, so only the stray accent is removed and the name is not an official TA2 term."
     }
   ]
 }

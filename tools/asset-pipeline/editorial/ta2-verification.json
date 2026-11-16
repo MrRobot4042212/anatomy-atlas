@@ -1,0 +1,1022 @@
+{
+  "checkedAgainst": "Terminologia Anatomica, second edition (FIPAT 2019), full PDF, extracted text",
+  "date": "2026-11-16",
+  "note": "confirmed = equals the official term or a listed synonym; kept-deviation = a deliberate fix of a TA2 misprint or a non-TA2 name (see corrections.json); unverifiable = TA2 has no entry with this name (numbered instances such as single ribs, fingers and teeth, and ids above 7113 that TA2 does not have).",
+  "results": [
+    {
+      "termKey": "ta2:1140-1",
+      "latin": "Cartilago costalis costae primae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-10",
+      "latin": "Cartilago costalis costae decimae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-2",
+      "latin": "Cartilago costalis costae secundae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-3",
+      "latin": "Cartilago costalis costae tertiae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-4",
+      "latin": "Cartilago costalis costae quartae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-5",
+      "latin": "Cartilago costalis costae quintae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-6",
+      "latin": "Cartilago costalis costae sextae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-7",
+      "latin": "Cartilago costalis costae septimae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-8",
+      "latin": "Cartilago costalis costae octavae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1140-9",
+      "latin": "Cartilago costalis costae nonae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1140 generic Cartilago costalis only; per-rib form absent"
+    },
+    {
+      "termKey": "ta2:1141",
+      "latin": "Ossa membri superioris",
+      "verdict": "confirmed",
+      "official": "OSSA MEMBRI SUPERIORIS",
+      "evidence": "TA2 Part 2, id 1141"
+    },
+    {
+      "termKey": "ta2:1265-1",
+      "latin": "Os primum metacarpi",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1265 generic Os metacarpi only (cf. 1269 Os tertium metacarpi)"
+    },
+    {
+      "termKey": "ta2:1277-1",
+      "latin": "Phalanx proximalis digiti primi manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1277 generic Phalanx proximalis manus only"
+    },
+    {
+      "termKey": "ta2:1277-2",
+      "latin": "Phalanx proximalis digiti secundi manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1277 generic Phalanx proximalis manus only"
+    },
+    {
+      "termKey": "ta2:1277-3",
+      "latin": "Phalanx proximalis digiti tertii manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1277 generic Phalanx proximalis manus only"
+    },
+    {
+      "termKey": "ta2:1277-4",
+      "latin": "Phalanx proximalis digiti quarti manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1277 generic Phalanx proximalis manus only"
+    },
+    {
+      "termKey": "ta2:1277-5",
+      "latin": "Phalanx proximalis digiti quinti manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1277 generic Phalanx proximalis manus only"
+    },
+    {
+      "termKey": "ta2:1278-2",
+      "latin": "Phalanx media digiti secundi manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1278 generic Phalanx media manus only"
+    },
+    {
+      "termKey": "ta2:1278-3",
+      "latin": "Phalanx media digiti tertii manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1278 generic Phalanx media manus only"
+    },
+    {
+      "termKey": "ta2:1278-4",
+      "latin": "Phalanx media digiti quarti manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1278 generic Phalanx media manus only"
+    },
+    {
+      "termKey": "ta2:1278-5",
+      "latin": "Phalanx media digiti quinti manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1278 generic Phalanx media manus only"
+    },
+    {
+      "termKey": "ta2:1279-1",
+      "latin": "Phalanx distalis digiti primi manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1279 generic Phalanx distalis manus only"
+    },
+    {
+      "termKey": "ta2:1279-2",
+      "latin": "Phalanx distalis digiti secundi manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1279 generic Phalanx distalis manus only"
+    },
+    {
+      "termKey": "ta2:1279-3",
+      "latin": "Phalanx distalis digiti tertii manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1279 generic Phalanx distalis manus only"
+    },
+    {
+      "termKey": "ta2:1279-4",
+      "latin": "Phalanx distalis digiti quarti manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1279 generic Phalanx distalis manus only"
+    },
+    {
+      "termKey": "ta2:1279-5",
+      "latin": "Phalanx distalis digiti quinti manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1279 generic Phalanx distalis manus only"
+    },
+    {
+      "termKey": "ta2:1496-4",
+      "latin": "Os quartum metatarsi",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1496 generic Os metatarsi only"
+    },
+    {
+      "termKey": "ta2:1510-1",
+      "latin": "Phalanx proximalis digiti primi pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1510 generic Phalanx proximalis pedis only"
+    },
+    {
+      "termKey": "ta2:1510-2",
+      "latin": "Phalanx proximalis digiti secundi pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1510 generic Phalanx proximalis pedis only"
+    },
+    {
+      "termKey": "ta2:1510-3",
+      "latin": "Phalanx proximalis digiti tertii pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1510 generic Phalanx proximalis pedis only"
+    },
+    {
+      "termKey": "ta2:1510-4",
+      "latin": "Phalanx proximalis digiti quarti pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1510 generic Phalanx proximalis pedis only"
+    },
+    {
+      "termKey": "ta2:1510-5",
+      "latin": "Phalanx proximalis digiti quinti pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1510 generic Phalanx proximalis pedis only"
+    },
+    {
+      "termKey": "ta2:1511-2",
+      "latin": "Phalanx media digiti secundi pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1511 generic Phalanx media pedis only"
+    },
+    {
+      "termKey": "ta2:1511-3",
+      "latin": "Phalanx media digiti tertii pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1511 generic Phalanx media pedis only"
+    },
+    {
+      "termKey": "ta2:1511-4",
+      "latin": "Phalanx media digiti quarti pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1511 generic Phalanx media pedis only"
+    },
+    {
+      "termKey": "ta2:1511-5",
+      "latin": "Phalanx media digiti quinti pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1511 generic Phalanx media pedis only"
+    },
+    {
+      "termKey": "ta2:1512-1",
+      "latin": "Phalanx distalis digiti primi pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1512 generic Phalanx distalis pedis only"
+    },
+    {
+      "termKey": "ta2:1512-2",
+      "latin": "Phalanx distalis digiti secundi pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1512 generic Phalanx distalis pedis only"
+    },
+    {
+      "termKey": "ta2:1512-3",
+      "latin": "Phalanx distalis digiti tertii pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1512 generic Phalanx distalis pedis only"
+    },
+    {
+      "termKey": "ta2:1512-4",
+      "latin": "Phalanx distalis digiti quarti pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1512 generic Phalanx distalis pedis only"
+    },
+    {
+      "termKey": "ta2:1512-5",
+      "latin": "Phalanx distalis digiti quinti pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1512 generic Phalanx distalis pedis only"
+    },
+    {
+      "termKey": "ta2:1664",
+      "latin": "Articulationes laryngis",
+      "verdict": "confirmed",
+      "official": "ARTICULATIONES LARYNGIS",
+      "evidence": "TA2 id 1664"
+    },
+    {
+      "termKey": "ta2:1670",
+      "latin": "Juncturae columnae vertebralis",
+      "verdict": "confirmed",
+      "official": "JUNCTURAE COLUMNAE VERTEBRALIS",
+      "evidence": "TA2 id 1670"
+    },
+    {
+      "termKey": "ta2:1737",
+      "latin": "Juncturae membri superioris",
+      "verdict": "confirmed",
+      "official": "JUNCTURAE MEMBRI SUPERIORIS",
+      "evidence": "TA2 id 1737"
+    },
+    {
+      "termKey": "ta2:1743",
+      "latin": "Articulationes cinguli pectoralis",
+      "verdict": "confirmed",
+      "official": "ARTICULATIONES CINGULI PECTORALIS",
+      "evidence": "TA2 id 1743"
+    },
+    {
+      "termKey": "ta2:1772-1",
+      "latin": "Capsula articularis articulationis cubiti",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1772 is Articulatio cubiti; no separate capsule entry"
+    },
+    {
+      "termKey": "ta2:1786-1",
+      "latin": "Capsula articularis articulationis radiocarpeae",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1786 is Articulatio radiocarpea; no separate capsule entry"
+    },
+    {
+      "termKey": "ta2:1835-1",
+      "latin": "Capsulae articulares articulationum metacarpophalangearum",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 1835 is Articulationes metacarpophalangeae; no capsule entry"
+    },
+    {
+      "termKey": "ta2:1891",
+      "latin": "Ligamentum cruciatum posterius",
+      "verdict": "confirmed",
+      "official": "Ligamentum cruciatum posterius",
+      "evidence": "TA2 id 1891; decussatum only in Other column"
+    },
+    {
+      "termKey": "ta2:2040",
+      "latin": "Musculi capitis",
+      "verdict": "confirmed",
+      "official": "MUSCULI CAPITIS",
+      "evidence": "TA2 id 2040"
+    },
+    {
+      "termKey": "ta2:2198",
+      "latin": "Musculus cricoarytenoideus lateralis",
+      "verdict": "kept-deviation",
+      "official": "Musculus cricoarytendoideus lateralis",
+      "evidence": "TA2 id 2198 printed so (misprint; 2196 spells cricoarytenoideus)"
+    },
+    {
+      "termKey": "ta2:2207",
+      "latin": "Fascia investiens superficialis colli",
+      "verdict": "confirmed",
+      "official": "Fascia investiens superficialis colli",
+      "evidence": "TA2 id 2207"
+    },
+    {
+      "termKey": "ta2:2240",
+      "latin": "Partes dorsales musculorum intertransversariorum lateralium lumborum",
+      "verdict": "confirmed",
+      "official": "Partes dorsales musculorum intertransversariorum lateralium lumborum",
+      "evidence": "TA2 id 2240: lateralium, not laterales"
+    },
+    {
+      "termKey": "ta2:2241",
+      "latin": "Partes ventrales musculorum intertransversariorum lateralium lumborum",
+      "verdict": "confirmed",
+      "official": "Partes ventrales musculorum intertransversariorum lateralium lumborum",
+      "evidence": "TA2 id 2241: lateralium, not laterales"
+    },
+    {
+      "termKey": "ta2:2450",
+      "latin": "Musculi membri superioris",
+      "verdict": "confirmed",
+      "official": "MUSCULI MEMBRI SUPERIORIS",
+      "evidence": "TA2 id 2450"
+    },
+    {
+      "termKey": "ta2:2474",
+      "latin": "Caput mediale musculi tricipitis brachii",
+      "verdict": "confirmed",
+      "official": "Caput mediale musculi tricipitis brachii",
+      "evidence": "TA2 id 2474"
+    },
+    {
+      "termKey": "ta2:2577",
+      "latin": "Vagina tendinum abductoris longi et extensoris brevis pollicis",
+      "verdict": "confirmed",
+      "official": "Vagina tendinum abductoris longi et extensoris brevis pollicis",
+      "evidence": "TA2 2577; synonym: ...musculorum abductoris pollicis longi et extensoris pollicis brevis"
+    },
+    {
+      "termKey": "ta2:2581",
+      "latin": "Vagina tendinum musculorum extensoris digitorum et extensoris indicis",
+      "verdict": "confirmed",
+      "official": "Vagina tendinum extensoris digitorum et extensoris indicis",
+      "evidence": "Equals TA2 2580 Latin synonym; TA2 2581 is extensor digiti minimi sheath"
+    },
+    {
+      "termKey": "ta2:2626",
+      "latin": "Compartimentum mediale femoris",
+      "verdict": "confirmed",
+      "official": "Compartimentum mediale femoris",
+      "evidence": "TA2 id 2626"
+    },
+    {
+      "termKey": "ta2:2682",
+      "latin": "Flexor digiti minimi pedis",
+      "verdict": "confirmed",
+      "official": "Flexor digiti minimi pedis",
+      "evidence": "TA2 2682; synonym Musculus flexor digiti minimi brevis pedis"
+    },
+    {
+      "termKey": "ta2:2750",
+      "latin": "Bursa subcutanea malleoli medialis",
+      "verdict": "confirmed",
+      "official": "Bursa subcutanea malleoli medialis",
+      "evidence": "TA2 id 2750"
+    },
+    {
+      "termKey": "ta2:2760",
+      "latin": "Vagina tendinum flexoris longi digitorum",
+      "verdict": "confirmed",
+      "official": "Vagina tendinum flexoris longi digitorum",
+      "evidence": "TA2 2760; synonym Vagina tendinum musculi flexoris digitorum longi"
+    },
+    {
+      "termKey": "ta2:3248",
+      "latin": "Bronchus segmentalis basalis medialis pulmonis dextri (BVII)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis basalis medialis pulmonis dextri",
+      "evidence": "TA2 id 3248; (BVII) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3249",
+      "latin": "Bronchus segmentalis basalis anterior pulmonis dextri (BVIII)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis basalis anterior pulmonis dextri",
+      "evidence": "TA2 id 3249; (BVIII) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3250",
+      "latin": "Bronchus segmentalis basalis lateralis pulmonis dextri (BIX)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis basalis lateralis pulmonis dextri",
+      "evidence": "TA2 id 3250; (BIX) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3254",
+      "latin": "Bronchus segmentalis apicoposterior pulmonis sinistri (BI+BII)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis apicoposterior pulmonis sinistri",
+      "evidence": "TA2 id 3254; (BI+BII) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3256",
+      "latin": "Bronchus segmentalis lingularis superior pulmonis sinistri (BIV)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis lingularis superior pulmonis sinistri",
+      "evidence": "TA2 id 3256; (BIV) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3257",
+      "latin": "Bronchus segmentalis lingularis inferior pulmonis sinistri (BV)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis lingularis inferior pulmonis sinistri",
+      "evidence": "TA2 id 3257; (BV) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3259",
+      "latin": "Bronchus segmentalis superior pulmonis sinistri (BVI)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis superior pulmonis sinistri",
+      "evidence": "TA2 id 3259; (BVI) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3260",
+      "latin": "Bronchus segmentalis basalis medialis pulmonis sinistri (BVII)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis basalis medialis pulmonis sinistri",
+      "evidence": "TA2 id 3260; (BVII) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3262",
+      "latin": "Bronchus segmentalis basalis anterior pulmonis sinistri (BVIII)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis basalis anterior pulmonis sinistri",
+      "evidence": "TA2 id 3262; (BVIII) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:3263",
+      "latin": "Bronchus segmentalis basalis lateralis pulmonis sinistri (BIX)",
+      "verdict": "confirmed",
+      "official": "Bronchus segmentalis basalis lateralis pulmonis sinistri",
+      "evidence": "TA2 id 3263; (BIX) code not part of TA2 Latin"
+    },
+    {
+      "termKey": "ta2:4114",
+      "latin": "Vena medialis pulmonis dextri",
+      "verdict": "confirmed",
+      "official": "Vena medialis pulmonis dextri",
+      "evidence": "TA2 id 4114"
+    },
+    {
+      "termKey": "ta2:4143",
+      "latin": "Arteria interventricularis anterior",
+      "verdict": "confirmed",
+      "official": "Arteria interventricularis anterior",
+      "evidence": "TA2 4143; synonym Ramus interventricularis anterior arteriae coronariae sinistrae"
+    },
+    {
+      "termKey": "ta2:4147",
+      "latin": "Rami interventriculares septales arteriae interventricularis anterioris",
+      "verdict": "confirmed",
+      "official": "Rami interventriculares septales arteriae interventricularis anterioris",
+      "evidence": "TA2 id 4147; correction truncates the official term"
+    },
+    {
+      "termKey": "ta2:4165",
+      "latin": "Vena media cordis",
+      "verdict": "confirmed",
+      "official": "Vena media cordis",
+      "evidence": "TA2 id 4165"
+    },
+    {
+      "termKey": "ta2:4211",
+      "latin": "Truncus coeliacus",
+      "verdict": "confirmed",
+      "official": "Truncus coeliacus",
+      "evidence": "TA2 id 4211"
+    },
+    {
+      "termKey": "ta2:4252",
+      "latin": "Arteria mesenterica superior",
+      "verdict": "confirmed",
+      "official": "Arteria mesenterica superior",
+      "evidence": "TA2 id 4252"
+    },
+    {
+      "termKey": "ta2:4253",
+      "latin": "Arteria pancreaticoduodenalis inferior",
+      "verdict": "confirmed",
+      "official": "Arteria pancreaticoduodenalis inferior",
+      "evidence": "TA2 id 4253"
+    },
+    {
+      "termKey": "ta2:4293",
+      "latin": "Ramus ascendens arteriae colicae sinistrae",
+      "verdict": "confirmed",
+      "official": "Ramus ascendens arteriae colicae sinistrae",
+      "evidence": "TA2 id 4293"
+    },
+    {
+      "termKey": "ta2:4303",
+      "latin": "Divisio posterior arteriae iliacae internae",
+      "verdict": "confirmed",
+      "official": "Divisio posterior arteriae iliacae internae",
+      "evidence": "TA2 id 4303"
+    },
+    {
+      "termKey": "ta2:4341",
+      "latin": "Arteria pudendalis interna",
+      "verdict": "confirmed",
+      "official": "Arteria pudendalis interna",
+      "evidence": "TA2 4341; pudenda interna only in Other column, not a synonym"
+    },
+    {
+      "termKey": "ta2:4420",
+      "latin": "Ramus frontalis arteriae temporalis superficialis",
+      "verdict": "confirmed",
+      "official": "Ramus frontalis arteriae temporalis superficialis",
+      "evidence": "TA2 id 4420"
+    },
+    {
+      "termKey": "ta2:4504",
+      "latin": "Rami orbitofrontales arteriae anterioris cerebri",
+      "verdict": "confirmed",
+      "official": "Rami orbitofrontales arteriae anterioris cerebri",
+      "evidence": "TA2 id 4504: word order anterioris cerebri"
+    },
+    {
+      "termKey": "ta2:4506",
+      "latin": "Rami frontales arteriae callosomarginalis",
+      "verdict": "confirmed",
+      "official": "Rami frontales arteriae callosomarginalis",
+      "evidence": "TA2 id 4506"
+    },
+    {
+      "termKey": "ta2:4515",
+      "latin": "Rami parietales arteriae mediae cerebri",
+      "verdict": "confirmed",
+      "official": "Rami parietales arteriae mediae cerebri",
+      "evidence": "TA2 id 4515"
+    },
+    {
+      "termKey": "ta2:4571",
+      "latin": "Arteria parietooccipitalis",
+      "verdict": "confirmed",
+      "official": "Arteria parietooccipitalis",
+      "evidence": "TA2 id 4571"
+    },
+    {
+      "termKey": "ta2:4587",
+      "latin": "Arteria musculophrenica",
+      "verdict": "confirmed",
+      "official": "Arteria musculophrenica",
+      "evidence": "TA2 id 4587"
+    },
+    {
+      "termKey": "ta2:4591",
+      "latin": "Arteria thyreoidea inferior",
+      "verdict": "confirmed",
+      "official": "Arteria thyreoidea inferior",
+      "evidence": "TA2 id 4591"
+    },
+    {
+      "termKey": "ta2:4601",
+      "latin": "Arteria transversa colli",
+      "verdict": "confirmed",
+      "official": "Arteria transversa colli",
+      "evidence": "TA2 id 4601"
+    },
+    {
+      "termKey": "ta2:4644",
+      "latin": "Ramus carpeus palmaris arteriae radialis",
+      "verdict": "confirmed",
+      "official": "Ramus carpeus palmaris arteriae radialis",
+      "evidence": "TA2 id 4644"
+    },
+    {
+      "termKey": "ta2:4830",
+      "latin": "Divisio anterior venae retromandibularis",
+      "verdict": "confirmed",
+      "official": "Divisio anterior venae retromandibularis",
+      "evidence": "TA2 id 4830"
+    },
+    {
+      "termKey": "ta2:4991-1",
+      "latin": "Vena cava inferior (pars thoracica)",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 4991 Vena cava inferior only; no thoracic/abdominal parts"
+    },
+    {
+      "termKey": "ta2:4991-2",
+      "latin": "Vena cava inferior (pars abdominalis)",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 4991 Vena cava inferior only; no thoracic/abdominal parts"
+    },
+    {
+      "termKey": "ta2:5028",
+      "latin": "Venae sacrales laterales",
+      "verdict": "confirmed",
+      "official": "Venae sacrales laterales",
+      "evidence": "TA2 id 5028"
+    },
+    {
+      "termKey": "ta2:5056",
+      "latin": "Venae circumflexae femoris mediales",
+      "verdict": "confirmed",
+      "official": "Venae circumflexae mediales femoris",
+      "evidence": "TA2 5056; correction equals Latin synonym"
+    },
+    {
+      "termKey": "ta2:5057",
+      "latin": "Venae circumflexae femoris laterales",
+      "verdict": "confirmed",
+      "official": "Venae circumflexae laterales femoris",
+      "evidence": "TA2 5057; correction equals Latin synonym"
+    },
+    {
+      "termKey": "ta2:5059",
+      "latin": "Venae pudendales externae",
+      "verdict": "confirmed",
+      "official": "Venae pudendales externae",
+      "evidence": "TA2 id 5059"
+    },
+    {
+      "termKey": "ta2:5081",
+      "latin": "Venae plantares laterales",
+      "verdict": "confirmed",
+      "official": "Venae plantares laterales",
+      "evidence": "TA2 id 5081"
+    },
+    {
+      "termKey": "ta2:5150",
+      "latin": "Systema lymphoideum",
+      "verdict": "confirmed",
+      "official": "Systema lymphoideum",
+      "evidence": "Equals TA2 5149; TA2 5150 is Organa lymphoidea primaria"
+    },
+    {
+      "termKey": "ta2:5207",
+      "latin": "Nodus buccinatorius",
+      "verdict": "confirmed",
+      "official": "Nodus buccinatorius",
+      "evidence": "TA2 id 5207"
+    },
+    {
+      "termKey": "ta2:5222",
+      "latin": "Nodi paratracheales colli",
+      "verdict": "confirmed",
+      "official": "Nodi paratracheales colli",
+      "evidence": "TA2 id 5222"
+    },
+    {
+      "termKey": "ta2:5224",
+      "latin": "Nodi cervicales laterales superficiales",
+      "verdict": "confirmed",
+      "official": "Nodi cervicales laterales superficiales",
+      "evidence": "TA2 id 5224"
+    },
+    {
+      "termKey": "ta2:5229",
+      "latin": "Nodi cervicales laterales profundi inferiores",
+      "verdict": "confirmed",
+      "official": "Nodi cervicales laterales profundi inferiores",
+      "evidence": "TA2 id 5229"
+    },
+    {
+      "termKey": "ta2:5239",
+      "latin": "Nodi axillares laterales",
+      "verdict": "confirmed",
+      "official": "Nodi axillares laterales",
+      "evidence": "TA2 id 5239"
+    },
+    {
+      "termKey": "ta2:5240",
+      "latin": "Nodi axillares posteriores",
+      "verdict": "confirmed",
+      "official": "Nodi axillares posteriores",
+      "evidence": "TA2 id 5240"
+    },
+    {
+      "termKey": "ta2:5241",
+      "latin": "Nodi axillares anteriores",
+      "verdict": "confirmed",
+      "official": "Nodi axillares anteriores",
+      "evidence": "TA2 id 5241"
+    },
+    {
+      "termKey": "ta2:5243",
+      "latin": "Nodi infraclaviculares",
+      "verdict": "confirmed",
+      "official": "Nodi infraclaviculares",
+      "evidence": "TA2 id 5243"
+    },
+    {
+      "termKey": "ta2:5258",
+      "latin": "Nodi prepericardiaci",
+      "verdict": "kept-deviation",
+      "official": "Nodi prepericadiaci",
+      "evidence": "TA2 id 5258 printed so (misprint; synonym Nodi praepericadiaci)"
+    },
+    {
+      "termKey": "ta2:5259",
+      "latin": "Nodi pericardiaci laterales",
+      "verdict": "confirmed",
+      "official": "Nodi pericardiaci laterales",
+      "evidence": "TA2 id 5259"
+    },
+    {
+      "termKey": "ta2:5271",
+      "latin": "Nodi aortici laterales",
+      "verdict": "confirmed",
+      "official": "Nodi aortici laterales",
+      "evidence": "TA2 id 5271"
+    },
+    {
+      "termKey": "ta2:5276",
+      "latin": "Nodi cavales laterales",
+      "verdict": "confirmed",
+      "official": "Nodi cavales laterales",
+      "evidence": "TA2 id 5276"
+    },
+    {
+      "termKey": "ta2:5283",
+      "latin": "Nodi gastrici dextri",
+      "verdict": "confirmed",
+      "official": "Nodi gastrici dextri",
+      "evidence": "TA2 id 5283"
+    },
+    {
+      "termKey": "ta2:5322",
+      "latin": "Nodi iliaci communes laterales",
+      "verdict": "confirmed",
+      "official": "Nodi iliaci communes laterales",
+      "evidence": "TA2 id 5322"
+    },
+    {
+      "termKey": "ta2:5338",
+      "latin": "Nodi sacrales laterales",
+      "verdict": "kept-deviation",
+      "official": "Nodi sacrales",
+      "evidence": "TA2 5338 Nodi sacrales; no lateral sacral nodes term"
+    },
+    {
+      "termKey": "ta2:5343",
+      "latin": "Nodi vesicales laterales",
+      "verdict": "confirmed",
+      "official": "Nodi vesicales laterales",
+      "evidence": "TA2 id 5343"
+    },
+    {
+      "termKey": "ta2:5856",
+      "latin": "Truncus encephali",
+      "verdict": "confirmed",
+      "official": "TRUNCUS ENCEPHALI",
+      "evidence": "TA2 id 5856"
+    },
+    {
+      "termKey": "ta2:6118",
+      "latin": "Tractus reticulospinalis medialis",
+      "verdict": "confirmed",
+      "official": "Tractus reticulospinalis medialis",
+      "evidence": "TA2 id 6118"
+    },
+    {
+      "termKey": "ta2:6442",
+      "latin": "Nervus cutaneus brachii lateralis superior",
+      "verdict": "confirmed",
+      "official": "Nervus cutaneus lateralis superior brachii",
+      "evidence": "TA2 6442; correction equals Latin synonym"
+    },
+    {
+      "termKey": "ta2:6564",
+      "latin": "Radix anterior nervi cutanei femoris posterioris",
+      "verdict": "confirmed",
+      "official": "Radix anterior nervi cutanei posterioris femoris",
+      "evidence": "TA2 6564; correction equals Latin synonym"
+    },
+    {
+      "termKey": "ta2:7071-1",
+      "latin": "Perionyx (pedis)",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 7071 generic Perionyx; no foot qualifier"
+    },
+    {
+      "termKey": "ta2:7128",
+      "latin": "Membrum superius sinistrum",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2 (max 7113); TA2 138 Membrum superius unsided"
+    },
+    {
+      "termKey": "ta2:7129",
+      "latin": "Membrum superius dextrum",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2 (max 7113); TA2 138 Membrum superius unsided"
+    },
+    {
+      "termKey": "ta2:7131",
+      "latin": "Membrum inferius sinistrum",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2 (max 7113); TA2 156 Membrum inferius unsided"
+    },
+    {
+      "termKey": "ta2:7132",
+      "latin": "Membrum inferius dextrum",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2 (max 7113); TA2 156 Membrum inferius unsided"
+    },
+    {
+      "termKey": "ta2:7136",
+      "latin": "Nervi",
+      "verdict": "confirmed",
+      "official": "NERVI",
+      "evidence": "TA2 6130 NERVI; id 7136 not in TA2 (max 7113)"
+    },
+    {
+      "termKey": "ta2:7139",
+      "latin": "Capsulae articulares articulationum metatarsophalangearum",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no metatarsophalangeal capsule entry"
+    },
+    {
+      "termKey": "ta2:7140",
+      "latin": "Capsulae articulares articulationum interphalangearum proximalium manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no interphalangeal capsule entry"
+    },
+    {
+      "termKey": "ta2:7141",
+      "latin": "Capsulae articulares articulationum interphalangearum distalium manus",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no interphalangeal capsule entry"
+    },
+    {
+      "termKey": "ta2:7144",
+      "latin": "Capsulae articulares articulationum interphalangearum distalium pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no interphalangeal capsule entry"
+    },
+    {
+      "termKey": "ta2:7145",
+      "latin": "Capsulae articulares articulationum interphalangearum proximalium pedis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no interphalangeal capsule entry"
+    },
+    {
+      "termKey": "ta2:7146",
+      "latin": "Ligamentum meniscotibiale anterius (Meniscus lateralis)",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; only 1901/1902 meniscotibiale laterale/mediale"
+    },
+    {
+      "termKey": "ta2:7147",
+      "latin": "Ligamentum meniscotibiale anterius (Meniscus medialis)",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; only 1901/1902 meniscotibiale laterale/mediale"
+    },
+    {
+      "termKey": "ta2:7148",
+      "latin": "Ligamentum meniscotibiale posterius (Meniscus lateralis)",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; only 1901/1902 meniscotibiale laterale/mediale"
+    },
+    {
+      "termKey": "ta2:7149",
+      "latin": "Ligamentum meniscotibiale posterius (Meniscus medialis)",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; only 1901/1902 meniscotibiale laterale/mediale"
+    },
+    {
+      "termKey": "ta2:7150",
+      "latin": "Capsula articularis articulationis tibiofibularis superioris",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no tibiofibular capsule entry"
+    },
+    {
+      "termKey": "ta2:7152",
+      "latin": "Capsula articularis articulationis acromioclavicularis",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no acromioclavicular capsule entry"
+    },
+    {
+      "termKey": "ta2:7201",
+      "latin": "Tendo musculi extensoris digitorum longi",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no extensor digitorum longus tendon entry"
+    },
+    {
+      "termKey": "ta2:7202",
+      "latin": "Arteria renalis sinistra",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; TA2 4269 Arteria renalis unsided"
+    },
+    {
+      "termKey": "ta2:7203",
+      "latin": "Arteria renalis dextra",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; TA2 4269 Arteria renalis unsided"
+    },
+    {
+      "termKey": "ta2:7208",
+      "latin": "Lamina unguis (pedis)",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; TA2 7066 Lamina unguis, no foot qualifier"
+    },
+    {
+      "termKey": "ta2:7210",
+      "latin": "Gyrus et sulcus transversus frontopolaris",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; no frontopolar gyrus/sulcus term found"
+    },
+    {
+      "termKey": "ta2:7223",
+      "latin": "Lobus dexter thymi",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; TA2 5153 Lobus thymi; Other column: Lobus dexter et sinister thymi"
+    },
+    {
+      "termKey": "ta2:7224",
+      "latin": "Lobus sinister thymi",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "Id not in TA2; TA2 5153 Lobus thymi; Other column: Lobus dexter et sinister thymi"
+    },
+    {
+      "termKey": "ta2:910-16",
+      "latin": "Dens molaris primus superioris",
+      "verdict": "unverifiable",
+      "official": null,
+      "evidence": "TA2 910 generic Dens molaris; no upper first molar entry"
+    }
+  ]
+}

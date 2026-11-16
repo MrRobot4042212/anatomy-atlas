@@ -369,6 +369,8 @@ def main():
             if key not in structures:
                 raise SystemExit(f"corrections: unknown structure {key}")
             structures[key]["parentKey"] = fix["parent"]
+            if "system" in fix:
+                structures[key]["system"] = fix["system"]
             if "subsystem" in fix:
                 structures[key]["subsystem"] = fix["subsystem"]
             stats["corrected:parent"] += 1
