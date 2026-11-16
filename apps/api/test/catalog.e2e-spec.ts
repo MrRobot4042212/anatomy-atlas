@@ -30,6 +30,10 @@ const prisma = {
   $queryRaw: vi.fn(async (strings: TemplateStringsArray) => {
     const sql = strings.join('?');
     if (sql.includes('COUNT(*)')) return [{ count: 1n }];
+    // Ranked search: the matching rows with Postgres-normalized names and their depth.
+    if (sql.includes('lineage')) {
+      return [{ ...femur, es: 'hueso femur', en: 'femur', la: 'os femoris', depth: 0, q: 'fem' }];
+    }
     if (sql.includes('WITH RECURSIVE')) return [];
     return [femur];
   }),
@@ -88,6 +92,13 @@ describe('Catalog (e2e)', () => {
       .expect(200);
     expect(res.body).toMatchObject({ total: 1, page: 1, pageSize: 10 });
     expect(res.body.items[0]).toMatchObject({ meshId: 'ta2-1360-r', region: 'lower-limb' });
+  });
+
+  it('GET /api/structures without a query lists by name with a COUNT', async () => {
+    const res = await request(app.getHttpServer())
+      .get('/api/structures?system=skeletal')
+      .expect(200);
+    expect(res.body).toMatchObject({ total: 1, items: [{ meshId: 'ta2-1360-r' }] });
   });
 
   it('GET /api/structures rejects an unknown system', async () => {
