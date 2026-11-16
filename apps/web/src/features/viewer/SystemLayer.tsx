@@ -3,9 +3,10 @@
 import { useEffect } from 'react';
 import type { ThreeEvent } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
-import { Box3, Mesh, type BufferGeometry, type Material, type Object3D } from 'three';
+import { Mesh, type BufferGeometry, type Material, type Object3D } from 'three';
 import { acceleratedRaycast, MeshBVH } from 'three-mesh-bvh';
 import type { AssetBundle, BodySystem, BodyZone } from '@atlas/shared';
+import { selectAndFocus } from './focusStructure';
 import { materialSetFor } from './materials';
 import { registry, resolveMeshId, type StructureEntry } from './registry';
 import { subsystemKey, useViewerStore, type ViewerState } from './store';
@@ -135,7 +136,6 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
 
   const hover = useViewerStore((s) => s.hover);
   const select = useViewerStore((s) => s.select);
-  const focus = useViewerStore((s) => s.focus);
 
   // Register, paint and subscribe in one effect so the cleanup (unsubscribe + unregister)
   // always pairs with a registration, StrictMode remounts included.
@@ -176,17 +176,20 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
     e.stopPropagation();
     hover(null);
   };
+  // A single click selects and never moves the camera; a double click also frames the
+  // structure (the gesture every 3D anatomy product shares). The double click arrives after
+  // two clicks, so the selection is already set when it focuses.
   const onClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     const meshId = resolveMeshId(e.object);
     if (!interactive(meshId)) return;
     select(meshId);
-    const entry = meshId ? registry.get(meshId) : undefined;
-    if (entry) {
-      // World-space bounds of one node, computed on demand (the scene is attached by now).
-      const { min, max } = new Box3().setFromObject(entry.node);
-      focus({ min: [min.x, min.y, min.z], max: [max.x, max.y, max.z] });
-    }
+  };
+  const onDoubleClick = (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    const meshId = resolveMeshId(e.object);
+    if (!meshId || !interactive(meshId)) return;
+    selectAndFocus(meshId);
   };
 
   return (
@@ -195,6 +198,7 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}
       onClick={onClick}
+      onDoubleClick={onDoubleClick}
     />
   );
 }

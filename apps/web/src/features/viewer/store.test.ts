@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { DEFAULT_HIDDEN_SUBSYSTEMS, DEFAULT_SYSTEMS, useViewerStore } from './store';
+import { DEFAULT_HIDDEN_SUBSYSTEMS, DEFAULT_SYSTEMS, useViewerStore, type Bounds } from './store';
 
 const initial = useViewerStore.getState();
 beforeEach(() => useViewerStore.setState(initial, true));
@@ -100,5 +100,19 @@ describe('reset', () => {
     useViewerStore.getState().hide('ta2-9');
     useViewerStore.getState().reset();
     expect(useViewerStore.getState().hidden.size).toBe(0);
+  });
+});
+
+describe('focus', () => {
+  it('hands the focus controller a new target each time, even for the same bounds', () => {
+    const bounds: Bounds = { min: [0, 0, 0], max: [1, 1, 1] };
+    useViewerStore.getState().focus(bounds);
+    const first = useViewerStore.getState().cameraTarget;
+    useViewerStore.getState().focus(bounds);
+    const second = useViewerStore.getState().cameraTarget;
+    expect(second).toEqual(bounds);
+    expect(second).not.toBe(first);
+    useViewerStore.getState().focus(null);
+    expect(useViewerStore.getState().cameraTarget).toBeNull();
   });
 });
