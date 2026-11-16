@@ -52,6 +52,14 @@ const TABS: { id: TabId; label: string }[] = [
 export function InfoPanel() {
   const selected = useViewerStore((s) => s.selected);
   const [tab, setTab] = useState<TabId>('names');
+  // The chosen tab survives a change of selection, except the pending description: landing on an
+  // empty placeholder instead of the names reads as a fault. Adjusted while rendering, the way
+  // React recommends for state that follows a prop.
+  const [seen, setSeen] = useState(selected);
+  if (seen !== selected) {
+    setSeen(selected);
+    if (tab === 'description') setTab('names');
+  }
 
   return (
     <section aria-label="Ficha de la estructura" className="flex h-full min-h-0 flex-col">
