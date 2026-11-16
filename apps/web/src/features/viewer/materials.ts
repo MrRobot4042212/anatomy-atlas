@@ -16,9 +16,9 @@ export type Variant = 'base' | 'hover' | 'selected' | 'ghost' | 'translucent';
 export type MaterialSet = Record<Variant, MeshStandardMaterial>;
 
 const cache = new Map<string, MaterialSet>();
-// Brand colours (DESIGN.md): hover sky blue, selection magenta from the brand gradient
+// Platform colours (DESIGN.md): hover is the accent light blue, selection magenta from the brand gradient
 // palette, the one hue that reads on bone, arteries and veins alike.
-const HOVER = new Color('#33b2fb');
+const HOVER = new Color('#6fb1fc');
 const SELECTED = new Color('#ff3ca6');
 let currentPlanes: Plane[] = [];
 

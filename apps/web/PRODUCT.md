@@ -45,16 +45,15 @@ the screen is the main light source, so the interface must be comfortable in the
 
 ## Brand Commitments
 
-- Name: **Wazo Anatomy**. WAZO is the owner's employer. Brand assets provided 2026-10-03:
-  wordmark `public/brand/wazo-logo.svg` (WAZO®), isotype `public/brand/wazo-mark.svg` (blurred
-  blue gradient shield, also the app icon), typeface **BR Sonoma** (licensed, not available; the owner approved
-  shipping the closest open face, Albert Sans, see `src/fonts/README.md`), and the WAZO colour system: electric blue `#0000FF`, black, white;
-  secondary blues `#0442D7` `#007BFF` `#33B2FB` `#89D4ED`; neutrals `#212639` `#D9D9D9`
-  `#F1EFEF`; primary gradient `#8DD8EF → #0000FF` (radial and linear); secondary gradients
-  4 (`#068BFF → #EEF7FF`), 5 (`#0088FF → #0118D6` radial), 6 (`#0209F0 → #86C5EA`); gradient
-  palettes warm (`#FF6709 #FF4C5A #FF3CA6 #4D5CD9 #000000`), navy (`#0000FF #043CDF #032CBC
-#000066`) and sky-to-red (`#0088FF #C694FF #FF6E93 #FF0000`). Values sampled from the brand
-  sheet; the isotype SVG carries the exact blues.
+- Name: **Wazo Anatomy**. WAZO is the owner's employer. The visual identity follows the WAZO
+  platform (https://new.wazotechnologies.com/), captured with measured values in
+  `docs/design/wazo-platform-capture.md` on 2026-11-16 and applied in `DESIGN.md`. It supersedes the
+  brand sheet of 2026-10-03 (navy palette, electric blue). Assets: wordmark `public/brand/wazo-logo.svg`
+  (WAZO®), isotype `public/brand/wazo-mark.svg` (also the app icon), typeface **BR Sonoma** (licensed,
+  weights 400 and 500; its files are not in the repository, so the atlas ships the closest open face,
+  Albert Sans, see `src/fonts/README.md`). Platform colours: page `#0A0A0A`, surfaces `#141414` `#1A1A1A`
+  `#242424`, white with alpha for secondary text, primary blue `#2E5BBA`, accent `#6FB1FC`, and a vertical
+  blue gradient (`#0000FF` to `#9DE2EE`) reserved for the primary action.
 - Dark theme is mandatory (owner decision, 2026-10-03).
 - Interface language: Spanish; terminology stays trilingual.
 - Identity must read as scientific rigor and precision, closer to an academic atlas than to a

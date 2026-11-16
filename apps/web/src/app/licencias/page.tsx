@@ -17,20 +17,18 @@ export default function Licencias() {
   return (
     <div className="min-h-screen bg-ground text-ink">
       <main className="mx-auto max-w-2xl px-6 py-12">
-        <Link href="/" className={`${link} text-[13px]`}>
+        <Link href="/" className={`${link} text-sm`}>
           Volver al atlas
         </Link>
-        <h1 className="mt-6 text-2xl font-semibold">Licencias y atribuciones</h1>
-        <p className="mt-3 text-[13px] leading-relaxed text-ink-muted">
+        <h1 className="mt-6 text-[28px] font-medium">Licencias y atribuciones</h1>
+        <p className="mt-3 text-sm leading-relaxed text-ink-muted">
           Wazo Anatomy se apoya en trabajo abierto de terceros. Esta página recoge su origen y las
           condiciones con las que se usa.
         </p>
 
         <section className="mt-10">
-          <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-faint">
-            Modelos 3D
-          </h2>
-          <ul className="mt-3 space-y-2 text-[13px] leading-relaxed">
+          <h2 className="text-sm text-ink-muted">Modelos 3D</h2>
+          <ul className="mt-3 space-y-2 text-sm leading-relaxed">
             <li>
               <a href="https://www.z-anatomy.com/" className={link}>
                 Z-Anatomy
@@ -50,7 +48,7 @@ export default function Licencias() {
               </a>
             </li>
           </ul>
-          <p className="mt-3 text-[13px] leading-relaxed">
+          <p className="mt-3 text-sm leading-relaxed">
             Los riñones proceden directamente de BodyParts3D, The Database Center for Life Science,
             con licencia{' '}
             <a href="https://creativecommons.org/licenses/by/4.0/" className={link}>
@@ -58,7 +56,7 @@ export default function Licencias() {
             </a>
             .
           </p>
-          <p className="mt-3 text-[13px] leading-relaxed text-ink-muted">
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted">
             Los modelos mostrados son una adaptación: se han seleccionado, renombrado según su
             código de Terminologia Anatomica, optimizado y comprimido para la web. La adaptación se
             distribuye bajo los mismos términos, CC BY-SA 4.0.
@@ -66,10 +64,8 @@ export default function Licencias() {
         </section>
 
         <section className="mt-10">
-          <h2 className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink-faint">
-            Nomenclatura
-          </h2>
-          <p className="mt-3 text-[13px] leading-relaxed">
+          <h2 className="text-sm text-ink-muted">Nomenclatura</h2>
+          <p className="mt-3 text-sm leading-relaxed">
             <i>Terminologia Anatomica</i>, segunda edición (2019). Federative International
             Programme for Anatomical Terminology (FIPAT), International Federation of Associations
             of Anatomists (IFAA).{' '}

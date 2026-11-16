@@ -8,7 +8,7 @@ import Link from 'next/link';
 export function Credits({ embedded = false }: { embedded?: boolean }) {
   const outside = embedded ? { target: '_blank', rel: 'noopener noreferrer' } : {};
   return (
-    <footer className="flex h-7 items-center justify-between gap-4 border-t border-hairline bg-panel px-4 text-[11px] text-ink-faint">
+    <footer className="flex h-7 items-center justify-between gap-4 border-t border-hairline bg-panel px-4 text-xs text-ink-faint">
       <p className="truncate">
         Modelos 3D derivados de{' '}
         <a

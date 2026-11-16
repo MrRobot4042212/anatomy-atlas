@@ -40,10 +40,7 @@ export function HierarchyTree() {
 
   return (
     <section aria-labelledby="tree-heading" className="flex min-h-0 flex-col">
-      <h2
-        id="tree-heading"
-        className="px-4 pt-4 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-faint"
-      >
+      <h2 id="tree-heading" className="px-4 pt-4 pb-2 text-sm text-ink-muted">
         Jerarquía
       </h2>
       {!isClient ? (
@@ -170,7 +167,7 @@ function TreeRow({
         >
           <span className="truncate">{node.nameEs || node.name}</span>
           {node.laterality !== 'midline' ? (
-            <span className="shrink-0 text-[10px] text-ink-faint">{SIDE[node.laterality]}</span>
+            <span className="shrink-0 text-xs text-ink-faint">{SIDE[node.laterality]}</span>
           ) : null}
           {node.meshId ? (
             <span

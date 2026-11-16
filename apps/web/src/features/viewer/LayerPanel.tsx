@@ -88,10 +88,7 @@ export function LayerPanel({ bundles }: { bundles: AssetBundle[] }) {
 
   return (
     <section aria-labelledby="layers-heading" className="flex flex-col">
-      <h2
-        id="layers-heading"
-        className="px-4 pt-4 pb-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-faint"
-      >
+      <h2 id="layers-heading" className="px-4 pt-4 pb-2 text-sm text-ink-muted">
         Capas
       </h2>
       <ul className="flex flex-col px-2">
@@ -117,8 +114,8 @@ export function LayerPanel({ bundles }: { bundles: AssetBundle[] }) {
                   htmlFor={`layer-${system}`}
                   className={`flex min-w-0 flex-1 flex-col leading-tight ${bundle ? 'cursor-pointer' : 'text-ink-faint'}`}
                 >
-                  <span className="truncate text-[13px]">{SYSTEM_LABELS[system]}</span>
-                  <span className="tabular text-[11px] text-ink-faint">
+                  <span className="truncate text-sm">{SYSTEM_LABELS[system]}</span>
+                  <span className="tabular text-xs text-ink-faint">
                     {bundle
                       ? `${bundle.meshCount} estructuras · ${formatBytes(bundle.sizeBytes)}`
                       : 'modelo pendiente'}
@@ -156,7 +153,7 @@ export function LayerPanel({ bundles }: { bundles: AssetBundle[] }) {
                             className="flex min-w-0 flex-1 cursor-pointer items-baseline gap-2 text-xs"
                           >
                             <span className="truncate">{subsystemLabel(subsystem)}</span>
-                            <span className="tabular ml-auto text-[10px] text-ink-faint">
+                            <span className="tabular ml-auto text-xs text-ink-faint">
                               {meshIds.length}
                             </span>
                           </label>

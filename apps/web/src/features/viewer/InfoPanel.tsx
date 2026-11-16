@@ -30,7 +30,7 @@ export function InfoPanel() {
 
   return (
     <section aria-label="Ficha de la estructura" className="flex h-full flex-col">
-      <div className="flex h-8 items-center border-b border-hairline px-4 text-[11px] text-ink-faint">
+      <div className="flex h-8 items-center border-b border-hairline px-4 text-xs text-ink-faint">
         {hovered ? (
           <span className="tabular">{hovered}</span>
         ) : (
@@ -46,7 +46,7 @@ export function InfoPanel() {
       ) : (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
           <Image src="/brand/wazo-mark.svg" alt="" width={72} height={72} className="opacity-80" />
-          <p className="font-latin text-2xl text-ink-muted">Nomina anatomica</p>
+          <p className="font-latin text-[28px] text-ink-muted">Nomina anatomica</p>
           <p className="max-w-[28ch] text-xs text-ink-faint">
             Haz clic en una estructura, o búscala arriba, para ver su nombre en latín, español e
             inglés, su posición en la jerarquía y sus medidas.
@@ -111,7 +111,7 @@ function Detail({ meshId }: { meshId: string }) {
 
   return (
     <div className="label-settle flex flex-col gap-5 overflow-y-auto px-4 pt-4 pb-6">
-      <nav aria-label="Jerarquía" className="text-[11px] leading-relaxed text-ink-faint">
+      <nav aria-label="Jerarquía" className="text-xs leading-relaxed text-ink-faint">
         {ancestors.map((a, i) => (
           <span key={a.id}>
             {i > 0 ? <span aria-hidden="true"> › </span> : null}
@@ -121,7 +121,7 @@ function Detail({ meshId }: { meshId: string }) {
       </nav>
 
       <header className="flex flex-col gap-1">
-        <h2 className="font-latin flex items-baseline gap-2 text-[30px] leading-[1.05] text-ink">
+        <h2 className="font-latin flex items-baseline gap-2 text-[32px] leading-[1.05] text-ink">
           <span
             aria-hidden="true"
             className="mb-1 inline-block size-2 shrink-0 rounded-full bg-scene-selected"
@@ -129,7 +129,7 @@ function Detail({ meshId }: { meshId: string }) {
           />
           {structure.names.la || structure.names.en}
         </h2>
-        <p className="text-base font-bold text-ink">{structure.names.es || structure.names.en}</p>
+        <p className="text-base font-medium text-ink">{structure.names.es || structure.names.en}</p>
         <p className="text-xs text-ink-muted">{structure.names.en}</p>
       </header>
 
@@ -158,14 +158,14 @@ function Detail({ meshId }: { meshId: string }) {
       {extents ? (
         <section aria-label="Medidas" className="flex flex-col gap-2 border-t border-hairline pt-3">
           <Caliper extents={extents} longest={longest} />
-          <p className="text-[11px] text-ink-faint">
+          <p className="text-xs text-ink-faint">
             Extensión de la geometría del modelo, no una medida clínica.
           </p>
         </section>
       ) : null}
 
       {structure.description ? (
-        <p className="text-[13px] leading-relaxed text-ink">{structure.description}</p>
+        <p className="text-sm leading-relaxed text-ink">{structure.description}</p>
       ) : null}
 
       <div className="grid grid-cols-2 gap-1.5">
@@ -197,9 +197,7 @@ function Detail({ meshId }: { meshId: string }) {
 
       {children.length > 0 ? (
         <section aria-label="Contiene" className="border-t border-hairline pt-3">
-          <h3 className="mb-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-faint">
-            Contiene
-          </h3>
+          <h3 className="mb-1.5 text-sm text-ink-muted">Contiene</h3>
           <ul className="flex flex-col gap-0.5 text-xs">
             {children.map((c) => (
               <li key={c.id} className="flex items-baseline gap-1.5">
@@ -218,7 +216,7 @@ function Detail({ meshId }: { meshId: string }) {
                   <span className="truncate text-ink-muted">{c.names.es || c.names.en}</span>
                 )}
                 {c.laterality !== 'midline' ? (
-                  <span className="text-[10px] text-ink-faint">
+                  <span className="text-xs text-ink-faint">
                     {c.laterality === 'left' ? 'izq.' : 'der.'}
                   </span>
                 ) : null}
@@ -244,17 +242,12 @@ function Action({
   primary?: boolean;
   pressed?: boolean;
 }) {
-  const tone = primary
-    ? 'bg-brand-gradient text-accent-ink hover:brightness-110'
-    : pressed
-      ? 'border border-accent-text/60 bg-accent-soft text-ink'
-      : 'border border-hairline text-ink hover:bg-raised';
   return (
     <button
       type="button"
       aria-pressed={primary ? undefined : pressed}
       onClick={onClick}
-      className={`flex h-8 items-center justify-center gap-1.5 rounded-sm px-2 text-xs font-bold transition-colors duration-150 ${tone}`}
+      className={`btn w-full ${primary ? 'btn-primary' : 'btn-outline'}`}
     >
       {icon}
       {children}

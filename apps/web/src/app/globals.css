@@ -1,56 +1,70 @@
 @import 'tailwindcss';
 
 /*
- * Wazo Anatomy tokens, derived from the WAZO brand system (apps/web/DESIGN.md).
- * The scene: a reading room at night. The body is the light source; the interface is the dark
- * instrument around it, built from WAZO's navy neutral and lit by WAZO's electric blue.
+ * Wazo Anatomy tokens. They follow the WAZO platform design (new.wazotechnologies.com), captured in
+ * docs/design/wazo-platform-capture.md and applied in apps/web/DESIGN.md: near-black surfaces, white
+ * emphasis through alpha, one blue accent, a vertical blue gradient only on the primary action, and
+ * one motion curve everywhere.
  */
 :root {
-  /* Brand constants */
-  --wazo-electric: #0000ff;
-  --wazo-royal: #0442d7;
-  --wazo-azure: #007bff;
-  --wazo-sky: #33b2fb;
-  --wazo-ice: #89d4ed;
-  --wazo-mint: #d8ffe6;
-  --wazo-night: #212639;
-  --wazo-magenta: #ff3ca6;
-  --wazo-gradient-primary: linear-gradient(180deg, #8dd8ef 0%, #0e69ed 45%, #0000ff 100%);
-  --wazo-gradient-secondary-5: radial-gradient(120% 90% at 50% 100%, #0118d6 0%, #0088ff 100%);
+  /* WAZO platform values, as rendered on the site */
+  --wazo-bg: #0a0a0a;
+  --wazo-bg-soft: #141414;
+  --wazo-surface: #1a1a1a;
+  --wazo-surface-2: #242424;
+  --wazo-primary: #2e5bba;
+  --wazo-primary-light: #4a90e2;
+  --wazo-accent: #6fb1fc;
+  --wazo-bright: #00a1ff;
+  --wazo-invalid: #ff6b6b;
+  --wazo-gradient-cta: linear-gradient(
+    180deg,
+    #0000ff 0%,
+    #043cdf 35%,
+    #1587f7 69.19%,
+    #9de2ee 104.84%
+  );
+  --wazo-ease: cubic-bezier(0.32, 0.08, 0.24, 1);
 
-  /* Surfaces: a dark scale around the brand night navy */
-  --ground: #0b0e1a;
-  --panel: #12162a;
-  --raised: #212639;
-  --hairline: #2a3049;
-  --hairline-strong: #3a4160;
+  /* Surfaces */
+  --ground: var(--wazo-bg);
+  --panel: var(--wazo-bg-soft);
+  --raised: var(--wazo-surface);
+  --raised-2: var(--wazo-surface-2);
+  --bar: rgba(22, 22, 22, 0.85);
+  --hairline: rgba(255, 255, 255, 0.096);
+  --hairline-strong: rgba(255, 255, 255, 0.192);
 
-  /* Ink: brand white and greys, tinted by the navy where secondary */
-  --ink: #f1efef;
-  --ink-muted: #a3aac4;
-  --ink-faint: #6f7694;
+  /* Ink: white, and white at lower alpha for every secondary level (the site never uses greys) */
+  --ink: #ffffff;
+  --ink-strong: rgba(255, 255, 255, 0.92);
+  --ink-muted: rgba(255, 255, 255, 0.7);
+  --ink-faint: rgba(255, 255, 255, 0.55);
 
-  /* Accent: electric blue for fills, sky for text and rings, azure wash for pressed states */
-  --accent: var(--wazo-electric);
+  /* Accent: primary blue for fills and controls, light blue for text and rings */
+  --accent: var(--wazo-primary);
   --accent-ink: #ffffff;
-  --accent-text: var(--wazo-sky);
-  --accent-soft: rgba(0, 123, 255, 0.16);
+  --accent-text: var(--wazo-accent);
+  --accent-soft: rgba(111, 177, 252, 0.16);
 
-  /* Inside the 3D scene only */
-  --scene-hover: var(--wazo-sky);
-  --scene-selected: var(--wazo-magenta);
+  /* Inside the 3D scene only: hover reuses the accent, selection keeps a hue no tissue has */
+  --scene-hover: var(--wazo-accent);
+  --scene-selected: #ff3ca6;
 
-  --danger: #ff6e93;
-  --focus-ring: 0 0 0 2px var(--ground), 0 0 0 4px var(--wazo-sky);
+  --danger: var(--wazo-invalid);
+  --tracking: -0.05em;
 }
 
 @theme inline {
   --color-ground: var(--ground);
   --color-panel: var(--panel);
   --color-raised: var(--raised);
+  --color-raised-2: var(--raised-2);
+  --color-bar: var(--bar);
   --color-hairline: var(--hairline);
   --color-hairline-strong: var(--hairline-strong);
   --color-ink: var(--ink);
+  --color-ink-strong: var(--ink-strong);
   --color-ink-muted: var(--ink-muted);
   --color-ink-faint: var(--ink-faint);
   --color-accent: var(--accent);
@@ -61,8 +75,17 @@
   --color-scene-selected: var(--scene-selected);
   --color-danger: var(--danger);
   --font-sans: var(--font-ui), system-ui, sans-serif;
-  --radius-xs: 2px;
-  --radius-sm: 4px;
+  /* Radius by role: 4 buttons and links, 8 cards and fields, 12 panels, 16 large surfaces */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  /* One motion curve; colour changes take 150 ms */
+  --default-transition-duration: 150ms;
+  --default-transition-timing-function: var(--wazo-ease);
+  --text-xs--line-height: 1.35;
+  --text-sm--line-height: 1.4;
+  --text-base--line-height: 1.4;
 }
 
 html {
@@ -75,24 +98,34 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.4;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+/*
+ * Tracking is -0.05em at every size on the platform. Set on every element so the em resolves
+ * against its own font size; set on the body it would inherit as pixels from the 14 px body.
+ */
+*,
+::before,
+::after {
+  letter-spacing: var(--tracking);
+}
+
 /* Browser surfaces carry the design too. */
 ::selection {
-  background: var(--wazo-electric);
+  background: var(--wazo-primary);
   color: #ffffff;
 }
 input,
 textarea {
-  caret-color: var(--wazo-sky);
+  caret-color: var(--wazo-accent);
 }
 :focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-  border-radius: var(--radius-sm);
+  outline: 2px solid var(--wazo-accent);
+  outline-offset: 2px;
 }
 * {
   scrollbar-width: thin;
@@ -110,18 +143,75 @@ textarea {
   background: transparent;
 }
 
+/* Latin names are italic by scientific convention; BR Sonoma has no italic, so this follows the UI face. */
 .font-latin {
   font-style: italic;
   font-weight: 500;
-  letter-spacing: -0.01em;
 }
+/* Numbers read better with tabular figures and looser tracking than the display rule. */
 .tabular {
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
-/* The brand gradient, used only on the primary action. */
-.bg-brand-gradient {
-  background: var(--wazo-gradient-primary);
+/* Bars over the scene: translucent, blurred, no border shadow (the platform header). */
+.bar-surface {
+  background: var(--bar);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+/* Buttons: 4 px radius, 14 px / 500, lift 1 px on hover (the platform CTA row). */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.18s var(--wazo-ease),
+    background 0.18s var(--wazo-ease),
+    border-color 0.18s var(--wazo-ease),
+    box-shadow 0.18s var(--wazo-ease);
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.btn-primary {
+  background: var(--wazo-gradient-cta);
+  color: #ffffff;
+}
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 6px 16px -6px rgba(0, 125, 255, 0.55);
+}
+.btn-outline {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.btn-outline:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+/* Toggle buttons: pressed is the accent wash with an accent border. */
+.btn-outline[aria-pressed='true'] {
+  background: var(--accent-soft);
+  border-color: var(--wazo-accent);
+}
+.btn-sm {
+  height: 32px;
+  padding: 0 12px;
 }
 
 /* Range input: the cutting plane slider. */
@@ -140,7 +230,7 @@ input[type='range'].plane::-webkit-slider-thumb {
   height: 12px;
   margin-top: -5px;
   border-radius: 50%;
-  background: var(--wazo-sky);
+  background: var(--wazo-accent);
   border: 2px solid var(--ground);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
@@ -152,11 +242,11 @@ input[type='range'].plane::-moz-range-thumb {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--wazo-sky);
+  background: var(--wazo-accent);
   border: 2px solid var(--ground);
 }
 
-/* The one authored motion: the specimen label settling in and its caliper drawing. */
+/* The one authored moment: the specimen label settling in and its caliper drawing. */
 @keyframes label-settle {
   from {
     opacity: 0;
@@ -176,15 +266,21 @@ input[type='range'].plane::-moz-range-thumb {
   }
 }
 .label-settle {
-  animation: label-settle 180ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: label-settle 220ms var(--wazo-ease) both;
 }
 .caliper-draw {
   transform-origin: left center;
-  animation: caliper-draw 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: caliper-draw 500ms var(--wazo-ease) both;
 }
 @media (prefers-reduced-motion: reduce) {
   .label-settle,
   .caliper-draw {
     animation: none;
+  }
+  .btn {
+    transition: none;
+  }
+  .btn:hover:not(:disabled) {
+    transform: none;
   }
 }

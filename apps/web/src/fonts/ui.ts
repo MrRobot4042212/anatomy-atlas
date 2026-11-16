@@ -11,7 +11,7 @@ import { Albert_Sans } from 'next/font/google';
 export const ui = Albert_Sans({
   variable: '--font-ui',
   subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500'],
   style: ['normal', 'italic'],
   display: 'swap',
 });
@@ -22,7 +22,5 @@ export const ui = Albert_Sans({
 //   src: [
 //     { path: './BRSonoma-Regular.woff2', weight: '400', style: 'normal' },
 //     { path: './BRSonoma-Medium.woff2', weight: '500', style: 'normal' },
-//     { path: './BRSonoma-SemiBold.woff2', weight: '600', style: 'normal' },
-//     { path: './BRSonoma-Bold.woff2', weight: '700', style: 'normal' },
 //   ],
 // });

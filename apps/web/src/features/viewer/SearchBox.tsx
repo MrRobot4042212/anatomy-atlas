@@ -105,8 +105,8 @@ export function SearchBox() {
       <label className="sr-only" htmlFor="structure-search">
         Buscar estructura
       </label>
-      <div className="flex h-8 items-center gap-2 rounded-sm border border-hairline bg-ground px-2.5 focus-within:border-hairline-strong">
-        <Search size={14} className="shrink-0 text-ink-faint" aria-hidden="true" />
+      <div className="flex h-10 items-center gap-2 rounded-sm border border-hairline-strong bg-panel px-3 transition-colors focus-within:border-[#4a90e2] focus-within:bg-raised-2">
+        <Search size={16} className="shrink-0 text-ink-faint" aria-hidden="true" />
         <input
           ref={inputRef}
           id="structure-search"
@@ -125,9 +125,9 @@ export function SearchBox() {
           onFocus={() => setOpen(true)}
           onBlur={() => setTimeout(() => setOpen(false), 120)}
           onKeyDown={onKeyDown}
-          className="min-w-0 flex-1 bg-transparent text-[13px] text-ink placeholder:text-ink-faint focus:outline-none"
+          className="min-w-0 flex-1 bg-transparent text-sm text-ink placeholder:text-ink-faint focus:outline-none"
         />
-        <kbd className="hidden rounded-xs border border-hairline px-1 font-sans text-[10px] text-ink-faint sm:inline">
+        <kbd className="hidden rounded-xs border border-hairline px-1 font-sans text-xs text-ink-faint sm:inline">
           /
         </kbd>
       </div>
@@ -136,7 +136,7 @@ export function SearchBox() {
         <ul
           id={listId}
           role="listbox"
-          className="absolute left-0 right-0 top-[calc(100%+4px)] z-20 max-h-80 overflow-y-auto rounded-sm border border-hairline bg-panel py-1 shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+          className="absolute left-0 right-0 top-[calc(100%+4px)] z-20 max-h-80 overflow-y-auto rounded-md border border-hairline bg-raised py-1 shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
         >
           {effectiveStatus === 'error' ? (
             <li className="px-3 py-2 text-xs text-danger">
@@ -160,18 +160,18 @@ export function SearchBox() {
               onClick={() => choose(s)}
               className={`flex cursor-pointer items-baseline gap-2 px-3 py-1.5 ${i === active ? 'bg-accent-soft' : ''}`}
             >
-              <span className="min-w-0 flex-1 truncate text-[13px]">
+              <span className="min-w-0 flex-1 truncate text-sm">
                 {s.names.es || s.names.en}
                 <span className="font-latin ml-1.5 text-ink-muted">{s.names.la}</span>
               </span>
-              <span className="shrink-0 text-[11px] text-ink-faint">
+              <span className="shrink-0 text-xs text-ink-faint">
                 {SYSTEM_LABELS[s.system]}
                 {SIDE[s.laterality] ? ` · ${SIDE[s.laterality]}` : ''}
               </span>
             </li>
           ))}
           {results.length > 0 && total > results.length ? (
-            <li className="px-3 pt-1 text-[11px] text-ink-faint">
+            <li className="px-3 pt-1 text-xs text-ink-faint">
               {total} coincidencias; afina la búsqueda para ver más.
             </li>
           ) : null}

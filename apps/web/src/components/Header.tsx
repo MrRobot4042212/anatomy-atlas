@@ -9,7 +9,7 @@ function Brand() {
     <>
       <Image src="/brand/wazo-mark.svg" alt="" width={22} height={22} priority />
       <Image src="/brand/wazo-logo.svg" alt="WAZO" width={68} height={18} priority />
-      <span className="font-latin mt-px text-[19px] leading-none text-ink">Anatomy</span>
+      <span className="font-latin mt-px text-[22px] leading-none text-ink">Anatomy</span>
     </>
   );
 }
@@ -26,7 +26,7 @@ export function Header({
   embedded?: boolean;
 }) {
   return (
-    <header className="grid h-12 grid-cols-[280px_1fr_340px] items-center border-b border-hairline bg-panel px-4 max-lg:grid-cols-[auto_1fr]">
+    <header className="grid h-16 grid-cols-[280px_1fr_340px] items-center bar-surface border-b border-hairline px-4 max-lg:grid-cols-[auto_1fr]">
       {embedded ? (
         <div className="flex items-center gap-2.5">
           <Brand />
