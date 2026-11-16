@@ -959,8 +959,8 @@
     "la": "Tarsus superior",
     "en": "Superior tarsus",
     "file": "muscular-r2.json",
-    "status": "deferred",
-    "resolution": "The tarsal plates of the eyelids sit under Muscles of head, but they are connective tissue. Moving them changes their body system and so their bundle; needs a decision on where eyelid structures belong."
+    "status": "fixed",
+    "resolution": "moved to Accessory visual structures (nervous, sense organs) in editorial/corrections.json"
   },
   {
     "termKey": "ta2:692",
@@ -1294,5 +1294,32 @@
     "file": "cardiovascular-r2.json",
     "status": "deferred",
     "resolution": "Unnamed objects in the source model. They carry placeholder names and must be identified against the mesh by an anatomist."
+  },
+  {
+    "termKey": "ta2:2581",
+    "issue": "The id does not match the official TA2: this Latin name is the entry with id 2580 (Vagina tendinum musculi extensoris digitorum et extensoris indicis).",
+    "la": "",
+    "en": "",
+    "file": "ta2-verification",
+    "status": "open",
+    "resolution": "termKey kept (it is the ontology contract, ADR 0004); fix the id mapping in the pipeline when the TA2 id source is revisited"
+  },
+  {
+    "termKey": "ta2:5150",
+    "issue": "The id does not match the official TA2: this Latin name is the entry with id 5149 (Systema lymphoideum).",
+    "la": "",
+    "en": "",
+    "file": "ta2-verification",
+    "status": "open",
+    "resolution": "termKey kept (it is the ontology contract, ADR 0004); fix the id mapping in the pipeline when the TA2 id source is revisited"
+  },
+  {
+    "termKey": "ta2:7136",
+    "issue": "The id does not match the official TA2: this Latin name is the entry with id 6130 (Nervi).",
+    "la": "",
+    "en": "",
+    "file": "ta2-verification",
+    "status": "open",
+    "resolution": "termKey kept (it is the ontology contract, ADR 0004); fix the id mapping in the pipeline when the TA2 id source is revisited"
   }
 ]
