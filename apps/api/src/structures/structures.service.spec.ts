@@ -96,6 +96,86 @@ describe('buildTree', () => {
   });
 });
 
+describe('StructuresService.list with a query', () => {
+  const prisma = { $queryRaw: vi.fn(), structure: { findMany: vi.fn() } };
+  let service: StructuresService;
+  const stored = new Map<string, StructureRow>();
+
+  // Rows as the ranking query returns them: light columns, normalized names, depth and the query.
+  // The full row is kept for the `findMany` that loads the page.
+  const hit = (partial: Partial<StructureRow> & { id: string; nameEn: string }, depth: number) => {
+    const base = row(partial);
+    stored.set(base.id, base);
+    return {
+      id: base.id,
+      nameEn: base.nameEn,
+      subsystem: base.subsystem,
+      meshId: base.meshId,
+      laterality: base.laterality,
+      es: base.nameEs.toLowerCase(),
+      en: base.nameEn.toLowerCase(),
+      la: base.nameLa.toLowerCase(),
+      depth,
+      q: partial.nameEn.split(' ')[0].toLowerCase(),
+    };
+  };
+
+  beforeEach(async () => {
+    vi.clearAllMocks();
+    stored.clear();
+    // Prisma returns `in` lookups in storage order, not in the order asked for.
+    prisma.structure.findMany.mockImplementation(
+      async ({ where }: { where: { id: { in: string[] } } }) =>
+        [...stored.values()].filter((r) => where.id.in.includes(r.id)),
+    );
+    const module = await Test.createTestingModule({
+      providers: [StructuresService, { provide: PrismaService, useValue: prisma }],
+    }).compile();
+    service = module.get(StructuresService);
+  });
+
+  it('ranks, paginates in memory and counts without a COUNT query', async () => {
+    prisma.$queryRaw.mockResolvedValueOnce([
+      hit(
+        {
+          id: 'bursa',
+          nameEn: 'Sciatic bursa of obturator internus',
+          subsystem: 'bursae',
+          meshId: 'b',
+        },
+        2,
+      ),
+      hit({ id: 'nerve-r', nameEn: 'Sciatic nerve', meshId: 'n-r', laterality: 'right' }, 6),
+      hit({ id: 'nerve-l', nameEn: 'Sciatic nerve', meshId: 'n-l', laterality: 'left' }, 6),
+    ]);
+    const page = await service.list({ q: 'sciatic', page: 1, pageSize: 2 });
+    expect(page.items.map((s) => s.id)).toEqual(['nerve-l', 'nerve-r']);
+    expect(page.total).toBe(3);
+    // One ranking query, no COUNT and no subtree bounds (every row on the page has geometry).
+    expect(prisma.$queryRaw).toHaveBeenCalledTimes(1);
+    expect(prisma.structure.findMany).toHaveBeenCalledWith({
+      where: { id: { in: ['nerve-l', 'nerve-r'] } },
+    });
+  });
+
+  it('frames a group on the page with the union of its descendants bounds', async () => {
+    prisma.$queryRaw
+      .mockResolvedValueOnce([hit({ id: 'heart', nameEn: 'Heart' }, 1)])
+      .mockResolvedValueOnce([
+        { id: 'heart', minX: -0.1, minY: 1.2, minZ: -0.05, maxX: 0.08, maxY: 1.35, maxZ: 0.1 },
+      ]);
+    const page = await service.list({ q: 'heart', page: 1, pageSize: 12 });
+    expect(page.items[0].meshId).toBeNull();
+    expect(page.items[0].bounds).toEqual({ min: [-0.1, 1.2, -0.05], max: [0.08, 1.35, 0.1] });
+  });
+
+  it('returns an empty page when nothing matches', async () => {
+    prisma.$queryRaw.mockResolvedValueOnce([]);
+    const page = await service.list({ q: 'zzz', page: 1, pageSize: 12 });
+    expect(page).toEqual({ items: [], total: 0, page: 1, pageSize: 12 });
+  });
+});
+
 describe('StructuresService.byMeshId', () => {
   const prisma = {
     structure: { findUnique: vi.fn(), findMany: vi.fn() },
