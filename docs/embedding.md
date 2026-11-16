@@ -152,6 +152,16 @@ Systems are listed in the canonical order above.
 { protocol: 'wazo-anatomy', version: 1, type: 'layers-changed', visibleSystems: ['skeletal', 'cardiovascular'] }
 ```
 
+## Try it
+
+`docs/examples/embed-host.html` is a complete host page that frames the atlas and runs every
+command in turn, printing each message it sends and receives. Serve it from an origin you put
+in `EMBED_ALLOWED_ORIGINS` (for local work, `python -m http.server 8099` in that folder with
+`EMBED_ALLOWED_ORIGINS=http://localhost:8099` on the atlas), and change `ATLAS` and the iframe
+`src` if the atlas is not on `http://localhost:3000`. From any other origin the browser refuses
+to show the frame, which is the expected result. Links in the attribution footer open in a new
+tab when embedded, so following one never replaces the atlas and drops the bridge.
+
 ## Versioning
 
 `version` is the protocol major version. New optional fields and new message types keep
