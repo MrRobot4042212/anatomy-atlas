@@ -8,7 +8,12 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { PrismaClient, type BodyRegion, type Laterality } from '../src/generated/prisma/index.js';
+import {
+  PrismaClient,
+  type BodyRegion,
+  type Laterality,
+  type Prisma,
+} from '../src/generated/prisma/index.js';
 
 const { values } = parseArgs({
   options: {
@@ -42,6 +47,8 @@ interface Manifest {
     sizeBytes: number;
     meshCount: number;
     hash: string;
+    /** Body zone -> meshIds of the bundle; absent when the manifest was built without zones. */
+    zones?: Record<string, string[]>;
   }[];
   structures: ManifestStructure[];
 }
@@ -56,9 +63,11 @@ async function main() {
   const manifest = JSON.parse(await readFile(values.manifest, 'utf8')) as Manifest;
 
   for (const b of manifest.bundles) {
+    // A manifest without zones resets the index, so a bundle never keeps zones of an old export.
+    const zones: Prisma.InputJsonObject = b.zones ?? {};
     await prisma.assetBundle.upsert({
       where: { id: b.id },
-      update: { url: b.url, sizeBytes: b.sizeBytes, meshCount: b.meshCount, hash: b.hash },
+      update: { url: b.url, sizeBytes: b.sizeBytes, meshCount: b.meshCount, hash: b.hash, zones },
       create: {
         id: b.id,
         system: b.system as never,
@@ -66,6 +75,7 @@ async function main() {
         sizeBytes: b.sizeBytes,
         meshCount: b.meshCount,
         hash: b.hash,
+        zones,
       },
     });
   }
@@ -136,8 +146,9 @@ async function main() {
   }
 
   const withMesh = ordered.filter((s) => s.assetId).length;
+  const zoned = manifest.bundles.filter((b) => b.zones && Object.keys(b.zones).length > 0).length;
   console.log(
-    `Seeded ${manifest.bundles.length} bundles, ${written} structures (${withMesh} with geometry); removed ${stale.length} stale structures, ${staleBundles.length} stale bundles.`,
+    `Seeded ${manifest.bundles.length} bundles (${zoned} with zones), ${written} structures (${withMesh} with geometry); removed ${stale.length} stale structures, ${staleBundles.length} stale bundles.`,
   );
 }
 

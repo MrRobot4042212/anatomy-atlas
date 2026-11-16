@@ -48,6 +48,8 @@ const prisma = {
         sizeBytes: 3979028,
         meshCount: 690,
         hash: 'abc',
+        zones: { thigh: ['ta2-1360-r'] },
+        createdAt: new Date(0),
         structures: [{ meshId: 'ta2-1360-r', subsystem: 'bones-of-lower-limb' }],
       },
     ]),
@@ -72,14 +74,21 @@ describe('Catalog (e2e)', () => {
     await app.close();
   });
 
-  it('GET /api/assets lists bundles with their meshIds', async () => {
+  it('GET /api/assets lists bundles with their meshIds, subsystems and zones', async () => {
     const res = await request(app.getHttpServer()).get('/api/assets').expect(200);
     expect(res.body).toHaveLength(1);
     expect(res.body[0]).toMatchObject({
       id: 'skeletal-v1',
       meshes: ['ta2-1360-r'],
       subsystems: { 'bones-of-lower-limb': ['ta2-1360-r'] },
+      zones: { thigh: ['ta2-1360-r'] },
     });
+  });
+
+  it('GET /api/assets/:id returns one bundle and 404 for unknown ids', async () => {
+    const res = await request(app.getHttpServer()).get('/api/assets/skeletal-v1').expect(200);
+    expect(res.body.zones).toEqual({ thigh: ['ta2-1360-r'] });
+    await request(app.getHttpServer()).get('/api/assets/nope-v1').expect(404);
   });
 
   it('GET /api/structures paginates and maps regions', async () => {

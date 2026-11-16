@@ -1,12 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import type { AssetBundle } from '@atlas/shared';
 import { PrismaService } from '../prisma/prisma.service.js';
+import { toAssetBundle } from './asset-bundle.mapper.js';
 
 @Injectable()
 export class AssetsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  /** Bundle manifest for the viewer: which GLB holds which meshIds. */
+  /** Bundle manifest for the viewer: which GLB holds which meshIds, by subsystem and zone. */
   async list(): Promise<AssetBundle[]> {
     const bundles = await this.prisma.assetBundle.findMany({
       orderBy: { id: 'asc' },
@@ -18,23 +19,7 @@ export class AssetsService {
         },
       },
     });
-    return bundles.map((b) => {
-      const subsystems: Record<string, string[]> = {};
-      for (const s of b.structures) {
-        const key = s.subsystem ?? 'other';
-        (subsystems[key] ??= []).push(s.meshId as string);
-      }
-      return {
-        id: b.id,
-        system: b.system,
-        url: b.url,
-        sizeBytes: b.sizeBytes,
-        meshCount: b.meshCount,
-        hash: b.hash,
-        meshes: b.structures.map((s) => s.meshId as string),
-        subsystems,
-      };
-    });
+    return bundles.map(toAssetBundle);
   }
 
   async byId(id: string): Promise<AssetBundle> {

@@ -81,6 +81,9 @@ model AssetBundle {
   sizeBytes  Int
   meshCount  Int
   hash       String
+  /// Body zone -> meshIds of this bundle (BodyZone keys from packages/shared), for the region
+  /// filter. Written by the seed from the manifest; `{}` until the pipeline provides zones.
+  zones      Json        @default("{}")
   createdAt  DateTime    @default(now())
   structures Structure[]
 }
