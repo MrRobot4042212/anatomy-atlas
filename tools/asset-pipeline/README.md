@@ -13,6 +13,17 @@ src/        Node: optimize.ts (gltf-transform + meshopt), manifest.ts
 
 Source: https://github.com/Z-Anatomy/Models-of-human-anatomy (CC BY-SA 4.0).
 
+`scripts/build_zones.py` gives every mesh one body zone (head, neck, thorax, abdomen, pelvis,
+back, shoulder, arm, forearm, hand, thigh, leg, foot) from its bounding box against landmarks
+taken from named bones; the rules are in its docstring. `scripts/check_zones.py` verifies it
+against reference structures and prints the distribution per system. Run both after
+`build_mapping.py` and before `pnpm manifest`, which adds the per-bundle `zones` index when
+`out/zones.json` exists:
+
+```bash
+python scripts/build_zones.py && python scripts/check_zones.py && pnpm manifest
+```
+
 `editorial/corrections.json` fixes the Latin and English names and the hierarchy inherited from
 the Z-Anatomy source (typos, grammar, misplaced parents). `build_mapping.py` applies it strictly;
 never edit `TA2.csv` or the blend. Each entry carries its basis.
