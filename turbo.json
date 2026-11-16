@@ -11,7 +11,8 @@
     "dev": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "passThroughEnv": ["EMBED_ALLOWED_ORIGINS"]
     },
     "lint": {
       "dependsOn": ["^build"]
