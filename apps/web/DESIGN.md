@@ -83,12 +83,21 @@ not in the repository, so the atlas ships **Albert Sans** (open, closest in prop
 - **Buttons** (`.btn`): 40 px high (32 with `.btn-sm`), 14 px / 500, 4 px radius, padding 0 16.
   `.btn-primary` is the gradient (one per view: Enfocar). `.btn-outline` is transparent with a 1 px
   border at white .3; hover raises 1 px, border .6 and fill .08. `aria-pressed="true"` is the accent wash
-  with a light-blue border.
+  with a light-blue border. `.btn-ghost` is the variant inside bars and sheets (no border, fill .08
+  on hover, same pressed state); `.btn-icon` makes any of them a 40 x 40 square with the label in
+  `aria-label`. A control that can be momentarily empty uses `aria-disabled` (styled as disabled,
+  still focusable) so it keeps focus when it empties itself.
 - **Fields**: 40 px, radius 8, fill `#141414`, border white .2, padding 12; focus turns the border
   `#4A90E2` and the fill `#242424`, with the global ring.
 - **Focus ring**: `outline: 2px solid #6FB1FC; outline-offset: 2px`, on everything focusable.
 - **Bars** (`.bar-surface`): translucent, blurred, over the scene. The header is 64 px; the toolbar is a
-  floating 12 px rounded container with 36 px segments (14 px / 500).
+  floating 12 px rounded container of 40 px ghost buttons, each an icon plus a label. Fixed slots in
+  two rows (camera views; Corte, Atenuar resto, Mostrar todo with its count, Reiniciar last): a state
+  changes colour or a number, never the layout. One Tab stop, arrows inside; below `sm` each row
+  scrolls sideways in the same order instead of wrapping.
+- **Sheets** (help): native modal `<dialog>`, 16 px radius, panel fill, backdrop black .6.
+- **First-run hint**: a bar-surface card at the canvas's top left, three lines with accent icons
+  and a close button; once per browser, never in embed mode.
 - **Specimen label** (`InfoPanel`): breadcrumb, Latin italic with the selection dot, Spanish name,
   English name, data grid, caliper (three proportional bars with end ticks, numbers tabular), four
   actions in a 2 x 2 grid (Enfocar primary; Aislar and Translúcido are toggles; Ocultar).
