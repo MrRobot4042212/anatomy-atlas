@@ -11,6 +11,8 @@ indicator lines, insertion areas and reference geometry) it derives:
   subsystem  second level of the Bonus collection path (e.g. "Systemic arteries")
   region     from "Regions of human body > Main divisions > ..." paths
   parentKey  the deepest group node of the same system that contains the object
+  excluded   "license:<source>" for objects listed in licensing/quarantine.json: they keep their
+             catalog row but lose geometry, so no export or bundle can include them
 
 Group nodes (sub-collections of each system) are emitted as structures without geometry so the
 catalog tree is complete. Deterministic: same inputs, same output.
@@ -173,6 +175,7 @@ def main():
     ap.add_argument("--dump", default="out/objects.json")
     ap.add_argument("--ta2", default="raw/TA2.csv")
     ap.add_argument("--out", default="out/mapping.json")
+    ap.add_argument("--quarantine", default="licensing/quarantine.json")
     args = ap.parse_args()
 
     data = json.load(open(args.dump, encoding="utf-8"))
@@ -320,6 +323,22 @@ def main():
         stats["structures"] += 1
         stats["official" if term["official"] else "unofficial"] += 1
         stats[f"system:{system}"] += 1
+
+    # Licence quarantine: keep the catalog row, drop the geometry.
+    quarantine = json.load(open(args.quarantine, encoding="utf-8"))
+    quarantined = {o["blenderName"]: o["source"] for o in quarantine["objects"]}
+    found = set()
+    for s in structures.values():
+        source = quarantined.get(s["blenderName"])
+        if source and s["hasGeometry"]:
+            s["hasGeometry"] = False
+            s["meshId"] = None
+            s["excluded"] = f"license:{source}"
+            found.add(s["blenderName"])
+            stats["excluded:license"] += 1
+    unmatched = sorted(set(quarantined) - found)
+    if unmatched:
+        raise SystemExit(f"quarantine entries not found in the mapping (typo or blend changed): {unmatched}")
 
     # A group that is also a mesh node keeps the mesh; make sure no node is its own parent.
     for s in structures.values():

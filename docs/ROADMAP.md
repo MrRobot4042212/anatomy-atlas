@@ -31,6 +31,9 @@
 - [x] Wazo Anatomy visual world on the WAZO brand system (logo, isotype, colours, gradients),
       EB Garamond italic for Latin, Geist Mono for data, specimen label with caliper. See `apps/web/DESIGN.md`.
 - [x] UI typeface: Albert Sans as the open stand-in for BR Sonoma (`apps/web/src/fonts/README.md`)
+- [x] Licence audit and quarantine of non-commercial meshes (ADR 0005, 2026-11-16)
+- [ ] Replace the 8 quarantined meshes (kidneys, renal pelvis, cochlea, vestibule) with BodyParts3D CC BY 4.0 or commissioned work
+- [ ] Replace Z-Anatomy Spanish names (TA2 derivative) with editorial names reviewed by an anatomist
 - [ ] Descriptions per structure (source to be decided: Wikipedia extracts as Z-Anatomy does)
 - [ ] Language switch for the UI (es/en)
 
