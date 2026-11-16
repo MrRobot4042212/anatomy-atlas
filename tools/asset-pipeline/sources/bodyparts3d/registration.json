@@ -1,0 +1,50 @@
+{
+  "description": "bp3d (mm) -> Z-Anatomy (m): z[i] = scale * signs[i] * bp[perm[i]] + shift[i]",
+  "perm": [0, 1, 2],
+  "signs": [1, 1, 1],
+  "scale": 0.0010071586011494674,
+  "shift": [0.00043770040849987955, 0.0966733476372497, 0.060982772871933766],
+  "rms": 0.011667308983241035,
+  "references": 140,
+  "median_centre_error_m": 0.010346570817840267,
+  "worst": [
+    {
+      "name": "Second metatarsal bone.r",
+      "centre_error_m": 0.0279
+    },
+    {
+      "name": "Prostate",
+      "centre_error_m": 0.0281
+    },
+    {
+      "name": "Second metatarsal bone.l",
+      "centre_error_m": 0.0284
+    },
+    {
+      "name": "First metatarsal bone.r",
+      "centre_error_m": 0.0303
+    },
+    {
+      "name": "First metatarsal bone.l",
+      "centre_error_m": 0.0309
+    }
+  ],
+  "local": {
+    "FJ3147": {
+      "shift": [-1.3832202779576197e-5, 0.002086146133652463, 0.006496426433129088],
+      "method": "twin-centre",
+      "twinVertices": 1163,
+      "vertices": 1163,
+      "neighbourShiftM": [-6.007062540692661e-5, 0.0007827533502059379, -0.006403844054240228],
+      "neighbours": 25
+    },
+    "FJ3145": {
+      "shift": [-0.0008902022052902289, 0.002086740123099177, 0.006373414669331723],
+      "method": "twin-centre",
+      "twinVertices": 1493,
+      "vertices": 1497,
+      "neighbourShiftM": [0.0006150607033724749, 0.0012576756297503042, -0.00543849242878695],
+      "neighbours": 26
+    }
+  }
+}

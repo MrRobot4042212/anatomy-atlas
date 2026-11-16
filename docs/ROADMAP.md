@@ -32,7 +32,8 @@
       EB Garamond italic for Latin, Geist Mono for data, specimen label with caliper. See `apps/web/DESIGN.md`.
 - [x] UI typeface: Albert Sans as the open stand-in for BR Sonoma (`apps/web/src/fonts/README.md`)
 - [x] Licence audit and quarantine of non-commercial meshes (ADR 0005, 2026-11-16)
-- [ ] Replace the 8 quarantined meshes (kidneys, renal pelvis, cochlea, vestibule) with BodyParts3D CC BY 4.0 or commissioned work
+- [x] Kidneys restored from BodyParts3D CC BY 4.0 (the blend's kidney was that mesh)
+- [ ] Replace the 6 meshes still excluded (renal pelvis, cochlea, vestibule): not in BodyParts3D
 - [x] Editorial Spanish names for all 1,959 terms, drafted and cross-reviewed (status draft)
 - [ ] Human anatomist review of `editorial/names.es.json` (flip status to reviewed; 267 flagged first)
 - [ ] Triage `editorial/source-issues.json` (144 data errors in Latin, English and hierarchy)

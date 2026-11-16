@@ -11,9 +11,45 @@ modifiers are applied. Nothing outside the mapping is ever exported.
 import argparse
 import json
 import sys
+import zipfile
 from pathlib import Path
 
 import bpy
+
+BP3D_ZIP = "raw/bodyparts3d/partof_BP3D_4.0_obj_99.zip"
+
+
+def bodyparts3d_object(root, structure, element, registration, replacements):
+    """Build a mesh object from a BodyParts3D OBJ (millimetres) in the Z-Anatomy frame (metres).
+
+    z[i] = scale * sign[i] * bp[perm[i]] + shift[i] + organ shift, from
+    sources/bodyparts3d/registration.json (scripts/register_bodyparts3d.py). The mesh is read
+    straight from the archive, so its provenance is the dataset and not the blend.
+    """
+    reg = registration
+    organ_shift = reg["local"][element]["shift"]
+    text = zipfile.ZipFile(root / BP3D_ZIP).read(f"partof_BP3D_4.0_obj_99/{element}.obj").decode()
+    verts, faces = [], []
+    for line in text.splitlines():
+        if line.startswith("v "):
+            bp = [float(x) for x in line.split()[1:4]]
+            verts.append(tuple(
+                reg["scale"] * reg["signs"][i] * bp[reg["perm"][i]] + reg["shift"][i] + organ_shift[i]
+                for i in range(3)
+            ))
+        elif line.startswith("f "):
+            faces.append([int(tok.split("/")[0]) - 1 for tok in line.split()[1:]])
+    mesh = bpy.data.meshes.new(structure["meshId"])
+    mesh.from_pydata(verts, [], faces)
+    mesh.update()
+    for poly in mesh.polygons:
+        poly.use_smooth = True
+    spec = next(r for r in replacements["replacements"] if r["element"] == element)
+    material = bpy.data.materials.get(spec["material"])
+    if material is None:
+        sys.exit(f"material {spec['material']!r} not found in the blend")
+    mesh.materials.append(material)
+    return bpy.data.objects.new(structure["meshId"], mesh)
 
 
 def parse_args():
@@ -38,11 +74,22 @@ def main():
     if not wanted:
         sys.exit(f"mapping has no geometry for system {args.system!r}")
 
+    registration = replacements = None
+    if any(str(s.get("source", "")).startswith("bodyparts3d:") for s in wanted):
+        registration = json.load(open(root / "sources/bodyparts3d/registration.json", encoding="utf-8"))
+        replacements = json.load(open(root / "sources/bodyparts3d/replacements.json", encoding="utf-8"))
+
     export_col = bpy.data.collections.new("EXPORT")
     bpy.context.scene.collection.children.link(export_col)
 
     missing, exported, curves = [], 0, 0
     for s in wanted:
+        source = str(s.get("source", ""))
+        if source.startswith("bodyparts3d:"):
+            obj = bodyparts3d_object(root, s, source.split(":", 1)[1], registration, replacements)
+            export_col.objects.link(obj)
+            exported += 1
+            continue
         obj = bpy.data.objects.get(s["blenderName"])
         if obj is None:
             missing.append(s["blenderName"])

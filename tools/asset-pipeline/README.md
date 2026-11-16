@@ -16,6 +16,10 @@ Source: https://github.com/Z-Anatomy/Models-of-human-anatomy (CC BY-SA 4.0).
 `editorial/names.es.json` holds the Spanish names (our own, ADR 0005). `build_mapping.py` reads
 them and never the Spanish column of `TA2.csv`. Style guide: `editorial/STYLE.md`.
 
+`sources/bodyparts3d/` re-sources quarantined organs from BodyParts3D (CC BY 4.0): the exporter
+builds their mesh from the original OBJ. `scripts/register_bodyparts3d.py` computes the
+transform; the archive goes in `raw/bodyparts3d/` (git-ignored).
+
 `licensing/quarantine.json` lists objects withheld from every export because they probably derive
 from non-commercial components credited by Z-Anatomy. Edit that file, never the exporter, and
 rerun `build_mapping.py`. Policy: `docs/adr/0005-model-licensing-policy.md`.

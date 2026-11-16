@@ -24,6 +24,15 @@ commercially. An audit on 2026-11-16 found:
    Cochlea and Vestibule, both sides (8 meshes). `build_mapping.py` keeps their catalog row and
    removes their geometry (`excluded: "license:<source>"`). `manifest.ts` fails if a bundle still
    carries one. The list is conservative because upstream gives no per-object provenance.
+   A quarantined object can be re-sourced from BodyParts3D 4.0 (CC BY 4.0) through
+   `sources/bodyparts3d/replacements.json`: the exporter then builds the mesh from the original
+   OBJ, placed with the transform from `scripts/register_bodyparts3d.py`.
+   - **Kidneys restored (2026-11-16).** Z-Anatomy's Kidney.l and Kidney.r turned out to be the
+     BodyParts3D meshes (1,163 and 1,497 vs 1,163 and 1,493 vertices, extents within 0.8 mm), so
+     the kidneys now come straight from FJ3147 and FJ3145. Placement uses the Z-Anatomy twin's
+     position, which the renal vessels and ureters of that body were attached to.
+   - **Still excluded:** renal pelvis, cochlea and vestibule. BodyParts3D 4.0 has no such parts
+     (checked against its official part lists, which also lack the auditory ossicles).
 2. **Models are published under CC BY-SA 4.0 with the attribution Z-Anatomy requires**, in the
    viewer footer and in the full notice at `/licencias`. Application code, API, content and brand
    are not part of the model licence.
@@ -38,18 +47,20 @@ commercially. An audit on 2026-11-16 found:
 
 ## Consequences
 
-- The urinary layer has no kidneys and the nervous layer has no cochlea or vestibule until a
+- The nervous layer has no cochlea or vestibule, and the urinary layer no renal pelvis, until a
   replacement exists. The structures still appear in the tree, search and info panel.
-- Replacement source: BodyParts3D 4.0 OBJ (CC BY 4.0). It needs a mapping from FMA ids to TA2
-  keys, keeping the `meshId` contract. Not started: it requires downloading the dataset
-  (isa_BP3D_4.0_obj_99.zip, 136 MB, dbarchive.biosciencedbc.jp).
+- The BodyParts3D archive used is `partof_BP3D_4.0_obj_99.zip` (62 MB, git-ignored under
+  `tools/asset-pipeline/raw/bodyparts3d/`). Attribution: "BodyParts3D, © The Database Center for
+  Life Science licensed under CC Attribution 4.0 International", shown at `/licencias`.
 - Not quarantined but unverified: auditory ossicles, intrarenal vessels, ureters. Their origin
   inside the blend is unknown. Re-check when the blend is updated or when provenance is known.
-- Metrics after the change: 2,904 structures with geometry (was 2,912).
+- Metrics after the change: 2,906 structures with geometry (was 2,912).
 
 ## Open items
 
-- Replace the 8 quarantined meshes (BodyParts3D or commissioned work with assignment of rights).
+- Replace the 6 meshes still excluded (renal pelvis, cochlea, vestibule, both sides). BodyParts3D
+  does not have them, so the options are commissioned work with assignment of rights or a
+  parametric model built from published dimensions.
 - A human anatomist must review `names.es.json` (1,959 terms; 267 flagged medium or low
   confidence, each with a note) and flip `status` to `reviewed`. Until then every name is `draft`.
 - Fix the source-data errors found by the review (`editorial/source-issues.json`, 144 items:

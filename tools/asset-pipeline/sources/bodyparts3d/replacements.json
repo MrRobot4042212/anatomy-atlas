@@ -1,0 +1,13 @@
+{
+  "source": {
+    "name": "BodyParts3D 4.0, part-of tree, 99% polygon reduction",
+    "archive": "partof_BP3D_4.0_obj_99.zip",
+    "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
+    "license": "CC BY 4.0",
+    "credit": "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International"
+  },
+  "replacements": [
+    { "blenderName": "Kidney.r", "element": "FJ3147", "fma": "FMA7204", "material": "Organ" },
+    { "blenderName": "Kidney.l", "element": "FJ3145", "fma": "FMA7205", "material": "Organ" }
+  ]
+}
