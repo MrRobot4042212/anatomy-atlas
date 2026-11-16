@@ -45,3 +45,7 @@ pnpm-debug.log*
 # misc
 *.pem
 .vercel
+
+# python bytecode
+__pycache__/
+*.pyc

@@ -18,6 +18,9 @@ from mesh import bounds, signed_volume  # noqa: E402
 RANGES = {
     "inner_ear:cochlea": [(5, 10), (5, 11), (5, 10)],
     "inner_ear:vestibule": [(8, 15), (8, 15), (8, 15)],
+    "ossicles:malleus": [(2.5, 5.5), (2.0, 5.0), (7.0, 10.0)],
+    "ossicles:incus": [(2.5, 6.0), (3.5, 6.5), (5.0, 8.0)],
+    "ossicles:stapes": [(3.0, 5.0), (2.5, 4.0), (1.2, 3.5)],
     "renal_pelvis:pelvis": [(30, 50), (12, 28), (60, 80)],
 }
 

@@ -8,3 +8,4 @@ pnpm-lock.yaml
 *.gltf
 *.ktx2
 apps/api/src/generated
+
