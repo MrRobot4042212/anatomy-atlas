@@ -6,9 +6,8 @@ import { firstParam, isEmbedFlag, resolveDeepLink } from '@/features/embed/deepL
 import { EmbedBridge } from '@/features/embed/EmbedBridge';
 import { parseAllowedOrigins } from '@/features/embed/origins';
 import { AnatomyViewer } from '@/features/viewer/AnatomyViewer';
-import { HierarchyTree } from '@/features/viewer/HierarchyTree';
 import { InfoPanel } from '@/features/viewer/InfoPanel';
-import { LayerPanel } from '@/features/viewer/LayerPanel';
+import { LeftRail } from '@/features/viewer/LeftRail';
 import { ViewerToolbar } from '@/features/viewer/ViewerToolbar';
 import { api } from '@/lib/api';
 
@@ -39,8 +38,7 @@ export default async function Home({ searchParams }: PageProps<'/'>) {
       <Header bundles={bundles} embedded={embedded} />
       <div className="grid min-h-0 min-w-0 grid-cols-[280px_minmax(0,1fr)_340px] max-lg:grid-cols-1 max-lg:grid-rows-[60vh_auto_auto] max-lg:overflow-y-auto">
         <aside className="flex min-h-0 flex-col overflow-y-auto border-r border-hairline bg-panel max-lg:order-2 max-lg:border-r-0 max-lg:border-t">
-          <LayerPanel bundles={bundles} />
-          <HierarchyTree />
+          <LeftRail bundles={bundles} />
         </aside>
         <main className="relative min-h-0 min-w-0 overflow-hidden max-lg:order-1">
           <AnatomyViewer bundles={bundles} />
