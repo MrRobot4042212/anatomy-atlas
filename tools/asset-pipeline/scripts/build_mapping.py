@@ -12,7 +12,8 @@ indicator lines, insertion areas and reference geometry) it derives:
   region     from "Regions of human body > Main divisions > ..." paths
   parentKey  the deepest group node of the same system that contains the object
   names.es   from editorial/names.es.json (our own Spanish names), never from TA2.csv
-  source     "bodyparts3d:<element>" when the geometry comes from sources/bodyparts3d instead of the blend
+  source     "bodyparts3d:<element>" or "authored:<generator>" when the geometry comes from
+             sources/ instead of the blend
   excluded   "license:<source>" for objects listed in licensing/quarantine.json: they keep their
              catalog row but lose geometry, so no export or bundle can include them
 
@@ -179,6 +180,7 @@ def main():
     ap.add_argument("--out", default="out/mapping.json")
     ap.add_argument("--quarantine", default="licensing/quarantine.json")
     ap.add_argument("--replacements", default="sources/bodyparts3d/replacements.json")
+    ap.add_argument("--authored", default="sources/authored/models.json")
     ap.add_argument("--editorial", default="editorial/names.es.json")
     ap.add_argument("--es-min-status", choices=["draft", "reviewed"], default="draft",
                     help="lowest editorial status accepted for a Spanish name; use 'reviewed' to ship only anatomist-approved names")
@@ -360,6 +362,20 @@ def main():
         s["replacesExcluded"] = s.pop("excluded")
         stats["excluded:license"] -= 1
         stats["source:bodyparts3d"] += 1
+
+    # Authored (parametric) models for quarantined structures that no clean dataset covers.
+    authored = json.load(open(args.authored, encoding="utf-8"))
+    for model in authored["models"]:
+        hit = [s for s in structures.values() if s["blenderName"] == model["blenderName"]]
+        if len(hit) != 1 or "excluded" not in hit[0]:
+            raise SystemExit(f"authored model {model['blenderName']!r} must match exactly one quarantined structure")
+        s = hit[0]
+        s["hasGeometry"] = True
+        s["meshId"] = s["key"]
+        s["source"] = f"authored:{model['generator']}"
+        s["replacesExcluded"] = s.pop("excluded")
+        stats["excluded:license"] -= 1
+        stats["source:authored"] += 1
 
     # Spanish names come only from our editorial file. Every term must be covered.
     editorial = json.load(open(args.editorial, encoding="utf-8"))["names"]

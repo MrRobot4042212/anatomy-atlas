@@ -1,0 +1,47 @@
+{
+  "description": "Authored (parametric) replacements for quarantined structures with no clean source. Original work, not derived from any third-party mesh. centre is the position of the structure in the Z-Anatomy body, a measurement only.",
+  "models": [
+    {
+      "blenderName": "Cochlea.l",
+      "generator": "inner_ear:cochlea",
+      "side": "left",
+      "centre": [0.0396, -0.0001, 1.58],
+      "material": "Bone-1"
+    },
+    {
+      "blenderName": "Cochlea.r",
+      "generator": "inner_ear:cochlea",
+      "side": "right",
+      "centre": [-0.0396, -0.0001, 1.58],
+      "material": "Bone-1"
+    },
+    {
+      "blenderName": "Vestibule.l",
+      "generator": "inner_ear:vestibule",
+      "side": "left",
+      "centre": [0.0398, 0.0082, 1.5837],
+      "material": "Bone-1"
+    },
+    {
+      "blenderName": "Vestibule.r",
+      "generator": "inner_ear:vestibule",
+      "side": "right",
+      "centre": [-0.0398, 0.0082, 1.5837],
+      "material": "Bone-1"
+    },
+    {
+      "blenderName": "Renal pelvis.l",
+      "generator": "renal_pelvis:pelvis",
+      "side": "left",
+      "centre": [0.0578, 0.0186, 1.1101],
+      "material": "Ductus"
+    },
+    {
+      "blenderName": "Renal pelvis.r",
+      "generator": "renal_pelvis:pelvis",
+      "side": "right",
+      "centre": [-0.0512, 0.0082, 1.0945],
+      "material": "Ductus"
+    }
+  ]
+}

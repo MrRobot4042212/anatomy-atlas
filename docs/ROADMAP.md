@@ -33,7 +33,8 @@
 - [x] UI typeface: Albert Sans as the open stand-in for BR Sonoma (`apps/web/src/fonts/README.md`)
 - [x] Licence audit and quarantine of non-commercial meshes (ADR 0005, 2026-11-16)
 - [x] Kidneys restored from BodyParts3D CC BY 4.0 (the blend's kidney was that mesh)
-- [ ] Replace the 6 meshes still excluded (renal pelvis, cochlea, vestibule): not in BodyParts3D
+- [x] Renal pelvis, cochlea and vestibule (with semicircular canals) authored as parametric models
+- [ ] Anatomist validation of the authored models; check provenance of the auditory ossicles
 - [x] Editorial Spanish names for all 1,959 terms, drafted and cross-reviewed (status draft)
 - [ ] Human anatomist review of `editorial/names.es.json` (flip status to reviewed; 267 flagged first)
 - [ ] Triage `editorial/source-issues.json` (144 data errors in Latin, English and hierarchy)
