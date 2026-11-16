@@ -8922,12 +8922,12 @@
       "note": "El latín de origen dice 'glenohumerae' (error de la fuente); el inglés y el padre (Metatarsophalangeal joints) indican metatarsofalángicas, que es lo que se traduce."
     },
     "ta2:7140": {
-      "es": "Cápsulas articulares de las articulaciones interfalángicas proximales",
+      "es": "Cápsulas articulares de las articulaciones interfalángicas proximales de la mano",
       "status": "draft",
       "confidence": "high"
     },
     "ta2:7141": {
-      "es": "Cápsulas articulares de las articulaciones interfalángicas distales",
+      "es": "Cápsulas articulares de las articulaciones interfalángicas distales de la mano",
       "status": "draft",
       "confidence": "high"
     },
@@ -9706,10 +9706,10 @@
       "confidence": "high"
     },
     "za:inferior-vein-of-left-ventricle-posterior": {
-      "es": "Vena inferior del ventrículo izquierdo",
+      "es": "Vena posterior del ventrículo izquierdo",
       "status": "draft",
       "confidence": "medium",
-      "note": "Clásicamente 'vena posterior del ventrículo izquierdo'; se elige la forma de la TA2 y se omite el calificativo mal formado del modelo."
+      "note": "The source name was a model artefact; the structure is the posterior vein of the left ventricle."
     },
     "za:insula-subcentral-gyrus-and-ant-and-post-sulci": {
       "es": "Ínsula (circunvolución subcentral y surcos anterior y posterior)",
@@ -10029,7 +10029,7 @@
       "note": "El nombre del modelo es '????????' (sin nombre), dentro de 'Cardiac veins'; nombre provisional descriptivo, debe revisarse contra la malla."
     },
     "za:x": {
-      "es": "Arteria sin identificar",
+      "es": "Rama sin identificar de la arteria carótida común",
       "status": "draft",
       "confidence": "low",
       "note": "El nombre del modelo es '?x' (sin nombre), dentro de 'Aorta'; nombre provisional descriptivo, debe revisarse contra la malla."

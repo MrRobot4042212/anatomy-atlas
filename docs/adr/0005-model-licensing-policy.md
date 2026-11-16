@@ -71,8 +71,13 @@ commercially. An audit on 2026-11-16 found:
   quarantined; to be checked or replaced the same way.
 - A human anatomist must review `names.es.json` (1,959 terms; 267 flagged medium or low
   confidence, each with a note) and flip `status` to `reviewed`. Until then every name is `draft`.
-- Fix the source-data errors found by the review (`editorial/source-issues.json`, 144 items:
-  Latin typos, wrong parents, English slips). They come from the Z-Anatomy .blend and TA2.csv.
+- Source-data errors found by the review (`editorial/source-issues.json`, 144 items): 137 fixed
+  in `editorial/corrections.json` (299 name edits over 161 terms, 23 hierarchy moves, applied
+  strictly by `build_mapping.py`), 4 declined as not errors (Latin part vs English head, an
+  unverifiable bundle name, a short term id) and 3 deferred (the eyelid tarsal plates sit under
+  muscles but moving them changes their body system and bundle; two objects unnamed in the
+  source model carry descriptive placeholder names). The corrections are not yet checked against
+  the official TA2 text; Latin names are CC BY-ND, so a check against the published list is due.
 - Legal confirmation that (a) the 2025 BodyParts3D relicensing covers the 2013 data, (b) glTF
   bundles loaded at runtime do not extend ShareAlike to application code, (c) editorial Spanish
   names written independently are not a derivative of the FIPAT translation.

@@ -1,0 +1,767 @@
+{
+  "version": 1,
+  "$comment": "Corrections to the Latin and English names inherited from the Z-Anatomy TA2.csv, found by a cross-review of all 1,959 terms and a lint (docs/adr/0005). Applied by build_mapping.py, strictly: an old text that is not present stops the build. Keys, meshIds and Terminologia Anatomica ids never change. Each entry lists its basis. Not yet checked against the official TA2 text.",
+  "names": {
+    "ta2:1140-1": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae primae"
+    },
+    "ta2:1140-10": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae decimae"
+    },
+    "ta2:1140-2": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae secundae"
+    },
+    "ta2:1140-3": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae tertiae"
+    },
+    "ta2:1140-4": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae quartae"
+    },
+    "ta2:1140-5": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae quintae"
+    },
+    "ta2:1140-6": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae sextae"
+    },
+    "ta2:1140-7": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae septimae"
+    },
+    "ta2:1140-8": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae octavae"
+    },
+    "ta2:1140-9": {
+      "basis": ["grammar"],
+      "la": "Cartilago costalis costae nonae"
+    },
+    "ta2:1141": {
+      "basis": ["grammar"],
+      "la": [["superiori", "superioris"]]
+    },
+    "ta2:1265-1": {
+      "basis": ["typo"],
+      "la": [["metarcapi", "metacarpi"]]
+    },
+    "ta2:1277-1": {
+      "basis": ["grammar"],
+      "la": "Phalanx proximalis digiti primi manus"
+    },
+    "ta2:1277-2": {
+      "basis": ["grammar"],
+      "la": "Phalanx proximalis digiti secundi manus"
+    },
+    "ta2:1277-3": {
+      "basis": ["grammar"],
+      "la": "Phalanx proximalis digiti tertii manus"
+    },
+    "ta2:1277-4": {
+      "basis": ["grammar"],
+      "la": "Phalanx proximalis digiti quarti manus"
+    },
+    "ta2:1277-5": {
+      "basis": ["grammar"],
+      "la": "Phalanx proximalis digiti quinti manus"
+    },
+    "ta2:1278-2": {
+      "basis": ["grammar"],
+      "la": "Phalanx media digiti secundi manus"
+    },
+    "ta2:1278-3": {
+      "basis": ["grammar"],
+      "la": "Phalanx media digiti tertii manus"
+    },
+    "ta2:1278-4": {
+      "basis": ["grammar"],
+      "la": "Phalanx media digiti quarti manus"
+    },
+    "ta2:1278-5": {
+      "basis": ["grammar"],
+      "la": "Phalanx media digiti quinti manus"
+    },
+    "ta2:1279-1": {
+      "basis": ["grammar"],
+      "la": "Phalanx distalis digiti primi manus"
+    },
+    "ta2:1279-2": {
+      "basis": ["grammar"],
+      "la": "Phalanx distalis digiti secundi manus"
+    },
+    "ta2:1279-3": {
+      "basis": ["grammar"],
+      "la": "Phalanx distalis digiti tertii manus"
+    },
+    "ta2:1279-4": {
+      "basis": ["grammar"],
+      "la": "Phalanx distalis digiti quarti manus"
+    },
+    "ta2:1279-5": {
+      "basis": ["grammar"],
+      "la": "Phalanx distalis digiti quinti manus"
+    },
+    "ta2:1496-4": {
+      "basis": ["typo"],
+      "la": [["quatum", "quartum"]]
+    },
+    "ta2:1510-1": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx proximalis digiti primi pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1510-2": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx proximalis digiti secundi pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1510-3": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx proximalis digiti tertii pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1510-4": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx proximalis digiti quarti pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1510-5": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx proximalis digiti quinti pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1511-2": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx media digiti secundi pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1511-3": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx media digiti tertii pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1511-4": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx media digiti quarti pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1511-5": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx media digiti quinti pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1512-1": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx distalis digiti primi pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1512-2": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx distalis digiti secundi pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1512-3": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx distalis digiti tertii pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1512-4": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx distalis digiti quarti pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1512-5": {
+      "basis": ["grammar", "english-term"],
+      "la": "Phalanx distalis digiti quinti pedis",
+      "en": [["finger of foot", "toe"]]
+    },
+    "ta2:1664": {
+      "basis": ["typo"],
+      "la": [["Articultiones", "Articulationes"]]
+    },
+    "ta2:1670": {
+      "basis": ["typo"],
+      "la": [["columnar", "columnae"]]
+    },
+    "ta2:1737": {
+      "basis": ["grammar"],
+      "la": [["superiori", "superioris"]]
+    },
+    "ta2:1743": {
+      "basis": ["typo"],
+      "la": [["pecoralis", "pectoralis"]]
+    },
+    "ta2:1772-1": {
+      "basis": ["grammar"],
+      "la": [["articulation cubiti", "articulationis cubiti"]]
+    },
+    "ta2:1786-1": {
+      "basis": ["grammar"],
+      "la": [["articulatio radiocarpea", "articulationis radiocarpeae"]]
+    },
+    "ta2:1818": {
+      "basis": ["english-typo"],
+      "en": [["Interosseus", "Interosseous"]]
+    },
+    "ta2:1835-1": {
+      "basis": ["typo"],
+      "la": [
+        [
+          "articulariae articulationes metacarpophalnageae",
+          "articulares articulationum metacarpophalangearum"
+        ]
+      ]
+    },
+    "ta2:1891": {
+      "basis": ["consistency"],
+      "la": [["decussatum", "cruciatum"]]
+    },
+    "ta2:2040": {
+      "basis": ["typo"],
+      "la": [["Muculi", "Musculi"]]
+    },
+    "ta2:2198": {
+      "basis": ["typo"],
+      "la": [["cricoarytendoideus", "cricoarytenoideus"]]
+    },
+    "ta2:2207": {
+      "basis": ["dangling-word"],
+      "la": [[" lamina", ""]]
+    },
+    "ta2:2240": {
+      "basis": ["abbreviation"],
+      "la": [
+        ["dors.", "dorsales"],
+        ["lat.", "laterales"]
+      ]
+    },
+    "ta2:2241": {
+      "basis": ["abbreviation"],
+      "la": [
+        ["vent.", "ventrales"],
+        ["lat.", "laterales"]
+      ]
+    },
+    "ta2:2450": {
+      "basis": ["grammar"],
+      "la": [["superiori", "superioris"]]
+    },
+    "ta2:2474": {
+      "basis": ["duplicated-word"],
+      "la": [["tricipitis caput brachii", "tricipitis brachii"]]
+    },
+    "ta2:2577": {
+      "basis": ["abbreviation"],
+      "la": "Vagina tendinum musculorum abductoris longi et extensoris brevis pollicis",
+      "en": "Tendon sheath of abductor pollicis longus and extensor pollicis brevis"
+    },
+    "ta2:2581": {
+      "basis": ["abbreviation"],
+      "la": "Vagina tendinum musculorum extensoris digitorum et extensoris indicis"
+    },
+    "ta2:2626": {
+      "basis": ["english-in-latin"],
+      "la": [["muscle", "femoris"]]
+    },
+    "ta2:2682": {
+      "basis": ["duplicated-word"],
+      "la": [["pedis pedis", "brevis pedis"]]
+    },
+    "ta2:2750": {
+      "basis": ["truncation"],
+      "la": [["malleoli", "malleoli medialis"]]
+    },
+    "ta2:2760": {
+      "basis": ["grammar"],
+      "la": "Vagina tendinis musculi flexoris digitorum longi"
+    },
+    "ta2:3076": {
+      "basis": ["omission"],
+      "en": "Right anterior medial segment of liver (V)"
+    },
+    "ta2:3077": {
+      "basis": ["omission"],
+      "en": "Right posterior medial segment of liver (VIII)"
+    },
+    "ta2:3079": {
+      "basis": ["omission"],
+      "en": "Right anterior lateral segment of liver (VI)"
+    },
+    "ta2:3080": {
+      "basis": ["omission"],
+      "en": "Right posterior lateral segment of liver (VII)"
+    },
+    "ta2:3248": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis basalis medialis pulmonis dextri (BVII)"
+    },
+    "ta2:3249": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis basalis anterior pulmonis dextri (BVIII)"
+    },
+    "ta2:3250": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis basalis lateralis pulmonis dextri (BIX)"
+    },
+    "ta2:3254": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis apicoposterior pulmonis sinistri (BI+BII)"
+    },
+    "ta2:3256": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis lingularis superior pulmonis sinistri (BIV)"
+    },
+    "ta2:3257": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis lingularis inferior pulmonis sinistri (BV)"
+    },
+    "ta2:3259": {
+      "basis": ["typo"],
+      "la": "Bronchus segmentalis superior pulmonis sinistri (BVI)"
+    },
+    "ta2:3260": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis basalis medialis pulmonis sinistri (BVII)"
+    },
+    "ta2:3262": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis basalis anterior pulmonis sinistri (BVIII)"
+    },
+    "ta2:3263": {
+      "basis": ["abbreviation"],
+      "la": "Bronchus segmentalis basalis lateralis pulmonis sinistri (BIX)"
+    },
+    "ta2:4114": {
+      "basis": ["grammar"],
+      "la": [["pulmonalis dextri", "pulmonis dextri"]]
+    },
+    "ta2:4143": {
+      "basis": ["abbreviation"],
+      "la": [["ant.", "anterior"]]
+    },
+    "ta2:4147": {
+      "basis": ["abbreviation"],
+      "la": "Rami interventriculares septales"
+    },
+    "ta2:4165": {
+      "basis": ["synonym-removed"],
+      "la": "Vena media cordis"
+    },
+    "ta2:4211": {
+      "basis": ["typo"],
+      "la": [["coeiiacus", "coeliacus"]]
+    },
+    "ta2:4252": {
+      "basis": ["typo"],
+      "la": [["mesenteries", "mesenterica"]]
+    },
+    "ta2:4253": {
+      "basis": ["truncation"],
+      "la": [["pancreaticoduodenalis", "pancreaticoduodenalis inferior"]]
+    },
+    "ta2:4293": {
+      "basis": ["truncation"],
+      "la": "Ramus ascendens arteriae colicae sinistrae"
+    },
+    "ta2:4303": {
+      "basis": ["typo"],
+      "la": [["internaecus", "internae"]]
+    },
+    "ta2:4341": {
+      "basis": ["consistency"],
+      "la": [["pudendalis", "pudenda"]]
+    },
+    "ta2:4420": {
+      "basis": ["typo"],
+      "la": [["fontale", "frontalis"]]
+    },
+    "ta2:4504": {
+      "basis": ["grammar"],
+      "la": [["cerebri anterior", "cerebri anterioris"]]
+    },
+    "ta2:4506": {
+      "basis": ["grammar"],
+      "la": [["callosomarginal", "callosomarginalis"]]
+    },
+    "ta2:4515": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:4571": {
+      "basis": ["typo"],
+      "la": [["Arteria paritooccipitale", "Arteria parietooccipitalis"]]
+    },
+    "ta2:4587": {
+      "basis": ["typo"],
+      "la": [["musculoohrenica", "musculophrenica"]]
+    },
+    "ta2:4591": {
+      "basis": ["synonym-removed"],
+      "la": "Arteria thyreoidea inferior"
+    },
+    "ta2:4601": {
+      "basis": ["synonym-removed"],
+      "la": "Arteria transversa colli"
+    },
+    "ta2:4644": {
+      "basis": ["truncation"],
+      "la": "Ramus carpeus palmaris arteriae radialis"
+    },
+    "ta2:4830": {
+      "basis": ["consistency"],
+      "la": [["venae mandibularis", "venae retromandibularis"]]
+    },
+    "ta2:4991-1": {
+      "basis": ["typo"],
+      "la": [["(part ", "(pars "]]
+    },
+    "ta2:4991-2": {
+      "basis": ["consistency"],
+      "la": [["abdominis", "abdominalis"]]
+    },
+    "ta2:5028": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5056": {
+      "basis": ["truncation"],
+      "la": [["circumflexae mediales", "circumflexae femoris mediales"]]
+    },
+    "ta2:5057": {
+      "basis": ["truncation", "accent"],
+      "la": [
+        ["circumflexae latérales", "circumflexae femoris laterales"],
+        ["@strip-accents", ""]
+      ]
+    },
+    "ta2:5059": {
+      "basis": ["typo"],
+      "la": [["extemae", "externae"]]
+    },
+    "ta2:5081": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5150": {
+      "basis": ["grammar"],
+      "la": [["lymphoidea", "lymphoideum"]]
+    },
+    "ta2:5207": {
+      "basis": ["typo", "english-typo"],
+      "la": [["bucinatorius", "buccinatorius"]],
+      "en": [["Bucinator", "Buccinator"]]
+    },
+    "ta2:5222": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5224": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5229": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5239": {
+      "basis": ["synonym-removed"],
+      "la": "Nodi axillares laterales"
+    },
+    "ta2:5240": {
+      "basis": ["synonym-removed"],
+      "la": "Nodi axillares posteriores"
+    },
+    "ta2:5241": {
+      "basis": ["synonym-removed"],
+      "la": "Nodi axillares anteriores"
+    },
+    "ta2:5243": {
+      "basis": ["synonym-removed"],
+      "la": "Nodi infraclaviculares"
+    },
+    "ta2:5258": {
+      "basis": ["typo"],
+      "la": [["prepericadiaci", "prepericardiaci"]]
+    },
+    "ta2:5259": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5271": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5276": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5283": {
+      "basis": ["dangling-word"],
+      "la": [[" caudales", ""]]
+    },
+    "ta2:5322": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5338": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5343": {
+      "basis": ["accent"],
+      "la": [["@strip-accents", ""]]
+    },
+    "ta2:5856": {
+      "basis": ["typo"],
+      "la": [["Trucus", "Truncus"]]
+    },
+    "ta2:6118": {
+      "basis": ["duplicated-word"],
+      "la": [["medialis tractus", "medialis"]]
+    },
+    "ta2:6442": {
+      "basis": ["wrong-term"],
+      "la": "Nervus cutaneus brachii lateralis superior"
+    },
+    "ta2:6564": {
+      "basis": ["truncation"],
+      "la": [["nervi cutanei femoris", "nervi cutanei femoris posterioris"]]
+    },
+    "ta2:7071-1": {
+      "basis": ["typo"],
+      "la": [["pedites", "pedis"]]
+    },
+    "ta2:7128": {
+      "basis": ["grammar"],
+      "la": [["superior sinistrus", "superius sinistrum"]]
+    },
+    "ta2:7129": {
+      "basis": ["grammar"],
+      "la": [["superior dextrus", "superius dextrum"]]
+    },
+    "ta2:7131": {
+      "basis": ["grammar"],
+      "la": [["inferior sinistrus", "inferius sinistrum"]]
+    },
+    "ta2:7132": {
+      "basis": ["grammar"],
+      "la": [["inferior dextrus", "inferius dextrum"]]
+    },
+    "ta2:7136": {
+      "basis": ["grammar"],
+      "la": [["Nervorum", "Nervi"]]
+    },
+    "ta2:7139": {
+      "basis": ["wrong-term"],
+      "la": "Capsulae articulares articulationum metatarsophalangearum"
+    },
+    "ta2:7140": {
+      "basis": ["wrong-term", "disambiguation"],
+      "la": "Capsulae articulares articulationum interphalangearum proximalium manus",
+      "en": "Articular capsules of proximal interphalangeal joints of hand"
+    },
+    "ta2:7141": {
+      "basis": ["wrong-term", "disambiguation"],
+      "la": "Capsulae articulares articulationum interphalangearum distalium manus",
+      "en": "Articular capsules of distal interphalangeal joints of hand"
+    },
+    "ta2:7144": {
+      "basis": ["grammar"],
+      "la": "Capsulae articulares articulationum interphalangearum distalium pedis"
+    },
+    "ta2:7145": {
+      "basis": ["grammar"],
+      "la": "Capsulae articulares articulationum interphalangearum proximalium pedis"
+    },
+    "ta2:7146": {
+      "basis": ["grammar"],
+      "la": [["anterior (Meniscus lateral)", "anterius (Meniscus lateralis)"]]
+    },
+    "ta2:7147": {
+      "basis": ["grammar"],
+      "la": [["anterior (Meniscus medial)", "anterius (Meniscus medialis)"]]
+    },
+    "ta2:7148": {
+      "basis": ["grammar"],
+      "la": [["posterior (Meniscus lateral)", "posterius (Meniscus lateralis)"]]
+    },
+    "ta2:7149": {
+      "basis": ["grammar"],
+      "la": [["posterior (Meniscus medial)", "posterius (Meniscus medialis)"]]
+    },
+    "ta2:7150": {
+      "basis": ["grammar"],
+      "la": [["articularis tibiofibularis superior", "articulationis tibiofibularis superioris"]]
+    },
+    "ta2:7152": {
+      "basis": ["grammar"],
+      "la": [[" articularis acromioclavicularis", " articulationis acromioclavicularis"]]
+    },
+    "ta2:7201": {
+      "basis": ["english-in-latin"],
+      "la": [["Tendon extensoris", "Tendo musculi extensoris"]]
+    },
+    "ta2:7202": {
+      "basis": ["consistency"],
+      "la": [["renum", "renalis"]]
+    },
+    "ta2:7203": {
+      "basis": ["consistency"],
+      "la": [["renum", "renalis"]]
+    },
+    "ta2:7208": {
+      "basis": ["typo"],
+      "la": [["pedites", "pedis"]]
+    },
+    "ta2:7210": {
+      "basis": ["grammar"],
+      "la": [["frontopolar", "frontopolaris"]]
+    },
+    "ta2:7223": {
+      "basis": ["grammar"],
+      "la": [["Lobus thymi dextri", "Lobus dexter thymi"]]
+    },
+    "ta2:7224": {
+      "basis": ["grammar"],
+      "la": [["Lobus thymi sinistri", "Lobus sinister thymi"]]
+    },
+    "ta2:910-16": {
+      "basis": ["typo"],
+      "la": [["suprioris", "superioris"]]
+    },
+    "za:automatic-division-of-peripheral-nervous-system": {
+      "basis": ["english-typo"],
+      "en": "Autonomic division of peripheral nervous system"
+    },
+    "za:crico-arythenoid-joint": {
+      "basis": ["english-typo"],
+      "en": "Crico-arytenoid joint"
+    },
+    "za:inferior-vein-of-left-ventricle-posterior": {
+      "basis": ["artefact"],
+      "en": "Posterior vein of left ventricle"
+    },
+    "za:lacrimal-canliculus": {
+      "basis": ["english-typo"],
+      "en": "Lacrimal canaliculus"
+    },
+    "za:orbital-part-of-inferior-frontal-gyrus": {
+      "basis": ["whitespace"],
+      "en": "Orbital part of inferior frontal gyrus"
+    },
+    "za:posterior-lateral-nasal-branches-of-sphenopalatine-artery": {
+      "basis": ["punctuation"],
+      "en": "Posterior lateral nasal branches of sphenopalatine artery"
+    },
+    "za:right-cerebal-hemisphere": {
+      "basis": ["english-typo"],
+      "en": "Right cerebral hemisphere"
+    },
+    "za:right-pulonary-artery": {
+      "basis": ["english-typo"],
+      "en": "Right pulmonary artery"
+    },
+    "za:subfacial-prepatellar-bursa": {
+      "basis": ["english-typo"],
+      "en": "Subfascial prepatellar bursa"
+    },
+    "za:unnamed": {
+      "basis": ["unnamed-in-source"],
+      "en": "Unidentified cardiac vein"
+    },
+    "za:x": {
+      "basis": ["unnamed-in-source"],
+      "en": "Unidentified branch of common carotid artery"
+    }
+  },
+  "parents": [
+    {
+      "keys": ["ta2-2635-l"],
+      "parent": "ta2-2626",
+      "basis": "hierarchy",
+      "why": "Gracilis is an adductor of the medial compartment; the right side was already there, the left sat under the posterior compartment."
+    },
+    {
+      "keys": ["ta2-5879-l", "ta2-5879-r"],
+      "parent": "ta2-5878",
+      "basis": "hierarchy",
+      "why": "The base of the peduncle belongs to the cerebral peduncle of the midbrain, not to the superior cerebellar peduncle."
+    },
+    {
+      "keys": ["ta2-6444-l", "ta2-6444-r"],
+      "parent": "ta2-6443",
+      "basis": "hierarchy",
+      "why": "The medial pectoral nerve arises from the medial cord, not from the inferior trunk."
+    },
+    {
+      "keys": ["ta2-6543-l", "ta2-6543-r", "ta2-6545-l", "ta2-6545-r"],
+      "parent": "ta2-6539",
+      "basis": "hierarchy",
+      "why": "The superior gluteal nerve and the nerve to piriformis are direct branches of the sacral plexus, not of the sciatic nerve."
+    },
+    {
+      "keys": ["ta2-6551-l", "ta2-6551-r"],
+      "parent": "ta2-6539",
+      "subsystem": "peripheral",
+      "basis": "hierarchy",
+      "why": "The nerve to quadratus femoris is a peripheral branch of the sacral plexus; it was filed under the spinal dura as central."
+    },
+    {
+      "keys": ["ta2-6585-l", "ta2-6585-r", "ta2-6586-l", "ta2-6586-r"],
+      "parent": "ta2-6582",
+      "basis": "hierarchy",
+      "why": "The medial sural cutaneous nerve and the sural nerve belong to the tibial nerve, not to the saphenous nerve."
+    },
+    {
+      "keys": ["ta2-6573-l", "ta2-6573-r"],
+      "parent": "ta2-6571",
+      "basis": "hierarchy",
+      "why": "The sural communicating branch comes from the common fibular nerve."
+    },
+    {
+      "keys": ["ta2-4108"],
+      "parent": "ta2-4107",
+      "basis": "hierarchy",
+      "why": "The right superior pulmonary vein sat under the left superior pulmonary vein; it belongs under the pulmonary veins, like the inferior ones."
+    },
+    {
+      "keys": ["ta2-4109", "ta2-4110", "ta2-4111", "ta2-4113", "ta2-4114"],
+      "parent": "ta2-4108",
+      "basis": "hierarchy",
+      "why": "Tributaries of the right superior pulmonary vein were filed under the left superior pulmonary vein."
+    }
+  ],
+  "declined": [
+    {
+      "termKey": "ta2:2302",
+      "reason": "Not an error: the official English of \"Pars clavicularis\" is \"Clavicular head\"."
+    },
+    {
+      "termKey": "ta2:2303",
+      "reason": "Not an error: the official English of \"Pars sternocostalis\" is \"Sternocostal head\"."
+    },
+    {
+      "termKey": "ta2:6092",
+      "reason": "Latin fasciculus and English tract are both used for the same bundle; cannot be settled without the official text."
+    },
+    {
+      "termKey": "ta2:692",
+      "reason": "The id looks short but is not shown to be wrong; TA2 ids are not grouped by region. Check against the official list."
+    }
+  ],
+  "deferred": [
+    {
+      "keys": ["ta2-6827-l", "ta2-6827-r", "ta2-6829-l", "ta2-6829-r"],
+      "reason": "The tarsal plates of the eyelids sit under Muscles of head, but they are connective tissue. Moving them changes their body system and so their bundle; needs a decision on where eyelid structures belong."
+    },
+    {
+      "keys": ["za:unnamed", "za:x"],
+      "reason": "Unnamed objects in the source model. They carry placeholder names and must be identified against the mesh by an anatomist."
+    }
+  ]
+}

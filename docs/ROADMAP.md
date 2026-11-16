@@ -37,7 +37,8 @@
 - [ ] Anatomist validation of the authored models; check provenance of the auditory ossicles
 - [x] Editorial Spanish names for all 1,959 terms, drafted and cross-reviewed (status draft)
 - [ ] Human anatomist review of `editorial/names.es.json` (flip status to reviewed; 267 flagged first)
-- [ ] Triage `editorial/source-issues.json` (144 data errors in Latin, English and hierarchy)
+- [x] Source-data errors fixed through `editorial/corrections.json` (137 of 144; 4 declined, 3 deferred)
+- [ ] Check the corrected Latin names against the official TA2; identify the two unnamed model objects; decide where the eyelid tarsal plates belong
 - [ ] Descriptions per structure (source to be decided: Wikipedia extracts as Z-Anatomy does)
 - [ ] Language switch for the UI (es/en)
 
