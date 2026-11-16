@@ -15,9 +15,9 @@ Target (project rules): 60 fps on an integrated-GPU laptop with skeletal + cardi
 
 | Item              | Value                                                                                                                                                |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU               | AMD Ryzen 7 7800X3D (Windows 11 Pro), 53% CPU load during tests (other processes)                                          |
+| CPU               | AMD Ryzen 7 7800X3D (Windows 11 Pro), 53% CPU load during tests (other processes)                                                                    |
 | GPUs (Windows)    | AMD Radeon RX 9070 XT (discrete), AMD Radeon(TM) Graphics (integrated)                                                                               |
-| Browser           | Brave (Chrome 157 engine) driven through a browser extension; `UNMASKED_RENDERER_WEBGL` = "Brave" (masked), `gl.RENDERER` = "WebKit WebGL"                         |
+| Browser           | Brave (Chrome 157 engine) driven through a browser extension; `UNMASKED_RENDERER_WEBGL` = "Brave" (masked), `gl.RENDERER` = "WebKit WebGL"           |
 | GPU actually used | Not readable. Offscreen benchmark: 50 full-screen 20-iteration `sin` passes at 1920x917 took 3.14 ms, consistent with a hardware GPU                 |
 | Viewport / DPR    | 1920 x 917, devicePixelRatio 1 (canvas dpr 1)                                                                                                        |
 | Display refresh   | about 72 Hz (frame 13.89 ms is the floor in every run)                                                                                               |
