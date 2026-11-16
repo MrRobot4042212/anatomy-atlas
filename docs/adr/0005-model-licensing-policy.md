@@ -58,26 +58,40 @@ commercially. An audit on 2026-11-16 found:
 - The BodyParts3D archive used is `partof_BP3D_4.0_obj_99.zip` (62 MB, git-ignored under
   `tools/asset-pipeline/raw/bodyparts3d/`). Attribution: "BodyParts3D, © The Database Center for
   Life Science licensed under CC Attribution 4.0 International", shown at `/licencias`.
-- Not quarantined but unverified: auditory ossicles, intrarenal vessels, ureters. Their origin
-  inside the blend is unknown. Re-check when the blend is updated or when provenance is known.
+- **Auditory ossicles (2026-11-16).** Research found that the Dundee "Anatomy of the Inner Ear"
+  model credited by Z-Anatomy also contains the ossicles (and derives from the McGill 3D ear,
+  CC BY-NC-SA 2.5 Canada), and BodyParts3D has none. No source maps the blend's Malleus, Incus
+  and Stapes to it, so this rests on elimination (about 60% confidence), but a wrong guess
+  costs a licence breach and a right one costs three small meshes. They are quarantined and
+  authored like the inner ear (`ossicles.py`: malleus with head, neck, handle and processes;
+  incus with body, short and long process and lenticular process; stapes with head, crura and
+  footplate; 6 meshes). The open alternative is the OpenEar library (CC BY 4.0, Sieber et al.
+  2019), but it is 59 GB; a single specimen would be 4 to 14 GB, not worth it for three bones.
+- Not quarantined but unverified: intrarenal vessels and ureters. Their origin inside the blend
+  is unknown. Re-check when the blend is updated or when provenance is known.
 - Metrics after the change: 2,912 structures with geometry, as before the audit.
 
 ## Open items
 
 - An anatomist must validate the authored models: cochlear spiral sense (`HANDEDNESS` in
-  `inner_ear.py`), canal planes and calyx layout. Commissioned work with assignment of rights can
+  `inner_ear.py`), canal planes, calyx layout and the three ossicles. Commissioned work with assignment of rights can
   replace them later without changing any meshId.
-- Provenance of the auditory ossicles in the blend is unknown (BodyParts3D has none). Not
-  quarantined; to be checked or replaced the same way.
 - A human anatomist must review `names.es.json` (1,959 terms; 267 flagged medium or low
   confidence, each with a note) and flip `status` to `reviewed`. Until then every name is `draft`.
 - Source-data errors found by the review (`editorial/source-issues.json`, 144 items): 137 fixed
   in `editorial/corrections.json` (299 name edits over 161 terms, 23 hierarchy moves, applied
   strictly by `build_mapping.py`), 4 declined as not errors (Latin part vs English head, an
-  unverifiable bundle name, a short term id) and 3 deferred (the eyelid tarsal plates sit under
-  muscles but moving them changes their body system and bundle; two objects unnamed in the
-  source model carry descriptive placeholder names). The corrections are not yet checked against
-  the official TA2 text; Latin names are CC BY-ND, so a check against the published list is due.
+  unverifiable bundle name, a short term id) and 2 deferred (two objects unnamed in the source
+  model carry descriptive placeholder names; geometric analysis suggests the small cardiac vein
+  for one and cannot decide the other). The eyelid tarsal plates were moved to the accessory
+  visual structures of the eye (nervous, sense organs), as TA2 classes them.
+- **TA2 verification (2026-11-16).** The 145 corrected Latin names were checked against the full
+  official TA2 text (`editorial/ta2-verification.json`): 73 confirmed, 69 unverifiable (TA2 has
+  no entry for numbered instances such as single ribs, fingers and teeth, and none above its id
+  7113), 3 deliberate deviations kept (two TA2 misprints and one name TA2 does not have). The
+  check also caught a fix that was wrong (pudendalis was right) and eight that were not the
+  official form; all are now the official text. Three source ids do not match TA2 (the name is
+  the entry of the previous id); the keys stay, the mapping is listed as an open source issue.
 - Legal confirmation that (a) the 2025 BodyParts3D relicensing covers the 2013 data, (b) glTF
   bundles loaded at runtime do not extend ShareAlike to application code, (c) editorial Spanish
   names written independently are not a derivative of the FIPAT translation.

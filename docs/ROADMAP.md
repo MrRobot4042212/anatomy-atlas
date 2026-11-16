@@ -14,7 +14,11 @@
 
 - [x] Cardiovascular bundle (676 structures, 4.0 MB; heart, arteries, veins, pulmonary as subsystem toggles)
 - [x] Baseline numbers: draw calls, triangles, bytes (see viewer skill). Frame time pending on real hardware
-- [ ] Draw-call reduction (merge static geometry per subsystem) if measured frame time exceeds budget
+- [ ] Draw-call reduction (merge static geometry per subsystem) if measured frame time exceeds budget.
+      Measured 2026-11-16, see `docs/PERFORMANCE.md`: 1,664 calls for skeletal + cardiovascular and 3,532
+      with all layers, one call per mesh. Holds the 72 Hz display cap on a discrete GPU, so the integrated-GPU
+      target is still unverified
+- [ ] Find the cause of the 0.2 to 2.5 s main-thread stalls in the first seconds after load (production build, trace)
 - [x] Lazy loading per system (nothing downloads until its layer is on)
 - [ ] Bundle splitting by region when a bundle exceeds 25 MB
 
@@ -34,11 +38,15 @@
 - [x] Licence audit and quarantine of non-commercial meshes (ADR 0005, 2026-11-16)
 - [x] Kidneys restored from BodyParts3D CC BY 4.0 (the blend's kidney was that mesh)
 - [x] Renal pelvis, cochlea and vestibule (with semicircular canals) authored as parametric models
-- [ ] Anatomist validation of the authored models; check provenance of the auditory ossicles
+- [x] Auditory ossicles quarantined (probably from the NC Dundee model) and authored as parametric models
+- [ ] Anatomist validation of the authored models (cochlea, vestibule, renal pelvis, ossicles)
 - [x] Editorial Spanish names for all 1,959 terms, drafted and cross-reviewed (status draft)
 - [ ] Human anatomist review of `editorial/names.es.json` (flip status to reviewed; 267 flagged first)
 - [x] Source-data errors fixed through `editorial/corrections.json` (137 of 144; 4 declined, 3 deferred)
-- [ ] Check the corrected Latin names against the official TA2; identify the two unnamed model objects; decide where the eyelid tarsal plates belong
+- [x] Corrected Latin names checked against the official TA2 (73 confirmed, 69 unverifiable, 3 deliberate deviations)
+- [x] Eyelid tarsal plates moved to the accessory visual structures of the eye
+- [ ] Identify the two unnamed model objects on the mesh (hypotheses in `docs/review/README.md`)
+- [ ] Fix the three TA2 id mismatches in the id mapping (`editorial/source-issues.json`)
 - [ ] Descriptions per structure (source to be decided: Wikipedia extracts as Z-Anatomy does)
 - [ ] Language switch for the UI (es/en)
 
