@@ -28,8 +28,11 @@ commercially. An audit on 2026-11-16 found:
    viewer footer and in the full notice at `/licencias`. Application code, API, content and brand
    are not part of the model licence.
 3. **Nomenclature.** Latin and English terms come from TA2 unaltered and are cited. Spanish names
-   currently come from Z-Anatomy's `TA2.csv` translation and are a derivative of TA2; they stay
-   until replaced by editorial Spanish names written and reviewed by an anatomist.
+   are our own editorial work in `tools/asset-pipeline/editorial/names.es.json`, written from the
+   Latin and English without consulting any existing Spanish list. `build_mapping.py` no longer
+   reads the Spanish column of `TA2.csv`. Each name has a status: `draft` (drafted and cross-checked in two passes, not reviewed by a human anatomist) or `reviewed` (approved by a human anatomist).
+   `--es-min-status reviewed` builds the catalog with only human-approved names. The style
+   guide and editorial decisions are in `editorial/STYLE.md`.
 4. **No Wikipedia text is stored.** Z-Anatomy definitions are CC BY-SA 3.0 and are not loaded.
    Structure descriptions will be written for this product.
 
@@ -47,7 +50,10 @@ commercially. An audit on 2026-11-16 found:
 ## Open items
 
 - Replace the 8 quarantined meshes (BodyParts3D or commissioned work with assignment of rights).
-- Replace Z-Anatomy's Spanish names with editorial names (tracked in `docs/ROADMAP.md`).
+- A human anatomist must review `names.es.json` (1,959 terms; 267 flagged medium or low
+  confidence, each with a note) and flip `status` to `reviewed`. Until then every name is `draft`.
+- Fix the source-data errors found by the review (`editorial/source-issues.json`, 144 items:
+  Latin typos, wrong parents, English slips). They come from the Z-Anatomy .blend and TA2.csv.
 - Legal confirmation that (a) the 2025 BodyParts3D relicensing covers the 2013 data, (b) glTF
   bundles loaded at runtime do not extend ShareAlike to application code, (c) editorial Spanish
   names written independently are not a derivative of the FIPAT translation.

@@ -1,0 +1,1010 @@
+[
+  {
+    "termKey": "ta2:1140-1",
+    "issue": "Latin repeats \"costae\" (\"Cartilago costae primae costae\"); TA form is \"Cartilago costalis costae primae\". Same redundancy in ta2:1140-2 to ta2:1140-10.",
+    "la": "Cartilago costae primae costae",
+    "en": "Costal cartilage of first rib",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1140-4",
+    "issue": "Latin ordinal has wrong gender: \"quarti\" should be \"quartae\" (costa is feminine).",
+    "la": "Cartilago costae quarti costae",
+    "en": "Costal cartilage of fourth rib",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1140-5",
+    "issue": "Latin ordinal has wrong gender: \"quinti\" should be \"quintae\".",
+    "la": "Cartilago costae quinti costae",
+    "en": "Costal cartilage of fifth rib",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1140-7",
+    "issue": "Latin ordinal has wrong gender: \"septimi\" should be \"septimae\".",
+    "la": "Cartilago costae septimi costae",
+    "en": "Costal cartilage of seventh rib",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1140-9",
+    "issue": "Latin is garbled (\"Costa cartilago nonae costae\"); should be \"Cartilago costalis costae nonae\".",
+    "la": "Costa cartilago nonae costae",
+    "en": "Costal cartilage of ninth rib",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1141",
+    "issue": "Latin \"membri superiori\" should be genitive \"membri superioris\".",
+    "la": "Ossa membri superiori",
+    "en": "Bones of upper limb",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1265-1",
+    "issue": "Latin typo: \"metarcapi\" should be \"metacarpi\".",
+    "la": "Os primum metarcapi",
+    "en": "First metacarpal bone",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1277-1",
+    "issue": "Latin \"primum digitorum manus\" is ungrammatical (TA: \"digiti primi manus\" / \"pollicis\"); same pattern in all hand and foot phalanx items (ta2:1277-x, 1278-x, 1279-x, 1510-x, 1511-x, 1512-x).",
+    "la": "Phalanx proximalis primum digitorum manus",
+    "en": "Proximal phalanx of first finger of hand",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1278-2",
+    "issue": "Latin typo: \"scundum\" should be \"secundum\".",
+    "la": "Phalanx media scundum digitorum manus",
+    "en": "Middle phalanx of second finger of hand",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1496-4",
+    "issue": "Latin typo: \"quatum\" should be \"quartum\".",
+    "la": "Os quatum metatarsi",
+    "en": "Fourth metatarsal bone",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1510-1",
+    "issue": "English \"finger of foot\" should be \"toe\" (e.g. \"Proximal phalanx of first toe\"); same in all foot phalanx items ta2:1510-x, 1511-x, 1512-x.",
+    "la": "Phalanx proximalis primum digitorum pedis",
+    "en": "Proximal phalanx of first finger of foot",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1664",
+    "issue": "Latin typo: \"Articultiones\" should be \"Articulationes\".",
+    "la": "Articultiones laryngis",
+    "en": "Synovial joints of larynx",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1669",
+    "issue": "parentEn typo \"Crico-arythenoid\" should be \"Crico-arytenoid\".",
+    "la": "Ligamentum cricopharyngeum",
+    "en": "Cricopharyngeal ligament",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1670",
+    "issue": "Latin typo: \"columnar\" should be \"columnae\".",
+    "la": "Juncturae columnar vertebralis",
+    "en": "Joints of vertebral column",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1737",
+    "issue": "Latin \"membri superiori\" should be genitive \"membri superioris\".",
+    "la": "Juncturae membri superiori",
+    "en": "Joints of upper limb",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1743",
+    "issue": "Latin typo: \"pecoralis\" should be \"pectoralis\".",
+    "la": "Articulationes cinguli pecoralis",
+    "en": "Synovial joints of pectoral girdle",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1772-1",
+    "issue": "Latin \"articulation cubiti\" should be genitive \"articulationis cubiti\".",
+    "la": "Capsula articularis articulation cubiti",
+    "en": "Articular capsule of elbow joint",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1786-1",
+    "issue": "Latin \"articulatio radiocarpea\" should be genitive \"articulationis radiocarpeae\"; parentEn (Distal radio-ulnar joint) also looks wrong for this capsule.",
+    "la": "Capsula articularis articulatio radiocarpea",
+    "en": "Articular capsule of radiocarpal joint",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1818",
+    "issue": "English typo: \"Interosseus\" should be \"Interosseous\" (also in parentEn of ta2:1819-1823).",
+    "la": "Ligamenta intercarpea interossea",
+    "en": "Interosseus intercarpal ligaments",
+    "file": "skeletal-r1.json"
+  },
+  {
+    "termKey": "ta2:1835-1",
+    "issue": "Latin typo 'metacarpophalnageae' (should be 'metacarpophalangeae') and nominative 'articulationes' where the genitive 'articulationum' is required.",
+    "la": "Capsulae articulariae articulationes metacarpophalnageae",
+    "en": "Articular capsules of metacarpophalangeal joints",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:1891",
+    "issue": "Latin 'Ligamentum decussatum posterius' is non-standard; TA uses 'Ligamentum cruciatum posterius', as in its sibling ta2:1890.",
+    "la": "Ligamentum decussatum posterius",
+    "en": "Posterior cruciate ligament",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:2040",
+    "issue": "Latin typo 'Muculi capitis'; should be 'Musculi capitis'.",
+    "la": "Muculi capitis",
+    "en": "Muscles of head",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2198",
+    "issue": "Latin typo 'cricoarytendoideus'; should be 'cricoarytenoideus'.",
+    "la": "Musculus cricoarytendoideus lateralis",
+    "en": "Lateral crico-arytenoid muscle",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2207",
+    "issue": "Latin 'Fascia investiens superficialis colli lamina' has a dangling, ungrammatical 'lamina' not reflected in the English.",
+    "la": "Fascia investiens superficialis colli lamina",
+    "en": "Superficial investing cervical fascia",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2240",
+    "issue": "Latin uses abbreviations ('dors.', 'lat.') instead of full forms ('dorsales', 'laterales').",
+    "la": "Partes dors. musculorum intertransversariorum lat. lumborum",
+    "en": "Dorsal parts of lateral intertransversarii lumborum muscles",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2241",
+    "issue": "Latin uses abbreviations ('vent.', 'lat.') instead of full forms ('ventrales', 'laterales').",
+    "la": "Partes vent. musculorum intertransversariorum lat. lumborum",
+    "en": "Ventral parts of lateral intertransversarii lumborum muscles",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2302",
+    "issue": "Latin says 'Pars clavicularis' (part) while English says 'Clavicular head'; the two disagree on part vs head.",
+    "la": "Pars clavicularis musculi pectoralis majoris",
+    "en": "Clavicular head of pectoralis major muscle",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2303",
+    "issue": "Latin says 'Pars sternocostalis' (part) while English says 'Sternocostal head'; the two disagree on part vs head.",
+    "la": "Pars sternocostalis musculi pectoralis majoris",
+    "en": "Sternocostal head of pectoralis major muscle",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2450",
+    "issue": "Latin 'Musculi membri superiori' has wrong case; should be 'membri superioris'.",
+    "la": "Musculi membri superiori",
+    "en": "Muscles of upper limb",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2474",
+    "issue": "Latin 'Caput mediale musculi tricipitis caput brachii' has a spurious second 'caput'; should be 'Caput mediale musculi tricipitis brachii'.",
+    "la": "Caput mediale musculi tricipitis caput brachii",
+    "en": "Medial head of triceps brachii",
+    "file": "muscular-r1.json"
+  },
+  {
+    "termKey": "ta2:2577",
+    "issue": "Latin and English use ad-hoc abbreviations ('abd.', 'ext.'); TA form is 'Vagina tendinum musculorum abductoris longi et extensoris brevis pollicis'.",
+    "la": "Vagina tendinum abd. longi et extensoris brevis pollicis",
+    "en": "Tendon sheath - abd. pollicis longus - ext. pollicis brevis",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:2581",
+    "issue": "Latin uses abbreviations and a dash ('musc. ext. digitorum - extensoris indicis'); TA form is 'Vagina tendinum musculorum extensoris digitorum et extensoris indicis'.",
+    "la": "Vagina tendinum musc. ext. digitorum - extensoris indicis",
+    "en": "Tendon sheath of extensor digitorum and extensor indicis",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:2626",
+    "issue": "Latin 'Compartimentum mediale muscle' contains the English word 'muscle'; should be 'Compartimentum mediale femoris'.",
+    "la": "Compartimentum mediale muscle",
+    "en": "Medial compartment of thigh",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:2635",
+    "issue": "Gracilis is placed under 'Posterior compartment of thigh'; it belongs to the medial (adductor) compartment.",
+    "la": "Musculus gracilis",
+    "en": "Gracilis muscle",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:2682",
+    "issue": "Latin duplicates 'pedis' ('Flexor digiti minimi pedis pedis'); TA2 form is 'Flexor digiti minimi brevis pedis'.",
+    "la": "Flexor digiti minimi pedis pedis",
+    "en": "Flexor digiti minimi of foot",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:2750",
+    "issue": "Latin 'Bursa subcutanea malleoli' omits 'medialis' while the English says medial malleolus; should be 'Bursa subcutanea malleoli medialis'.",
+    "la": "Bursa subcutanea malleoli",
+    "en": "Subcutaneous bursa of medial malleolus",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:2760",
+    "issue": "Latin 'flexoris digitorum longus' mixes nominative and genitive; should be 'Vagina tendinum musculi flexoris digitorum longi'.",
+    "la": "Vagina tendinis flexoris digitorum longus",
+    "en": "Tendon sheath of flexor digitorum longus",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:3076",
+    "issue": "English omits 'right' ('Anterior medial segment of liver (V)') while the Latin says 'dextrum'; TA English is 'Right anterior medial segment'.",
+    "la": "Segmentum anterius mediale dextrum hepatis (V)",
+    "en": "Anterior medial segment of liver (V)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3077",
+    "issue": "English omits 'right' while the Latin says 'dextrum' (should be 'Right posterior medial segment of liver (VIII)').",
+    "la": "Segmentum posterius mediale dextrum hepatis (VIII)",
+    "en": "Posterior medial segment of liver (VIII)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3079",
+    "issue": "English omits 'right' while the Latin says 'dextrum' (should be 'Right anterior lateral segment of liver (VI)').",
+    "la": "Segmentum anterius laterale dextrum hepatis (VI)",
+    "en": "Anterior lateral segment of liver (VI)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3080",
+    "issue": "English omits 'right' while the Latin says 'dextrum' (should be 'Right posterior lateral segment of liver (VII)').",
+    "la": "Segmentum posterius laterale dextrum hepatis (VII)",
+    "en": "Posterior lateral segment of liver (VII)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3248",
+    "issue": "Latin abbreviated ('basalis med.'); full form 'basalis medialis'.",
+    "la": "Bronchus segmentalis basalis med. pulmonis dextri (BVII)",
+    "en": "Medial basal segmental bronchus of right lung (BVII)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3249",
+    "issue": "Latin abbreviated ('basalis ant.'); full form 'basalis anterior'.",
+    "la": "Bronchus segmentalis basalis ant. pulmonis dextri (BVIII)",
+    "en": "Anterior basal segmental bronchus of right lung (BVIII)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3250",
+    "issue": "Latin abbreviated ('basalis lat.'); full form 'basalis lateralis'.",
+    "la": "Bronchus segmentalis basalis lat. pulmonis dextri (BIX)",
+    "en": "Lateral basal segmental bronchus of right lung (BIX)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3254",
+    "issue": "Latin abbreviated ('apicopost.'); full form 'apicoposterior'.",
+    "la": "Bronchus segmentalis apicopost. pulmonis sinistri (BI+BII)",
+    "en": "Apicoposterior segmental bronchus of left lung (BI+BII)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3256",
+    "issue": "Latin abbreviated ('segm. lingularis sup.'); full form 'segmentalis lingularis superior'.",
+    "la": "Bronchus segm. lingularis sup. pulmonis sinistri (BIV)",
+    "en": "Superior lingular segmental bronchus of left lung (BIV)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3257",
+    "issue": "Latin abbreviated ('lingularis inf.'); full form 'lingularis inferior'.",
+    "la": "Bronchus segmentalis lingularis inf. pulmonis sinistri (BV)",
+    "en": "Inferior lingular segmental bronchus of left lung (BV)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3259",
+    "issue": "Latin has a missing space and lowercase numeral: 'sinistri(bvi)' should be 'sinistri (BVI)'.",
+    "la": "Bronchus segmentalis superior pulmonis sinistri(bvi)",
+    "en": "Superior segmental bronchus of left lung (BVI)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3260",
+    "issue": "Latin abbreviated ('basalis med.'); full form 'basalis medialis'.",
+    "la": "Bronchus segmentalis basalis med. pulmonis sinistri (BVII)",
+    "en": "Medial basal segmental bronchus of left lung (BVII)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3262",
+    "issue": "Latin abbreviated ('basalis ant.'); full form 'basalis anterior'.",
+    "la": "Bronchus segmentalis basalis ant. pulmonis sinistri (BVIII)",
+    "en": "Anterior basal segmental bronchus of left lung (BVIII)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:3263",
+    "issue": "Latin abbreviated ('basalis lat.'); full form 'basalis lateralis'.",
+    "la": "Bronchus segmentalis basalis lat. pulmonis sinistri (BIX)",
+    "en": "Lateral basal segmental bronchus of left lung (BIX)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:4077",
+    "issue": "parentEn 'Right pulonary artery' is misspelled (pulmonary); the same typo appears in the parentEn of ta2:4078-4090.",
+    "la": "Arteria pulmonalis dextra",
+    "en": "Right pulmonary artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4108",
+    "issue": "Right-lung veins ta2:4108-4114 have parentEn 'Left superior pulmonary vein'; wrong side in the hierarchy (should be under Right superior pulmonary vein / Pulmonary veins).",
+    "la": "Vena pulmonalis dextra superior",
+    "en": "Right superior pulmonary vein",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4114",
+    "issue": "Latin 'Vena medialis pulmonalis dextri' should read 'pulmonis dextri' (noun genitive, not adjective).",
+    "la": "Vena medialis pulmonalis dextri",
+    "en": "Medial vein of right lung",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4147",
+    "issue": "Latin is abbreviated and repeats 'sept.' ('Rami sept. art. Intervent. ant. sept. arteriae coron. sinis.'); expected 'Rami interventriculares septales arteriae interventricularis anterioris'.",
+    "la": "Rami sept. art. Intervent. ant. sept. arteriae coron. sinis.",
+    "en": "Septal branches of anterior interventricular artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4165",
+    "issue": "Latin concatenates two synonyms ('Vena media cordis' and 'Vena interventricularis inferior') into a single string.",
+    "la": "Vena media cordis interventricularis inferior",
+    "en": "Middle cardiac vein",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4211",
+    "issue": "Latin typo 'Truncus coeiiacus' for 'Truncus coeliacus'.",
+    "la": "Truncus coeiiacus",
+    "en": "Coeliac trunk",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4252",
+    "issue": "Latin typo 'Arteria mesenteries superior' for 'Arteria mesenterica superior'.",
+    "la": "Arteria mesenteries superior",
+    "en": "Superior mesenteric artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4253",
+    "issue": "Latin 'Arteria pancreaticoduodenalis' lacks 'inferior', while the English says 'Inferior pancreaticoduodenal artery'.",
+    "la": "Arteria pancreaticoduodenalis",
+    "en": "Inferior pancreaticoduodenal artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4293",
+    "issue": "Latin truncated: 'Ramus ascendens arteriae' should be 'Ramus ascendens arteriae colicae sinistrae'.",
+    "la": "Ramus ascendens arteriae",
+    "en": "Ascending branch of left colic artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4303",
+    "issue": "Latin typo 'internaecus' for 'internae'.",
+    "la": "Divisio posterior arteriae iliacae internaecus",
+    "en": "Posterior division of internal iliac artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4341",
+    "issue": "Latin 'Arteria pudendalis interna' should be 'Arteria pudenda interna'.",
+    "la": "Arteria pudendalis interna",
+    "en": "Internal pudendal artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4420",
+    "issue": "Latin typo 'Ramus fontale' for 'Ramus frontalis'.",
+    "la": "Ramus fontale arteriae temporalis superficialis",
+    "en": "Frontal branch of superficial temporal artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4504",
+    "issue": "Latin 'arteriae cerebri anterior' should be 'arteriae cerebri anterioris' (genitive agreement).",
+    "la": "Rami orbitofrontales arteriae cerebri anterior",
+    "en": "Orbitofrontal branches of anterior cerebral artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4506",
+    "issue": "Latin 'arteriae callosomarginal' should be 'arteriae callosomarginalis'.",
+    "la": "Rami frontales arteriae callosomarginal",
+    "en": "Frontal branches of callosomarginal artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4515",
+    "issue": "Latin 'Rami pariétales' carries a spurious accent; should be 'Rami parietales'.",
+    "la": "Rami pariétales arteriae mediae cerebri",
+    "en": "Parietal branches of middle cerebral artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4571",
+    "issue": "Latin typo 'Arteria paritooccipitale' for 'Arteria parietooccipitalis'.",
+    "la": "Arteria paritooccipitale",
+    "en": "Parieto-occipital artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4587",
+    "issue": "Latin typo 'Arteria musculoohrenica' for 'Arteria musculophrenica'.",
+    "la": "Arteria musculoohrenica",
+    "en": "Musculophrenic artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4591",
+    "issue": "Latin concatenates two spellings ('Arteria thyreoidea inferior' and 'arteria thyroidea inferior') into one string.",
+    "la": "Arteria thyreoidea inferior arteria thyroidea inferior",
+    "en": "Inferior thyroid artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4601",
+    "issue": "Latin concatenates two synonyms ('Arteria transversa colli' and 'arteria transversa cervicis') into one string.",
+    "la": "Arteria transversa colli arteria transversa cervicis",
+    "en": "Transverse cervical artery",
+    "file": "cardiovascular-r1.json"
+  },
+  {
+    "termKey": "ta2:4644",
+    "issue": "The Latin is truncated: 'Ramus carpeus palmaris arteriae' lacks 'radialis' (the English says 'of radial artery').",
+    "la": "Ramus carpeus palmaris arteriae",
+    "en": "Palmar carpal branch of radial artery",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:4830",
+    "issue": "The Latin reads 'venae mandibularis' but the English and the sibling term ta2:4957 say retromandibular: it should be 'venae retromandibularis'.",
+    "la": "Divisio anterior venae mandibularis",
+    "en": "Anterior division of retromandibular vein",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:4991-1",
+    "issue": "Latin typo: '(part thoracica)' should be '(pars thoracica)'.",
+    "la": "Vena cava inferior (part thoracica)",
+    "en": "Inferior vena cava (thoracic part)",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:4991-2",
+    "issue": "Latin '(pars abdominis)' is non-standard; the TA form is 'pars abdominalis'.",
+    "la": "Vena cava inferior (pars abdominis)",
+    "en": "Inferior vena cava (abdominal part)",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:5028",
+    "issue": "Latin typo with a spurious accent: 'latérales' should be 'laterales'.",
+    "la": "Venae sacrales latérales",
+    "en": "Lateral sacral veins",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:5056",
+    "issue": "The Latin 'Venae circumflexae mediales' omits 'femoris', which the English 'femoral' includes.",
+    "la": "Venae circumflexae mediales",
+    "en": "Medial circumflex femoral veins",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:5057",
+    "issue": "Latin typo with a spurious accent: 'latérales' should be 'laterales'; it also omits 'femoris'.",
+    "la": "Venae circumflexae latérales",
+    "en": "Lateral circumflex femoral veins",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:5059",
+    "issue": "Latin typo: 'extemae' should be 'externae'.",
+    "la": "Venae pudendales extemae",
+    "en": "External pudendal veins",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:5081",
+    "issue": "Latin typo with a spurious accent: 'latérales' should be 'laterales'.",
+    "la": "Venae plantares latérales",
+    "en": "Lateral plantar veins",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:5150",
+    "issue": "Latin gender error: 'Systema lymphoidea' should be 'Systema lymphoideum' (systema is neuter).",
+    "la": "Systema lymphoidea",
+    "en": "Lymphoid system",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5207",
+    "issue": "Latin 'bucinatorius' and English 'Bucinator' use a single c; the TA forms are 'buccinatorius' / 'buccinator'.",
+    "la": "Nodus bucinatorius",
+    "en": "Bucinator node",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5222",
+    "issue": "Latin contains a stray accent: 'paratrachéales' should be 'paratracheales'.",
+    "la": "Nodi paratrachéales colli",
+    "en": "Paratracheal cervical nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5224",
+    "issue": "Latin contains a stray accent: 'latérales' should be 'laterales'.",
+    "la": "Nodi cervicales latérales superficiales",
+    "en": "Superficial lateral cervical nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5229",
+    "issue": "Latin contains a stray accent: 'latérales' should be 'laterales'.",
+    "la": "Nodi cervicales latérales profundi inferiores",
+    "en": "Inferior deep lateral cervical nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5239",
+    "issue": "Latin has a stray accent ('latérales') and concatenates the synonym 'nodi humerales' into the name.",
+    "la": "Nodi axillares latérales nodi humerales",
+    "en": "Lateral axillary nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5240",
+    "issue": "Latin concatenates the synonym 'nodi subscapulares' into the name ('Nodi axillares posteriores nodi subscapulares').",
+    "la": "Nodi axillares posteriores nodi subscapulares",
+    "en": "Posterior axillary nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5241",
+    "issue": "Latin concatenates the synonym 'nodi pectorales' into the name ('Nodi axillares anteriores nodi pectorales').",
+    "la": "Nodi axillares anteriores nodi pectorales",
+    "en": "Anterior axillary nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5243",
+    "issue": "Latin concatenates the synonym 'nodi deltopectorales' into the name ('Nodi infraclaviculares nodi deltopectorales').",
+    "la": "Nodi infraclaviculares nodi deltopectorales",
+    "en": "Infraclavicular nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5258",
+    "issue": "Latin typo: 'prepericadiaci' should be 'prepericardiaci'.",
+    "la": "Nodi prepericadiaci",
+    "en": "Prepericardial nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5259",
+    "issue": "Latin contains a stray accent: 'latérales' should be 'laterales'.",
+    "la": "Nodi pericardiaci latérales",
+    "en": "Lateral pericardial nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5271",
+    "issue": "Latin contains a stray accent: 'latérales' should be 'laterales'.",
+    "la": "Nodi aortici latérales",
+    "en": "Lateral aortic nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5276",
+    "issue": "Latin contains a stray accent: 'latérales' should be 'laterales'.",
+    "la": "Nodi cavales latérales",
+    "en": "Lateral caval nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5283",
+    "issue": "Latin 'Nodi gastrici dextri caudales' has an extra word 'caudales' absent from the English and from the TA term 'Nodi gastrici dextri'.",
+    "la": "Nodi gastrici dextri caudales",
+    "en": "Right gastric nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5322",
+    "issue": "Latin contains a stray accent: 'latérales' should be 'laterales'.",
+    "la": "Nodi iliaci communes latérales",
+    "en": "Lateral common iliac nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5338",
+    "issue": "Latin contains a stray accent: 'latérales' should be 'laterales'.",
+    "la": "Nodi sacrales latérales",
+    "en": "Lateral sacral nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5343",
+    "issue": "Latin contains a stray accent: 'latérales' should be 'laterales'.",
+    "la": "Nodi vesicales latérales",
+    "en": "Lateral vesical nodes",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:5856",
+    "issue": "Latin typo: 'Trucus encephali' should be 'Truncus encephali'.",
+    "la": "Trucus encephali",
+    "en": "Brainstem",
+    "file": "nervous-r1.json"
+  },
+  {
+    "termKey": "ta2:5879",
+    "issue": "Hierarchy error: Base of peduncle (basis pedunculi) is part of the cerebral peduncle (midbrain), but its parent is given as 'Superior cerebellar peduncle'.",
+    "la": "Basis pedunculi",
+    "en": "Base of peduncle",
+    "file": "nervous-r1.json"
+  },
+  {
+    "termKey": "ta2:6092",
+    "issue": "Latin 'Fasciculus posterolateralis' and English 'Posterolateral tract' disagree on the head noun (fasciculus vs tract); TA uses 'Tractus posterolateralis' (Lissauer tract).",
+    "la": "Fasciculus posterolateralis",
+    "en": "Posterolateral tract",
+    "file": "nervous-r1.json"
+  },
+  {
+    "termKey": "ta2:6118",
+    "issue": "Latin has a duplicated word: 'Tractus reticulospinalis medialis tractus' should be 'Tractus reticulospinalis medialis'.",
+    "la": "Tractus reticulospinalis medialis tractus",
+    "en": "Medial reticulospinal tract",
+    "file": "nervous-r1.json"
+  },
+  {
+    "termKey": "ta2:6442",
+    "issue": "Latin 'Nervus cutaneus lateralis posterioris femoris' is not a valid term and does not match the English 'Superior lateral brachial cutaneous nerve'; correct Latin is 'Nervus cutaneus brachii lateralis superior'.",
+    "la": "Nervus cutaneus lateralis posterioris femoris",
+    "en": "Superior lateral brachial cutaneous nerve",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:6444",
+    "issue": "Hierarchy anomaly: medial pectoral nerve is placed under 'Inferior trunk of brachial plexus'; it arises from the medial cord.",
+    "la": "Nervus pectoralis medialis",
+    "en": "Medial pectoral nerve",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:6543",
+    "issue": "Hierarchy anomaly: superior gluteal nerve and nerve to piriformis (ta2:6545) are placed under 'Sciatic nerve'; both are direct sacral plexus branches.",
+    "la": "Nervus gluteus superior",
+    "en": "Superior gluteal nerve",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:6551",
+    "issue": "Hierarchy anomaly: nerve to quadratus femoris is placed under 'Spinal dura' with subsystem 'central'; it is a sacral plexus branch (peripheral).",
+    "la": "Nervus musculi quadrati femoris",
+    "en": "Nerve to quadratus femoris muscle",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:6564",
+    "issue": "Latin 'Radix anterior nervi cutanei femoris' omits 'posterioris' and so does not match the English 'Anterior root of posterior femoral cutaneous nerve'.",
+    "la": "Radix anterior nervi cutanei femoris",
+    "en": "Anterior root of posterior femoral cutaneous nerve",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:6585",
+    "issue": "Hierarchy anomaly: medial sural cutaneous nerve (tibial nerve branch), like ta2:6586 sural nerve and ta2:6573, is placed under 'Saphenous nerve', which is a femoral nerve branch.",
+    "la": "Nervus cutaneus medialis surae",
+    "en": "Medial sural cutaneous nerve",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:6827",
+    "issue": "Superior and inferior tarsal plates (also ta2:6829) are eyelid connective tissue, not muscles; their placement under 'Muscles of head' in the muscular system is questionable.",
+    "la": "Tarsus superior",
+    "en": "Superior tarsus",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:692",
+    "issue": "termKey 'ta2:692' for 'Labyrinthus osseus' looks truncated; the neighbouring ear terms are in the 69xx range, so the id should be checked.",
+    "la": "Labyrinthus osseus",
+    "en": "Bony labyrinth",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:7071-1",
+    "issue": "Latin qualifier '(pedites)' means 'foot soldiers'; the genitive of pes is 'pedis'.",
+    "la": "Perionyx (pedites)",
+    "en": "Perionyx (foot)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:7128",
+    "issue": "Latin 'Membrum superior sinistrus' is ungrammatical; should be 'Membrum superius sinistrum'.",
+    "la": "Membrum superior sinistrus",
+    "en": "Left upper limb",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:7129",
+    "issue": "Latin 'Membrum superior dextrus' is ungrammatical; should be 'Membrum superius dextrum'.",
+    "la": "Membrum superior dextrus",
+    "en": "Right upper limb",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:7131",
+    "issue": "Latin agreement error: 'Membrum inferior sinistrus' should be 'Membrum inferius sinistrum' (membrum is neuter).",
+    "la": "Membrum inferior sinistrus",
+    "en": "Left lower limb",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:7132",
+    "issue": "Latin agreement error: 'Membrum inferior dextrus' should be 'Membrum inferius dextrum' (membrum is neuter).",
+    "la": "Membrum inferior dextrus",
+    "en": "Right lower limb",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:7136",
+    "issue": "Latin 'Nervorum' is a genitive plural; the nominative 'Nervi' is expected for 'Nerves'.",
+    "la": "Nervorum",
+    "en": "Nerves",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:7139",
+    "issue": "Latin says 'articulationes glenohumerae' (glenohumeral, also 'articulareae' misspelt) while English and parent say metatarsophalangeal joints; Latin is wrong and should read 'Capsulae articulares articulationum metatarsophalangearum'.",
+    "la": "Capsulae articulareae articulationes glenohumerae",
+    "en": "Articular capsules of metatarsophalangeal joints",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7140",
+    "issue": "Latin 'articulareae' misspelt (articulares), singular 'proximalis' with plural noun; neither la nor en says 'of hand' although foot counterparts (ta2:7145) specify 'pedis', so the name is ambiguous between hand and foot.",
+    "la": "Capsulae articulareae art. interphalangeae proximalis",
+    "en": "Articular capsules of proximal interphalangeal joints",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7141",
+    "issue": "Latin 'articulareae' misspelt, 'articulationes ... distalis' ungrammatical (articulationum interphalangearum distalium); no 'manus' although the foot counterpart ta2:7144 says 'pedis'.",
+    "la": "Capsulae articulareae articulationes interphalangeae distalis",
+    "en": "Articular capsules of distal interphalangeal joints",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7144",
+    "issue": "Latin 'distali' and 'interphalangelorum' are malformed (articulationum interphalangearum distalium pedis).",
+    "la": "Capsulae articulares distali art. interphalangelorum pedis",
+    "en": "Articular capsules of distal interphalangeal joints of foot",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7145",
+    "issue": "Latin 'interphalangelorum' is malformed (articulationum interphalangearum proximalium pedis).",
+    "la": "Capsulae articulares art. interphalangelorum prox. pedis",
+    "en": "Articular capsules of proximal interphalangeal joints of foot",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7146",
+    "issue": "Latin agreement errors: 'anterior' should be 'anterius' (neuter ligamentum) and 'Meniscus lateral' should be 'Meniscus lateralis'.",
+    "la": "Ligamentum meniscotibiale anterior (Meniscus lateral)",
+    "en": "Anterior meniscotibial ligament (Lateral meniscus)",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7147",
+    "issue": "Latin agreement errors: 'anterior' should be 'anterius' and 'Meniscus medial' should be 'Meniscus medialis'.",
+    "la": "Ligamentum meniscotibiale anterior (Meniscus medial)",
+    "en": "Anterior meniscotibial ligament (Medial meniscus)",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7148",
+    "issue": "Latin agreement errors: 'posterior' should be 'posterius' and 'Meniscus lateral' should be 'Meniscus lateralis'.",
+    "la": "Ligamentum meniscotibiale posterior (Meniscus lateral)",
+    "en": "Posterior meniscotibial ligament (Lateral meniscus)",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7149",
+    "issue": "Latin agreement errors: 'posterior' should be 'posterius' and 'Meniscus medial' should be 'Meniscus medialis'.",
+    "la": "Ligamentum meniscotibiale posterior (Meniscus medial)",
+    "en": "Posterior meniscotibial ligament (Medial meniscus)",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7150",
+    "issue": "Latin 'articularis tibiofibularis superior' should be the genitive 'articulationis tibiofibularis superioris'.",
+    "la": "Capsula articularis articularis tibiofibularis superior",
+    "en": "Articular capsule of superior tibiofibular joint",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7152",
+    "issue": "Latin 'articularis acromioclavicularis' should be the genitive 'articulationis acromioclavicularis'.",
+    "la": "Capsula articularis articularis acromioclavicularis",
+    "en": "Articular capsule of acromioclavicular joint",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "ta2:7201",
+    "issue": "Latin uses the English 'Tendon'; should be 'Tendo musculi extensoris digitorum longi'.",
+    "la": "Tendon extensoris digitorum longi",
+    "en": "Tendon of extensor digitorum longus",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "ta2:7202",
+    "issue": "The Latin 'Arteria renum sinistra' is non-standard; the TA form is 'Arteria renalis sinistra'.",
+    "la": "Arteria renum sinistra",
+    "en": "Left renal artery",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:7203",
+    "issue": "The Latin 'Arteria renum dextra' is non-standard; the TA form is 'Arteria renalis dextra'.",
+    "la": "Arteria renum dextra",
+    "en": "Right renal artery",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "ta2:7208",
+    "issue": "Latin qualifier '(pedites)' means 'foot soldiers'; the genitive of pes is 'pedis'.",
+    "la": "Lamina unguis (pedites)",
+    "en": "Nail plate (foot)",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:7210",
+    "issue": "Latin 'Gyrus et sulcus transversus frontopolar' mixes an English adjective ('frontopolar') into Latin; expected 'frontopolaris' (or 'frontopolares').",
+    "la": "Gyrus et sulcus transversus frontopolar",
+    "en": "Transverse frontopolar gyrus and sulcus",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "ta2:7223",
+    "issue": "Latin 'Lobus thymi dextri' reads 'lobe of the right thymus'; the correct form is 'Lobus dexter thymi'.",
+    "la": "Lobus thymi dextri",
+    "en": "Right lobe of thymus",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:7224",
+    "issue": "Latin 'Lobus thymi sinistri' reads 'lobe of the left thymus'; the correct form is 'Lobus sinister thymi'.",
+    "la": "Lobus thymi sinistri",
+    "en": "Left lobe of thymus",
+    "file": "lymphatic-viscera-r1.json"
+  },
+  {
+    "termKey": "ta2:910-16",
+    "issue": "Latin typo 'suprioris' (should be 'superioris'; TA form would be 'superior').",
+    "la": "Dens molaris primus suprioris",
+    "en": "Upper first molar tooth",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "za:automatic-division-of-peripheral-nervous-system",
+    "issue": "English typo 'Automatic' for 'Autonomic' (also propagated to the parentEn of ta2:6601).",
+    "la": "",
+    "en": "Automatic division of peripheral nervous system",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "za:crico-arythenoid-joint",
+    "issue": "English typo 'Crico-arythenoid' (should be 'Crico-arytenoid' / 'Cricoarytenoid').",
+    "la": "",
+    "en": "Crico-arythenoid joint",
+    "file": "skeletal-r2.json"
+  },
+  {
+    "termKey": "za:inferior-vein-of-left-ventricle-posterior",
+    "issue": "The English name has a malformed qualifier \"(//Posterior '')\" that is a model-naming artefact.",
+    "la": "",
+    "en": "Inferior vein of left ventricle (//Posterior '')",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "za:lacrimal-canliculus",
+    "issue": "English typo 'canliculus' for 'canaliculus' (also propagated to the parentEn of ta2:6855 and ta2:6856).",
+    "la": "",
+    "en": "Lacrimal canliculus",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "za:orbital-part-of-inferior-frontal-gyrus",
+    "issue": "English contains a double space ('part of  inferior').",
+    "la": "",
+    "en": "Orbital part of  inferior frontal gyrus",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "za:posterior-lateral-nasal-branches-of-sphenopalatine-artery",
+    "issue": "The English name has a stray trailing period.",
+    "la": "",
+    "en": "Posterior lateral nasal branches of sphenopalatine artery.",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "za:right-cerebal-hemisphere",
+    "issue": "English typo 'cerebal' for 'cerebral'.",
+    "la": "",
+    "en": "Right cerebal hemisphere",
+    "file": "nervous-r2.json"
+  },
+  {
+    "termKey": "za:right-pulonary-artery",
+    "issue": "English typo: 'pulonary' should be 'pulmonary' (it also appears in the termKey).",
+    "la": "",
+    "en": "Right pulonary artery",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "za:subfacial-prepatellar-bursa",
+    "issue": "English (and key) misspell 'Subfacial'; should be 'Subfascial prepatellar bursa'.",
+    "la": "",
+    "en": "Subfacial prepatellar bursa",
+    "file": "muscular-r2.json"
+  },
+  {
+    "termKey": "za:unnamed",
+    "issue": "The model gives no name ('????????'), so the structure cannot be identified from the source and must be checked against the mesh.",
+    "la": "",
+    "en": "????????",
+    "file": "cardiovascular-r2.json"
+  },
+  {
+    "termKey": "za:x",
+    "issue": "The model gives no name ('?x'), so the structure cannot be identified from the source and must be checked against the mesh.",
+    "la": "",
+    "en": "?x",
+    "file": "cardiovascular-r2.json"
+  }
+]

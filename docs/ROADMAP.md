@@ -33,7 +33,9 @@
 - [x] UI typeface: Albert Sans as the open stand-in for BR Sonoma (`apps/web/src/fonts/README.md`)
 - [x] Licence audit and quarantine of non-commercial meshes (ADR 0005, 2026-11-16)
 - [ ] Replace the 8 quarantined meshes (kidneys, renal pelvis, cochlea, vestibule) with BodyParts3D CC BY 4.0 or commissioned work
-- [ ] Replace Z-Anatomy Spanish names (TA2 derivative) with editorial names reviewed by an anatomist
+- [x] Editorial Spanish names for all 1,959 terms, drafted and cross-reviewed (status draft)
+- [ ] Human anatomist review of `editorial/names.es.json` (flip status to reviewed; 267 flagged first)
+- [ ] Triage `editorial/source-issues.json` (144 data errors in Latin, English and hierarchy)
 - [ ] Descriptions per structure (source to be decided: Wikipedia extracts as Z-Anatomy does)
 - [ ] Language switch for the UI (es/en)
 

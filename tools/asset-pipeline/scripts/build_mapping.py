@@ -11,6 +11,7 @@ indicator lines, insertion areas and reference geometry) it derives:
   subsystem  second level of the Bonus collection path (e.g. "Systemic arteries")
   region     from "Regions of human body > Main divisions > ..." paths
   parentKey  the deepest group node of the same system that contains the object
+  names.es   from editorial/names.es.json (our own Spanish names), never from TA2.csv
   excluded   "license:<source>" for objects listed in licensing/quarantine.json: they keep their
              catalog row but lose geometry, so no export or bundle can include them
 
@@ -130,7 +131,7 @@ def load_ta2(path):
             ta2_key = m.group(1) + (f"-{m.group(2)}" if m.group(2) else "")
             key = cells[1].strip().casefold()
             terms.setdefault(key, {"ta2Id": int(m.group(1)), "ta2Key": ta2_key, "en": cells[1].strip(),
-                                   "la": cells[2].strip(), "es": cells[4].strip()})
+                                   "la": cells[2].strip(), "es": ""})  # cells[4] is a translation: never read (ADR 0005)
     return terms
 
 
@@ -176,6 +177,9 @@ def main():
     ap.add_argument("--ta2", default="raw/TA2.csv")
     ap.add_argument("--out", default="out/mapping.json")
     ap.add_argument("--quarantine", default="licensing/quarantine.json")
+    ap.add_argument("--editorial", default="editorial/names.es.json")
+    ap.add_argument("--es-min-status", choices=["draft", "reviewed"], default="draft",
+                    help="lowest editorial status accepted for a Spanish name; use 'reviewed' to ship only anatomist-approved names")
     args = ap.parse_args()
 
     data = json.load(open(args.dump, encoding="utf-8"))
@@ -339,6 +343,23 @@ def main():
     unmatched = sorted(set(quarantined) - found)
     if unmatched:
         raise SystemExit(f"quarantine entries not found in the mapping (typo or blend changed): {unmatched}")
+
+    # Spanish names come only from our editorial file. Every term must be covered.
+    editorial = json.load(open(args.editorial, encoding="utf-8"))["names"]
+    rank = {"draft": 0, "reviewed": 1}
+    missing, below = set(), set()
+    for s in structures.values():
+        entry = editorial.get(s["termKey"])
+        if entry is None:
+            missing.add(s["termKey"])
+        elif rank[entry["status"]] < rank[args.es_min_status]:
+            below.add(s["termKey"])
+            s["names"] = {**s["names"], "es": ""}
+        else:
+            s["names"] = {**s["names"], "es": entry["es"]}
+    if missing:
+        raise SystemExit(f"editorial file lacks {len(missing)} terms, first: {sorted(missing)[:10]}")
+    stats["es:below-min-status"] = len(below)
 
     # A group that is also a mesh node keeps the mesh; make sure no node is its own parent.
     for s in structures.values():

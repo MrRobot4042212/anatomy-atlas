@@ -13,6 +13,9 @@ src/        Node: optimize.ts (gltf-transform + meshopt), manifest.ts
 
 Source: https://github.com/Z-Anatomy/Models-of-human-anatomy (CC BY-SA 4.0).
 
+`editorial/names.es.json` holds the Spanish names (our own, ADR 0005). `build_mapping.py` reads
+them and never the Spanish column of `TA2.csv`. Style guide: `editorial/STYLE.md`.
+
 `licensing/quarantine.json` lists objects withheld from every export because they probably derive
 from non-commercial components credited by Z-Anatomy. Edit that file, never the exporter, and
 rerun `build_mapping.py`. Policy: `docs/adr/0005-model-licensing-policy.md`.
