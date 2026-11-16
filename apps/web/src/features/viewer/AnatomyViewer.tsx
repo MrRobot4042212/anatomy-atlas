@@ -359,6 +359,10 @@ export function AnatomyViewer({ bundles }: { bundles: AssetBundle[] }) {
   const facts = useMemo(() => indexMeshFacts(bundles), [bundles]);
   const [sight, setSight] = useState<SightReport>({ meshId: null, sight: 'unknown' });
   const isDev = process.env.NODE_ENV === 'development';
+  // The frame counter is opt-in (add ?perf to the address in development): it used to sit over the
+  // panel buttons. The metrics on document.body.dataset.atlasStats are published regardless.
+  const showPerfOverlay =
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('perf');
 
   return (
     <>
@@ -382,7 +386,7 @@ export function AnatomyViewer({ bundles }: { bundles: AssetBundle[] }) {
         <ClippingDirector />
         <SightProbe onSight={setSight} />
         {isDev ? <DevProbe /> : null}
-        {isDev ? <StatsGl className="stats" /> : null}
+        {isDev && showPerfOverlay ? <StatsGl className="stats" /> : null}
       </Canvas>
       <SelectionCue facts={facts} sight={sight} />
     </>

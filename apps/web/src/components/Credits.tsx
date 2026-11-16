@@ -14,7 +14,7 @@ export function Credits({ embedded = false }: { embedded?: boolean }) {
         <a
           href="https://www.z-anatomy.com/"
           {...outside}
-          className="underline decoration-hairline-strong underline-offset-2 hover:text-ink"
+          className="inline-block py-2 -my-2 underline decoration-hairline-strong underline-offset-2 hover:text-ink"
         >
           Z-Anatomy
         </a>{' '}
@@ -22,7 +22,7 @@ export function Credits({ embedded = false }: { embedded?: boolean }) {
         <a
           href="https://lifesciencedb.jp/bp3d/"
           {...outside}
-          className="underline decoration-hairline-strong underline-offset-2 hover:text-ink"
+          className="inline-block py-2 -my-2 underline decoration-hairline-strong underline-offset-2 hover:text-ink"
         >
           BodyParts3D
         </a>{' '}
@@ -30,7 +30,7 @@ export function Credits({ embedded = false }: { embedded?: boolean }) {
         <Link
           href="/licencias"
           {...outside}
-          className="underline decoration-hairline-strong underline-offset-2 hover:text-ink"
+          className="inline-block py-2 -my-2 underline decoration-hairline-strong underline-offset-2 hover:text-ink"
         >
           Licencias
         </Link>
