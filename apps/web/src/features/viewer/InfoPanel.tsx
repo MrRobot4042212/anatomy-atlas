@@ -3,10 +3,9 @@
 import { Component, Suspense, use, type ReactNode } from 'react';
 import Image from 'next/image';
 import { Crosshair, EyeOff, Focus, Layers2 } from 'lucide-react';
-import type { StructureDetail } from '@atlas/shared';
-import { api } from '@/lib/api';
 import { SYSTEM_LABELS, subsystemLabel } from './LayerPanel';
 import { useViewerStore } from './store';
+import { detailFor } from './structureDetail';
 
 const LATERALITY: Record<string, string> = {
   left: 'Izquierda',
@@ -23,20 +22,6 @@ const REGION: Record<string, string> = {
   'upper-limb': 'Miembro superior',
   'lower-limb': 'Miembro inferior',
 };
-
-// One promise per meshId, reused by React's `use()`; details never change during a session.
-const detailPromises = new Map<string, Promise<StructureDetail>>();
-function detailFor(meshId: string): Promise<StructureDetail> {
-  let p = detailPromises.get(meshId);
-  if (!p) {
-    p = api.structure(meshId).catch((err: unknown) => {
-      detailPromises.delete(meshId); // allow a retry on the next selection
-      throw err;
-    });
-    detailPromises.set(meshId, p);
-  }
-  return p;
-}
 
 /** The specimen label: nomenclature, place in the hierarchy, measured size, actions. */
 export function InfoPanel() {
