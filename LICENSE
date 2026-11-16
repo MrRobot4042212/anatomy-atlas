@@ -1,0 +1,15 @@
+Copyright (c) 2026 Diego Alfonso Chicoma Ibañez. All rights reserved.
+
+The source code in this repository (apps/, packages/, tools/, docs/) is proprietary.
+No permission is granted to use, copy, modify, distribute or sublicense it without
+prior written consent from the copyright holder.
+
+Third-party components keep their own licenses:
+
+- 3D anatomy models are derived from Z-Anatomy (CC BY-SA 4.0), itself derived from
+  BodyParts3D by DBCLS (CC BY-SA 2.1 JP). Derived models (the GLB bundles produced by
+  tools/asset-pipeline) are distributed under CC BY-SA 4.0 and are not covered by the
+  proprietary terms above. See README.md "Model credits".
+- Anatomical terminology (names in Latin, English and Spanish) comes from Terminologia
+  Anatomica 2 as redistributed by Z-Anatomy, under the same CC BY-SA 4.0 terms.
+- npm dependencies are licensed by their respective authors; see each package.
