@@ -24,7 +24,7 @@ jobs:
       # (API e2e tests replace PrismaService with an in-memory fake).
       DATABASE_URL: postgresql://atlas:atlas@localhost:5432/atlas?schema=public
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - uses: pnpm/action-setup@v4
         # Version comes from "packageManager" in package.json.
