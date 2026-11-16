@@ -27,7 +27,7 @@ export function Header({
   embedded?: boolean;
 }) {
   return (
-    <header className="grid h-16 grid-cols-[280px_1fr_340px] items-center bar-surface border-b border-hairline px-4 max-lg:grid-cols-[auto_1fr_auto]">
+    <header className="relative z-30 grid h-16 grid-cols-[280px_1fr_340px] items-center bar-surface border-b border-hairline px-4 max-lg:grid-cols-[auto_1fr_auto]">
       {embedded ? (
         <div className="flex items-center gap-2.5">
           <Brand />
