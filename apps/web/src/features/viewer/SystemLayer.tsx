@@ -5,10 +5,11 @@ import type { ThreeEvent } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { Box3, Mesh, type BufferGeometry, type Material, type Object3D } from 'three';
 import { acceleratedRaycast, MeshBVH } from 'three-mesh-bvh';
-import type { AssetBundle } from '@atlas/shared';
-import { materialSetFor, type Variant } from './materials';
+import type { AssetBundle, BodySystem, BodyZone } from '@atlas/shared';
+import { materialSetFor } from './materials';
 import { registry, resolveMeshId, type StructureEntry } from './registry';
 import { subsystemKey, useViewerStore, type ViewerState } from './store';
+import { passesFilters, variantFor, type PaintState } from './visibility';
 
 // BVH-accelerated raycast for every mesh in the app (module scope, set once).
 Mesh.prototype.raycast = acceleratedRaycast;
@@ -70,28 +71,25 @@ function registerScene(scene: Object3D): string[] {
   return ids;
 }
 
-type PaintState = Pick<
-  ViewerState,
-  'hovered' | 'selected' | 'hidden' | 'hiddenSubsystems' | 'isolated' | 'transparent'
->;
-
-function variantFor(meshId: string, state: PaintState): Variant {
-  if (meshId === state.selected) return 'selected';
-  if (meshId === state.hovered) return 'hover';
-  if (state.isolated && meshId !== state.isolated) return 'ghost';
-  if (state.transparent.has(meshId)) return 'translucent';
-  return 'base';
+/** What the layer knows about each mesh besides its geometry: subsystem, zone and side. */
+interface MeshFacts {
+  system: BodySystem;
+  subsystemOf: Map<string, string>;
+  zoneOf: Map<string, BodyZone>;
 }
 
-function paint(meshIds: string[], subsystemOf: Map<string, string>, state: PaintState) {
+function paint(meshIds: string[], facts: MeshFacts, state: PaintState) {
   for (const meshId of meshIds) {
     const entry = registry.get(meshId);
     if (!entry) continue;
-    const sub = subsystemOf.get(meshId);
-    const visible = !state.hidden.has(meshId) && !(sub && state.hiddenSubsystems.has(sub));
+    const sub = facts.subsystemOf.get(meshId);
+    const visible =
+      !state.hidden.has(meshId) &&
+      !(sub && state.hiddenSubsystems.has(sub)) &&
+      passesFilters(meshId, facts.zoneOf, state.zones, state.side);
     entry.node.visible = visible;
     if (!visible) continue;
-    const variant = variantFor(meshId, state);
+    const variant = variantFor(meshId, facts.system, state);
     entry.meshes.forEach((mesh, i) => {
       mesh.material = entry.materials[i][variant];
     });
@@ -105,7 +103,11 @@ function paintStateChanged(a: ViewerState, b: ViewerState): boolean {
     a.hidden !== b.hidden ||
     a.hiddenSubsystems !== b.hiddenSubsystems ||
     a.isolated !== b.isolated ||
-    a.transparent !== b.transparent
+    a.transparent !== b.transparent ||
+    a.translucentSystems !== b.translucentSystems ||
+    a.zones !== b.zones ||
+    a.side !== b.side ||
+    a.dimOthers !== b.dimOthers
   );
 }
 
@@ -125,9 +127,14 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
       const key = subsystemKey(bundle.system, subsystem);
       for (const id of ids) subsystemOf.set(id, key);
     }
-    paint(meshIds, subsystemOf, useViewerStore.getState());
+    const zoneOf = new Map<string, BodyZone>();
+    for (const [zone, ids] of Object.entries(bundle.zones ?? {})) {
+      for (const id of ids) zoneOf.set(id, zone as BodyZone);
+    }
+    const facts: MeshFacts = { system: bundle.system, subsystemOf, zoneOf };
+    paint(meshIds, facts, useViewerStore.getState());
     const unsubscribe = useViewerStore.subscribe((state, prev) => {
-      if (paintStateChanged(state, prev)) paint(meshIds, subsystemOf, state);
+      if (paintStateChanged(state, prev)) paint(meshIds, facts, state);
     });
     return () => {
       unsubscribe();

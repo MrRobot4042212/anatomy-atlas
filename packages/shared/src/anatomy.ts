@@ -35,6 +35,28 @@ export const BODY_REGIONS = [
 ] as const;
 export type BodyRegion = (typeof BODY_REGIONS)[number];
 
+/**
+ * Zones of the body the viewer filters by. Finer than `BodyRegion` (arm, forearm, hand, thigh, leg
+ * and foot are separate) and derived from the geometry of each mesh against anatomical landmarks,
+ * so every mesh has exactly one, including the structures the catalog leaves without a region.
+ */
+export const BODY_ZONES = [
+  'head',
+  'neck',
+  'thorax',
+  'abdomen',
+  'pelvis',
+  'back',
+  'shoulder',
+  'arm',
+  'forearm',
+  'hand',
+  'thigh',
+  'leg',
+  'foot',
+] as const;
+export type BodyZone = (typeof BODY_ZONES)[number];
+
 export const LATERALITY = ['left', 'right', 'midline'] as const;
 export type Laterality = (typeof LATERALITY)[number];
 
@@ -76,6 +98,8 @@ export interface AssetBundle {
   meshes: string[];
   /** meshIds grouped by subsystem (e.g. arteries / veins / heart), for layer sub-toggles. */
   subsystems: Record<string, string[]>;
+  /** meshIds grouped by body zone, for the region filter. Absent until the manifest provides it. */
+  zones?: Partial<Record<BodyZone, string[]>>;
   /** Content hash to bust CDN cache on re-export. */
   hash: string;
 }
