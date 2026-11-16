@@ -11,8 +11,13 @@ import { registry, resolveMeshId, type StructureEntry } from './registry';
 import { subsystemKey, useViewerStore, type ViewerState } from './store';
 import { passesFilters, variantFor, type PaintState } from './visibility';
 
-// BVH-accelerated raycast for every mesh in the app (module scope, set once).
-Mesh.prototype.raycast = acceleratedRaycast;
+// BVH-accelerated raycast for every mesh in the app (module scope, set once). Neither three
+// nor R3F skips invisible objects when picking, so a hidden structure would still take the
+// click; the paint pass hides structures mesh by mesh and the raycast honours that flag.
+Mesh.prototype.raycast = function raycastVisible(this: Mesh, raycaster, intersects) {
+  if (!this.visible) return;
+  acceleratedRaycast.call(this, raycaster, intersects);
+};
 
 const ASSETS_URL = process.env.NEXT_PUBLIC_ASSETS_URL ?? '/models';
 
@@ -27,23 +32,32 @@ function bundleUrl(bundle: AssetBundle): string {
 type BvhGeometry = BufferGeometry & { boundsTree?: MeshBVH };
 
 /**
- * Register the named nodes of a loaded scene and return their meshIds. Idempotent: BVHs are
- * built once per geometry and materials are shared, so re-running after a StrictMode remount
- * costs a traversal, not a rebuild.
+ * Register every structure node of a loaded scene and return their meshIds. A structure is a
+ * node named with a meshId of the bundle, at any depth: vessel and nerve trees nest branches
+ * under their trunk (616 of 676 cardiovascular structures are nested), so registering only
+ * the scene's children would make every branch resolve to, and paint as, its root. Each mesh
+ * belongs to its nearest structure ancestor, the same rule `resolveMeshId` applies to a hit.
+ * Idempotent: BVHs are built once per geometry and materials are shared, so re-running after
+ * a StrictMode remount costs a traversal, not a rebuild.
  */
-function registerScene(scene: Object3D): string[] {
+function registerScene(scene: Object3D, meshIds: ReadonlySet<string>): string[] {
   const started = performance.now();
   let built = 0;
   const ids: string[] = [];
-  for (const node of scene.children) {
+  const isStructure = (node: Object3D) => meshIds.has(node.name);
+
+  /** Meshes of this structure: itself and its descendants down to the next structure. */
+  const ownMeshes = (node: Object3D, out: Mesh[]) => {
+    if (node instanceof Mesh) out.push(node);
+    for (const child of node.children) if (!isStructure(child)) ownMeshes(child, out);
+    return out;
+  };
+
+  const register = (node: Object3D) => {
     const meshId = node.name;
-    if (!meshId) continue;
     node.userData.meshId = meshId;
-    const meshes: Mesh[] = [];
-    node.traverse((child) => {
-      if (child instanceof Mesh) meshes.push(child);
-    });
-    if (meshes.length === 0) continue;
+    const meshes = ownMeshes(node, []);
+    if (meshes.length === 0) return;
     const materials = meshes.map((mesh) => {
       const geometry = mesh.geometry as BvhGeometry;
       if (!geometry.boundsTree) {
@@ -62,7 +76,11 @@ function registerScene(scene: Object3D): string[] {
     const entry: StructureEntry = { meshId, node, meshes, materials };
     registry.set(meshId, entry);
     ids.push(meshId);
-  }
+  };
+
+  scene.traverse((node) => {
+    if (isStructure(node)) register(node);
+  });
   if (process.env.NODE_ENV === 'development') {
     console.debug(
       `[viewer] registered ${ids.length} structures, built ${built} BVHs in ${Math.round(performance.now() - started)} ms`,
@@ -87,11 +105,12 @@ function paint(meshIds: string[], facts: MeshFacts, state: PaintState) {
       !state.hidden.has(meshId) &&
       !(sub && state.hiddenSubsystems.has(sub)) &&
       passesFilters(meshId, facts.zoneOf, state.zones, state.side);
-    entry.node.visible = visible;
-    if (!visible) continue;
-    const variant = variantFor(meshId, facts.system, state);
+    // Visibility is set on the structure's own meshes, not on its node: hiding a trunk must
+    // not hide the branches nested under it.
+    const variant = visible ? variantFor(meshId, facts.system, state) : null;
     entry.meshes.forEach((mesh, i) => {
-      mesh.material = entry.materials[i][variant];
+      mesh.visible = visible;
+      if (variant) mesh.material = entry.materials[i][variant];
     });
   }
 }
@@ -121,7 +140,7 @@ export function SystemLayer({ bundle }: { bundle: AssetBundle }) {
   // Register, paint and subscribe in one effect so the cleanup (unsubscribe + unregister)
   // always pairs with a registration, StrictMode remounts included.
   useEffect(() => {
-    const meshIds = registerScene(scene);
+    const meshIds = registerScene(scene, new Set(bundle.meshes));
     const subsystemOf = new Map<string, string>();
     for (const [subsystem, ids] of Object.entries(bundle.subsystems)) {
       const key = subsystemKey(bundle.system, subsystem);
