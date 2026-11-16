@@ -50,7 +50,7 @@ export default async function Home({ searchParams }: PageProps<'/'>) {
           <InfoPanel />
         </aside>
       </div>
-      <Credits />
+      <Credits embedded={embedded} />
       {/* The bridge mounts before the deep link so the host also hears about that selection. */}
       {embedded ? <EmbedBridge allowedOrigins={allowedOrigins} bundles={bundles} /> : null}
       {deepLink ? <DeepLinkSelection meshId={deepLink} bundles={bundles} /> : null}
