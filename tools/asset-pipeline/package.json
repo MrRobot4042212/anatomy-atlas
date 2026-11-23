@@ -19,7 +19,7 @@
     "meshoptimizer": "^0.24.0"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
+    "@types/node": "^26.6.6",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
   }
