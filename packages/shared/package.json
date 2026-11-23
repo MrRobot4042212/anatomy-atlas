@@ -18,8 +18,8 @@
     "lint": "echo no-linter-for-shared"
   },
   "devDependencies": {
-    "typescript": "^5.9.2",
-    "tsup": "^8.5.0"
+    "typescript": "^7.0.2",
+    "tsup": "^9.0.0"
   },
   "files": [
     "dist"
